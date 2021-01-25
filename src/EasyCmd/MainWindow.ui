@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1034</width>
+    <width>1200</width>
     <height>900</height>
    </rect>
   </property>
@@ -82,7 +82,7 @@
             <height>0</height>
            </size>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="10,1">
+          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="10,1,0">
            <property name="spacing">
             <number>1</number>
            </property>
@@ -113,8 +113,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>588</width>
-                  <height>434</height>
+                  <width>594</width>
+                  <height>395</height>
                  </rect>
                 </property>
                </widget>
@@ -124,6 +124,13 @@
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>命令预览：</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <spacer name="horizontalSpacer">
                <property name="orientation">
@@ -138,9 +145,33 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_ok">
+              <widget class="QPushButton" name="pushButton_genCmd">
                <property name="text">
-                <string>确认</string>
+                <string>生成命令</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_execCmd">
+               <property name="text">
+                <string>执行命令</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QTextEdit" name="textEdit_cmdPreview">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>40</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -215,10 +246,17 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1034</width>
+     <width>1200</width>
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="action_about"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -229,6 +267,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_about">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

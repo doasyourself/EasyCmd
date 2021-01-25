@@ -17,9 +17,19 @@ DESTDIR = $$PWD/dist
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    CmdReadWriteWorker.cpp
+    CmdReadWriteWorker.cpp \
+    AboutUsDialog.cpp \
+    Utils.cpp
 
 HEADERS  += MainWindow.h \
-    CmdReadWriteWorker.h
+    CmdReadWriteWorker.h \
+    AboutUsDialog.h \
+    Utils.h
 
-FORMS    += MainWindow.ui
+FORMS    += MainWindow.ui \
+    AboutUsDialog.ui
+
+TRANSLATIONS += $$PWD/resource/easycmd.ts
+
+RESOURCES += \
+    resource/resource.qrc

@@ -14,8 +14,6 @@ CmdReadWriteWorker::CmdReadWriteWorker()
     m_cmd_process.start();
     bool ok = m_cmd_process.waitForStarted(2000);
     Q_ASSERT(ok);
-
-
 }
 
 CmdReadWriteWorker::~CmdReadWriteWorker()
