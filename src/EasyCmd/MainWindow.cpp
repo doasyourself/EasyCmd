@@ -90,3 +90,21 @@ void MainWindow::on_pushButton_ctrlbreak_clicked()
 {
     m_rw_worker.ctrlBreak();
 }
+
+void MainWindow::slotConsoleOutput(QString output)
+{
+    // 在尾部追加，最后把鼠标移动到尾部
+    ui->plainTextEdit->moveCursor(QTextCursor::End);
+    ui->plainTextEdit->insertPlainText(output);
+    ui->plainTextEdit->moveCursor(QTextCursor::End);
+}
+
+void MainWindow::writeToConsole(QString cmd_string)
+{
+    QMetaObject::invokeMethod(&m_rw_worker, "slotWrite", Qt::AutoConnection, Q_ARG(QString, cmd_string));
+}
+
+void MainWindow::on_pushButton_ctrlbreak_clicked()
+{
+    m_rw_worker.ctrlBreak();
+}
