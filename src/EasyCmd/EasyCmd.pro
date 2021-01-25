@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = EasyCmd
 TEMPLATE = app
 
+include($$PWD/CmdEditors/CmdEditors.pri)
+
+DESTDIR = $$PWD/dist
 
 SOURCES += main.cpp\
         MainWindow.cpp
