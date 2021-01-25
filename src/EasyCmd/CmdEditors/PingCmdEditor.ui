@@ -36,7 +36,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="lineEdit_ip_url">
+       <property name="inputMask">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>输入ip地址或url</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -49,19 +59,22 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
         <item>
-         <widget class="QRadioButton" name="radioButton">
+         <widget class="QRadioButton" name="radioButton_infiniteTimes">
           <property name="toolTip">
            <string>-t</string>
           </property>
           <property name="text">
            <string>持续ping</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="radioButton_finiteTimes">
             <property name="toolTip">
              <string>-n</string>
             </property>
@@ -71,7 +84,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox"/>
+           <widget class="QSpinBox" name="spinBox_times">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="value">
+             <number>4</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -83,7 +103,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QCheckBox" name="checkBox_2">
+         <widget class="QCheckBox" name="checkBox_option_a">
           <property name="toolTip">
            <string>-a</string>
           </property>
@@ -96,13 +116,32 @@
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="label_2">
+            <property name="toolTip">
+             <string>-l</string>
+            </property>
+            <property name="toolTipDuration">
+             <number>-1</number>
+            </property>
             <property name="text">
              <string>指定发送数据长度：</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox_2"/>
+           <widget class="QSpinBox" name="spinBox_options_l">
+            <property name="specialValueText">
+             <string>未设置</string>
+            </property>
+            <property name="minimum">
+             <number>-1</number>
+            </property>
+            <property name="maximum">
+             <number>65527</number>
+            </property>
+            <property name="value">
+             <number>-1</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -114,7 +153,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="checkBox_options_f">
           <property name="toolTip">
            <string>-f</string>
           </property>
@@ -136,7 +175,20 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox_3"/>
+           <widget class="QSpinBox" name="spinBox_options_i">
+            <property name="specialValueText">
+             <string>未设置</string>
+            </property>
+            <property name="minimum">
+             <number>-1</number>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="value">
+             <number>-1</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -160,9 +212,21 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinBox_4">
+           <widget class="QSpinBox" name="spinBox_options_w">
+            <property name="specialValueText">
+             <string>未设置</string>
+            </property>
             <property name="suffix">
              <string>毫秒</string>
+            </property>
+            <property name="minimum">
+             <number>-1</number>
+            </property>
+            <property name="maximum">
+             <number>10000000</number>
+            </property>
+            <property name="value">
+             <number>-1</number>
             </property>
            </widget>
           </item>

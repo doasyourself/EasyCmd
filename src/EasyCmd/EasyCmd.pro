@@ -16,8 +16,10 @@ include($$PWD/CmdEditors/CmdEditors.pri)
 DESTDIR = $$PWD/dist
 
 SOURCES += main.cpp\
-        MainWindow.cpp
+        MainWindow.cpp \
+    CmdReadWriteWorker.cpp
 
-HEADERS  += MainWindow.h
+HEADERS  += MainWindow.h \
+    CmdReadWriteWorker.h
 
 FORMS    += MainWindow.ui

@@ -1,6 +1,7 @@
 ﻿#include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "CmdEditorHeader.h"
+#include <QKeyEvent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,11 +13,28 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->treeWidget_cmds, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
             this, SLOT(slotCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
+
+    // 响应控制台输出
+    connect(&m_rw_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    Qt::KeyboardModifiers modifiers = event->modifiers();
+    int key = event->key();
+
+    if (modifiers & Qt::ControlModifier)
+    {
+        if (key == Qt::Key_C) /*处理Ctrl Break*/
+        {
+            m_rw_worker.ctrlBreak();
+        }
+    }
 }
 
 void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *)
@@ -25,7 +43,6 @@ void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetIte
     {
         ui->scrollArea->setWidget(0);
         ui->pushButton_ok->setEnabled(false);
-        ui->pushButton_cancel->setEnabled(false);
         return;
     }
 
@@ -37,9 +54,9 @@ void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetIte
         editor = new PingCmdEditor(ui->scrollArea);
     }
 
+    // 设置到界面上
     ui->scrollArea->setWidget(editor);
     ui->pushButton_ok->setEnabled(true);
-    ui->pushButton_cancel->setEnabled(true);
 }
 
 void MainWindow::on_pushButton_ok_clicked()
@@ -48,11 +65,33 @@ void MainWindow::on_pushButton_ok_clicked()
     if (editor)
     {
         QString cmd_string = editor->getCmdString();
-        ui->textBrowser->setText(cmd_string);
+        if (!cmd_string.isEmpty())
+        {
+            // 写入命令
+            writeToConsole(cmd_string);
+        }
     }
 }
 
 void MainWindow::on_pushButton_cancel_clicked()
 {
 
+}
+
+void MainWindow::slotConsoleOutput(QString output)
+{
+    // 在尾部追加，最后把鼠标移动到尾部
+    ui->plainTextEdit->moveCursor(QTextCursor::End);
+    ui->plainTextEdit->insertPlainText(output);
+    ui->plainTextEdit->moveCursor(QTextCursor::End);
+}
+
+void MainWindow::writeToConsole(QString cmd_string)
+{
+    QMetaObject::invokeMethod(&m_rw_worker, "slotWrite", Qt::AutoConnection, Q_ARG(QString, cmd_string));
+}
+
+void MainWindow::on_pushButton_ctrlbreak_clicked()
+{
+    m_rw_worker.ctrlBreak();
 }
