@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NetStatCmdEditor</class>
+ <widget class="QWidget" name="NetStatCmdEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>855</width>
+    <height>522</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>参数</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>11</number>
+        </property>
+        <property name="topMargin">
+         <number>11</number>
+        </property>
+        <property name="rightMargin">
+         <number>11</number>
+        </property>
+        <property name="bottomMargin">
+         <number>11</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>无</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="title">
+      <string>可选项</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_a">
+          <property name="toolTip">
+           <string>-a</string>
+          </property>
+          <property name="text">
+           <string>显示所有连接和侦听端口</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QCheckBox" name="checkBox_option_b">
+            <property name="toolTip">
+             <string>-b. 在你没有足够权限时可能失败</string>
+            </property>
+            <property name="text">
+             <string>显示在创建每个连接或侦听端口时涉及的可执行程序</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,1">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_e">
+          <property name="toolTip">
+           <string>-e</string>
+          </property>
+          <property name="text">
+           <string>显示以太网统计信息</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QCheckBox" name="checkBox_option_f">
+            <property name="toolTip">
+             <string>-f</string>
+            </property>
+            <property name="text">
+             <string>显示外部地址的完全限定域名(FQDN)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="checkBox_options_n">
+          <property name="toolTip">
+           <string>-n</string>
+          </property>
+          <property name="text">
+           <string>以数字形式显示地址和端口号</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QCheckBox" name="checkBox_option_o">
+            <property name="toolTip">
+             <string>-o</string>
+            </property>
+            <property name="text">
+             <string>显示拥有的与每个连接关联的进程 ID</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_s">
+          <property name="toolTip">
+           <string>-s. 默认情况下，显示 IP、IPv6、ICMP、ICMPv6、TCP、TCPv6、UDP 和 UDPv6 的统计信息;-p 选项可用于指定默认的子网。</string>
+          </property>
+          <property name="text">
+           <string>显示每个协议的统计信息</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_q">
+          <property name="toolTip">
+           <string>-q</string>
+          </property>
+          <property name="text">
+           <string>显示所有连接、侦听端口和绑定的非侦听 TCP 端口</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_r">
+          <property name="toolTip">
+           <string>-r</string>
+          </property>
+          <property name="text">
+           <string>显示路由表</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QCheckBox" name="checkBox_option_p">
+            <property name="toolTip">
+             <string>-p. proto可以是下列任何一个: TCP、UDP、TCPv6 或 UDPv6。如果与 -s选项一起用来显示每个协议的统计信息，proto 可以是下列任何一个:IP、IPv6、ICMP、ICMPv6、TCP、TCPv6、UDP 或 UDPv6。</string>
+            </property>
+            <property name="text">
+             <string>显示proto指定的协议的连接</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_option_p"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_11">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_y">
+          <property name="toolTip">
+           <string>-y. 无法与其他选项结合使用。</string>
+          </property>
+          <property name="text">
+           <string>显示所有连接的 TCP 连接模板。</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_x">
+          <property name="toolTip">
+           <string>-x</string>
+          </property>
+          <property name="text">
+           <string>显示 NetworkDirect 连接、侦听器和共享端点</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="checkBox_option_v">
+          <property name="toolTip">
+           <string>-v</string>
+          </property>
+          <property name="text">
+           <string>显示正在进行的工作</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <item>
+           <widget class="QCheckBox" name="checkBox_option_interval">
+            <property name="toolTip">
+             <string>interval. 重新显示选定的统计，各个显示间暂停的 间隔秒数。按 CTRL+C 停止重新显示统计。如果省略，则 netstat 将打印当前的配置信息一次。</string>
+            </property>
+            <property name="text">
+             <string>周期刷新，刷新周期：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_option_interval">
+            <property name="suffix">
+             <string>秒</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="value">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

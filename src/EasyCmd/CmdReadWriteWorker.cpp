@@ -11,6 +11,7 @@ CmdReadWriteWorker::CmdReadWriteWorker()
 
     // 初始化并启动cmd.exe进程
     m_cmd_process.setProgram("cmd.exe");
+    m_cmd_process.setProcessChannelMode(QProcess::MergedChannels); /*将标准输出和标准错误输出合并在一起输出，防止遗漏输出内容*/
     m_cmd_process.start();
     bool ok = m_cmd_process.waitForStarted(2000);
     Q_ASSERT(ok);

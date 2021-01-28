@@ -2,6 +2,7 @@
 #include "ui_MainWindow.h"
 #include "CmdEditorHeader.h"
 #include "AboutUsDialog.h"
+#include "NetStatCmdEditor.h"
 #include <QKeyEvent>
 #include <QTranslator>
 
@@ -21,9 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->splitter->setStretchFactor(0, 2);
     ui->splitter->setStretchFactor(1, 5);
 
-    // 初始化禁用两个按钮
+    // 初始化禁用生成按钮
     ui->pushButton_genCmd->setEnabled(false);
-    ui->pushButton_execCmd->setEnabled(false);
 
     // 响应行切换
     connect(ui->treeWidget_cmds, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
@@ -58,7 +58,6 @@ void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetIte
     {
         ui->scrollArea->setWidget(0);
         ui->pushButton_genCmd->setEnabled(false);
-        ui->pushButton_execCmd->setEnabled(false);
         return;
     }
 
@@ -68,6 +67,10 @@ void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetIte
     if (cmd_name == "ping")
     {
         editor = new PingCmdEditor(ui->scrollArea);
+    }
+    else if (cmd_name == "netstat")
+    {
+        editor = new NetStatCmdEditor(ui->scrollArea);
     }
 
     // 设置到界面上
@@ -100,8 +103,9 @@ void MainWindow::slotConsoleOutput(QString output)
 
 void MainWindow::on_pushButton_execCmd_clicked()
 {
-    on_pushButton_genCmd_clicked();
     QString cmd_string = ui->textEdit_cmdPreview->toPlainText();
+    cmd_string.trimmed();
+    cmd_string.append("\n");/*保证末尾有\n*/
 
 
     // 向cmd.exe写入命令

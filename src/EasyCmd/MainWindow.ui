@@ -73,6 +73,14 @@
              <string>测试网络连通情况</string>
             </property>
            </item>
+           <item>
+            <property name="text">
+             <string>netstat</string>
+            </property>
+            <property name="text">
+             <string>显示网络连接、路由表和网络接口信息</string>
+            </property>
+           </item>
           </item>
          </widget>
          <widget class="QWidget" name="widget_3" native="true">
@@ -113,7 +121,7 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>594</width>
+                  <width>658</width>
                   <height>395</height>
                  </rect>
                 </property>
@@ -127,7 +135,7 @@
              <item>
               <widget class="QLabel" name="label">
                <property name="text">
-                <string>命令预览：</string>
+                <string>命令输入框：</string>
                </property>
               </widget>
              </item>
