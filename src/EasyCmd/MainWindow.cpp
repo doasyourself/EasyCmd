@@ -3,6 +3,8 @@
 #include "CmdEditorHeader.h"
 #include "AboutUsDialog.h"
 #include "NetStatCmdEditor.h"
+
+#include <QDesktopWidget>
 #include <QKeyEvent>
 #include <QTranslator>
 
@@ -31,6 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 响应控制台输出
     connect(&m_rw_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
+
+    // 窗口居中显示
+    moveToScreenCenter();
 }
 
 MainWindow::~MainWindow()
@@ -85,6 +90,12 @@ void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetIte
 void MainWindow::writeToConsole(QString cmd_string)
 {
     QMetaObject::invokeMethod(&m_rw_worker, "slotWrite", Qt::AutoConnection, Q_ARG(QString, cmd_string));
+}
+
+void MainWindow::moveToScreenCenter()
+{
+    QDesktopWidget* desktop = QApplication::desktop(); // =qApp->desktop();也可以
+    move((desktop->width() - this->width())/2, (desktop->height() - this->height())/2);
 }
 
 void MainWindow::on_pushButton_ctrlbreak_clicked()

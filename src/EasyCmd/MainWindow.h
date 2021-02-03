@@ -51,6 +51,7 @@ private slots:
 
 private:
     void writeToConsole(QString);
+    void moveToScreenCenter();
 
 private:
     Ui::MainWindow *ui;
