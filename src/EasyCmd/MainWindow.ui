@@ -95,6 +95,13 @@
                <number>9</number>
               </property>
               <item>
+               <widget class="QLineEdit" name="lineEdit">
+                <property name="placeholderText">
+                 <string>搜索命令</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QTreeWidget" name="treeWidget_cmds">
                 <column>
                  <property name="text">

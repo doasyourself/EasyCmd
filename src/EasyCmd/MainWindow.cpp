@@ -3,6 +3,7 @@
 #include "CmdEditorHeader.h"
 #include "AboutUsDialog.h"
 #include "NetStatCmdEditor.h"
+#include "EditorFactory.h"
 
 #include <QDesktopWidget>
 #include <QKeyEvent>
@@ -66,17 +67,12 @@ void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetIte
         return;
     }
 
-    // 创建对应的编辑器
-    QWidget *editor = NULL;
+    // 获取编辑器名称
     QString cmd_name = current->text(0);
-    if (cmd_name == "ping")
-    {
-        editor = new PingCmdEditor(ui->scrollArea);
-    }
-    else if (cmd_name == "netstat")
-    {
-        editor = new NetStatCmdEditor(ui->scrollArea);
-    }
+
+    // 创建对应的编辑器
+    static EditorFactory editor_factory;
+    QWidget *editor = editor_factory.createEditor(cmd_name);
 
     // 设置到界面上
     ui->scrollArea->setWidget(editor);
@@ -117,7 +113,6 @@ void MainWindow::on_pushButton_execCmd_clicked()
     QString cmd_string = ui->textEdit_cmdPreview->toPlainText();
     cmd_string.trimmed();
     cmd_string.append("\n");/*保证末尾有\n*/
-
 
     // 向cmd.exe写入命令
     writeToConsole(cmd_string);
