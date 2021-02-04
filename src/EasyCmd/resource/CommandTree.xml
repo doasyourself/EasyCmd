@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Node name="网络">
+        <Node name="ping" desc="测试网络连通状况"></Node>
+        <Node name="netstat" desc="显示网络连接、路由表和网络接口信息"></Node>
+    </Node>
+    <Node name="文件管理"></Node>
+    <Node name="系统管理"></Node>
+    <Node name="应用程序"></Node>
+</root>

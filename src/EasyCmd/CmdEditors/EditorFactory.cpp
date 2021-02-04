@@ -18,6 +18,6 @@ QWidget *EditorFactory::createEditor(const QString &name)
 {
     QWidget *editor = NULL;
     newEditorFunc func = m_editor_map.value(name);
-    editor = func();
+    if (func) editor = func();
     return editor;
 }

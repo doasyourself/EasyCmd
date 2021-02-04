@@ -95,71 +95,14 @@
                <number>9</number>
               </property>
               <item>
-               <widget class="QLineEdit" name="lineEdit">
+               <widget class="QLineEdit" name="lineEdit_searchCmd">
                 <property name="placeholderText">
                  <string>搜索命令</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QTreeWidget" name="treeWidget_cmds">
-                <column>
-                 <property name="text">
-                  <string>名称</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>描述</string>
-                 </property>
-                </column>
-                <item>
-                 <property name="text">
-                  <string>网络</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>ping</string>
-                  </property>
-                  <property name="text">
-                   <string>测试网络连通情况</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>netstat</string>
-                  </property>
-                  <property name="text">
-                   <string>显示网络连接、路由表和网络接口信息</string>
-                  </property>
-                 </item>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>文件管理</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>系统管理</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>应用程序</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>Ftp</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Mysql</string>
-                  </property>
-                 </item>
-                </item>
-               </widget>
+               <widget class="QTreeView" name="treeView_cmds"/>
               </item>
              </layout>
             </widget>

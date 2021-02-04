@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,15 +16,21 @@ include($$PWD/CmdEditors/CmdEditors.pri)
 DESTDIR = $$PWD/dist
 
 SOURCES += main.cpp\
+    CmdProxyModel.cpp \
+    CmdTreeModel.cpp \
         MainWindow.cpp \
     CmdReadWriteWorker.cpp \
     AboutUsDialog.cpp \
-    Utils.cpp
+    Utils.cpp \
+    ZXmlDomItem.cpp
 
 HEADERS  += MainWindow.h \
+    CmdProxyModel.h \
     CmdReadWriteWorker.h \
     AboutUsDialog.h \
-    Utils.h
+    CmdTreeModel.h \
+    Utils.h \
+    ZXmlDomItem.h
 
 FORMS    += MainWindow.ui \
     AboutUsDialog.ui

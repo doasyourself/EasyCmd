@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSortFilterProxyModel>
 #include "CmdReadWriteWorker.h"
+#include "CmdTreeModel.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,7 +23,13 @@ protected:
     virtual void keyPressEvent(QKeyEvent *event);
 
 private slots:
-    void slotCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *);
+    /**
+     * @brief slotCurrentItemChanged
+     *  当前行改变消息
+     * @param current
+     * @param previous
+     */
+    void slotCurrentRowChanged(const QModelIndex &current, const QModelIndex &previous);
 
     /**
      * @brief slotConsoleOutput
@@ -47,7 +55,14 @@ private slots:
      */
     void on_pushButton_genCmd_clicked();
 
+    /**
+     * @brief on_action_about_triggered
+     *  关于
+     */
     void on_action_about_triggered();
+
+    // 实时搜索
+    void on_lineEdit_searchCmd_textEdited(const QString &arg1);
 
 private:
     void writeToConsole(QString);
@@ -58,6 +73,10 @@ private:
 
     // cmd读写
     CmdReadWriteWorker m_rw_worker;
+
+    // 命令行model
+    CmdTreeModel *m_cmd_model;
+    QSortFilterProxyModel *m_proxy_model;
 };
 
 #endif // MAINWINDOW_H

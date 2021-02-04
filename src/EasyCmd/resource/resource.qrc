@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>easycmd.qm</file>
+        <file>CommandTree.xml</file>
     </qresource>
 </RCC>

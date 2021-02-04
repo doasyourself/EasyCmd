@@ -4,6 +4,7 @@
 #include "AboutUsDialog.h"
 #include "NetStatCmdEditor.h"
 #include "EditorFactory.h"
+#include "CmdProxyModel.h"
 
 #include <QDesktopWidget>
 #include <QKeyEvent>
@@ -28,9 +29,17 @@ MainWindow::MainWindow(QWidget *parent) :
     // 初始化禁用生成按钮
     ui->pushButton_genCmd->setEnabled(false);
 
+    // 加载命令列表
+    m_cmd_model = CmdTreeModel::modelFromFile(":/CommandTree.xml");
+    m_proxy_model = new CmdProxyModel;
+    m_proxy_model->setSourceModel(m_cmd_model);
+    m_proxy_model->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    m_proxy_model->setFilterKeyColumn(-1);
+    ui->treeView_cmds->setModel(m_proxy_model);
+
     // 响应行切换
-    connect(ui->treeWidget_cmds, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
-            this, SLOT(slotCurrentItemChanged(QTreeWidgetItem *, QTreeWidgetItem *)));
+    connect(ui->treeView_cmds->selectionModel(), &QItemSelectionModel::currentRowChanged,
+            this, &MainWindow::slotCurrentRowChanged);
 
     // 响应控制台输出
     connect(&m_rw_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
@@ -58,17 +67,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void MainWindow::slotCurrentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *)
+void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    if (!current /*未选中*/ || !current->parent() /*不是二级节点*/)
+    QModelIndex src_current = m_proxy_model->mapToSource(current);
+
+    if (!src_current.parent().isValid() /*不是二级节点*/)
     {
-        ui->scrollArea->setWidget(0);
+        ui->scrollArea->setWidget(new QWidget);
         ui->pushButton_genCmd->setEnabled(false);
         return;
     }
 
     // 获取编辑器名称
-    QString cmd_name = current->text(0);
+    QString cmd_name = m_cmd_model->data(m_cmd_model->index(src_current.row(), CmdTreeModel::COL_COMMAND, src_current.parent())).toString();
 
     // 创建对应的编辑器
     static EditorFactory editor_factory;
@@ -140,4 +151,10 @@ void MainWindow::on_action_about_triggered()
 {
     AboutUsDialog dlg;
     dlg.exec();
+}
+
+void MainWindow::on_lineEdit_searchCmd_textEdited(const QString &arg1)
+{
+    QString filter_string = ui->lineEdit_searchCmd->text();
+    m_proxy_model->setFilterFixedString(filter_string);
 }
