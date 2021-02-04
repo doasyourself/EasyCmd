@@ -78,12 +78,19 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
         return;
     }
 
-    // 获取编辑器名称
-    QString cmd_name = m_cmd_model->data(m_cmd_model->index(src_current.row(), CmdTreeModel::COL_COMMAND, src_current.parent())).toString();
+    // 获取编辑器id
+    QModelIndex first_col_index = m_cmd_model->index(src_current.row(), CmdTreeModel::COL_COMMAND, src_current.parent());
+    QString cmd_id = m_cmd_model->data(first_col_index, Qt::UserRole).toString();
+
+    // 如果没填id，就用name
+    if (cmd_id.isEmpty())
+    {
+        cmd_id = m_cmd_model->data(first_col_index).toString();
+    }
 
     // 创建对应的编辑器
     static EditorFactory editor_factory;
-    QWidget *editor = editor_factory.createEditor(cmd_name);
+    QWidget *editor = editor_factory.createEditor(cmd_id);
 
     // 设置到界面上
     ui->scrollArea->setWidget(editor);
@@ -122,6 +129,7 @@ void MainWindow::slotConsoleOutput(QString output)
 void MainWindow::on_pushButton_execCmd_clicked()
 {
     QString cmd_string = ui->textEdit_cmdPreview->toPlainText();
+
     cmd_string.trimmed();
     cmd_string.append("\n");/*保证末尾有\n*/
 

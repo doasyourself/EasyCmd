@@ -12,6 +12,11 @@ ZXmlDomItem::ZXmlDomItem(QDomNode &node, ZXmlDomItem *parent)
     for (int i = 0; i < child_count; i++)
     {
         QDomNode childNode = child_node_list.item(i);
+
+        /*跳过文本和注释*/
+        if (childNode.isText() || childNode.isComment())
+            continue;
+
         ZXmlDomItem *childItem = new ZXmlDomItem(childNode, this);
         m_child_items.append(childItem);
     }

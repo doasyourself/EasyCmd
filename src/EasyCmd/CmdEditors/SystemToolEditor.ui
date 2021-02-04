@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SystemToolEditor</class>
+ <widget class="QWidget" name="SystemToolEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>727</width>
+    <height>673</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_notepad">
+        <property name="text">
+         <string>记事本</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioButton_calc">
+        <property name="text">
+         <string>计算器</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QRadioButton" name="radioButton_mspaint">
+        <property name="text">
+         <string>画图板</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QRadioButton" name="radioButton_write">
+        <property name="text">
+         <string>写字板</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QRadioButton" name="radioButton_magnify">
+        <property name="text">
+         <string>放大镜</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton_explorer">
+        <property name="text">
+         <string>资源管理器</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QRadioButton" name="radioButton_taskmgr">
+        <property name="text">
+         <string>任务管理器</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="2">
+       <widget class="QRadioButton" name="radioButton_devmgmtmsc">
+        <property name="text">
+         <string>设备管理器</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_controlexe">
+        <property name="text">
+         <string>控制面板</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QRadioButton" name="radioButton_regedt32">
+        <property name="text">
+         <string>注册表编辑器</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton_mstsc">
+        <property name="text">
+         <string>远程桌面连接</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioButton_compmgmtmsc">
+        <property name="text">
+         <string>计算机管理</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QRadioButton" name="radioButton_cleanmgr">
+        <property name="text">
+         <string>磁盘清理</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QRadioButton" name="radioButton_dxdiag">
+        <property name="text">
+         <string>DX诊断工具</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QRadioButton" name="radioButton_charmap">
+        <property name="text">
+         <string>字符映射表</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QRadioButton" name="radioButton_servicemsc">
+        <property name="text">
+         <string>本地服务设置</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

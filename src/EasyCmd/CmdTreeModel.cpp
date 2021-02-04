@@ -97,27 +97,31 @@ QVariant CmdTreeModel::data(const QModelIndex &index, int role) const
     {
         if (!index.isValid()) break;
 
-        if (role != Qt::DisplayRole) break;
-
         ZXmlDomItem *item = static_cast<ZXmlDomItem *>(index.internalPointer());
         QDomNode node = item->node();
-
-        switch (index.column())
+        if (role == Qt::DisplayRole)
         {
-        case COL_COMMAND:
-        {
-            v = node.attributes().namedItem("name").nodeValue();
-            break;
+            switch (index.column())
+            {
+            case COL_COMMAND:
+            {
+                v = node.attributes().namedItem("name").nodeValue();
+                break;
+            }
+            case COL_CMDDESC:
+            {
+                v = node.attributes().namedItem("desc").nodeValue();
+                break;
+            }
+            default:
+            {
+                break;
+            }
+            }
         }
-        case COL_CMDDESC:
+        else if (role == Qt::UserRole) /*获取id，英文*/
         {
-            v = node.attributes().namedItem("desc").nodeValue();
-            break;
-        }
-        default:
-        {
-            break;
-        }
+            v = node.attributes().namedItem("id").nodeValue();
         }
 
     } while (0);
