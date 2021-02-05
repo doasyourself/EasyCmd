@@ -3,13 +3,26 @@
 #include <QMessageBox>
 
 NetStatCmdEditor::NetStatCmdEditor(QWidget *parent) :
-    QWidget(parent),
+    ICmdEditor(parent),
     ui(new Ui::NetStatCmdEditor)
 {
     ui->setupUi(this);
 
-    // 初始化需要加载一次
+    // 初始化需要设置一次界面
     on_checkBox_option_s_toggled(false);
+
+    // 监听修改操作
+    QList<QCheckBox *> checkboxs = findChildren<QCheckBox *>();
+    foreach (QCheckBox *chk, checkboxs)
+    {
+        connect(chk, &QCheckBox::toggled, this, &ICmdEditor::sigModified);
+    }
+
+    QList<QSpinBox *> spinboxs = findChildren<QSpinBox *>();
+    foreach (QSpinBox *spin, spinboxs)
+    {
+        connect(spin, QOverload<int>::of(&QSpinBox::valueChanged), this, &ICmdEditor::sigModified);
+    }
 }
 
 NetStatCmdEditor::~NetStatCmdEditor()
@@ -97,8 +110,6 @@ QString NetStatCmdEditor::getCmdString()
         options += " " + ui->spinBox_option_interval->value();
     }
     // End
-
-
 
     QString cmd_string("netstat");
     cmd_string += options;

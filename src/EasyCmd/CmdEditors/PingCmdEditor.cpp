@@ -3,10 +3,29 @@
 #include <QMessageBox>
 
 PingCmdEditor::PingCmdEditor(QWidget *parent) :
-    QWidget(parent),
+    ICmdEditor(parent),
     ui(new Ui::PingCmdEditor)
 {
     ui->setupUi(this);
+
+    // 监听修改信号
+    QList<QRadioButton *> radios = findChildren<QRadioButton *>();
+    foreach (QRadioButton *radio, radios)
+    {
+        connect(radio, &QRadioButton::toggled, this, &ICmdEditor::sigModified);
+    }
+
+    QList<QCheckBox *> checkboxs = findChildren<QCheckBox *>();
+    foreach (QCheckBox *chk, checkboxs)
+    {
+        connect(chk, &QCheckBox::toggled, this, &ICmdEditor::sigModified);
+    }
+
+    QList<QSpinBox *> spinboxs = findChildren<QSpinBox *>();
+    foreach (QSpinBox *spin, spinboxs)
+    {
+        connect(spin, QOverload<int>::of(&QSpinBox::valueChanged), this, &ICmdEditor::sigModified);
+    }
 }
 
 PingCmdEditor::~PingCmdEditor()
@@ -68,8 +87,6 @@ QString PingCmdEditor::getCmdString()
         options += " -w " + QString::number(options_w);
     }
     // End
-
-
 
     QString cmd_string("ping");
     cmd_string += options;

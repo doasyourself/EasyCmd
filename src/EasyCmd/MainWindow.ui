@@ -173,13 +173,6 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_genCmd">
-               <property name="text">
-                <string>生成命令</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <widget class="QPushButton" name="pushButton_execCmd">
                <property name="text">
                 <string>执行命令</string>

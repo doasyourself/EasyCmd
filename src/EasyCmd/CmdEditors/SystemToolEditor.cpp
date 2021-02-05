@@ -3,7 +3,7 @@
 #include <QButtonGroup>
 
 SystemToolEditor::SystemToolEditor(QWidget *parent) :
-    QWidget(parent),
+    ICmdEditor(parent),
     ui(new Ui::SystemToolEditor)
 {
     ui->setupUi(this);
@@ -14,6 +14,13 @@ SystemToolEditor::SystemToolEditor(QWidget *parent) :
     foreach (QRadioButton *btn, radio_buttons)
     {
         btn_group->addButton(btn);
+    }
+
+    // 监听修改信号
+    QList<QRadioButton *> radios = findChildren<QRadioButton *>();
+    foreach (QRadioButton *radio, radios)
+    {
+        connect(radio, &QRadioButton::toggled, this, &ICmdEditor::sigModified);
     }
 }
 

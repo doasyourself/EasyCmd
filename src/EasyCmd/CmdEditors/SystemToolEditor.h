@@ -13,7 +13,7 @@ namespace Ui {
 class SystemToolEditor;
 }
 
-class SystemToolEditor : public QWidget, public ICmdEditor
+class SystemToolEditor : public ICmdEditor
 {
     Q_OBJECT
 

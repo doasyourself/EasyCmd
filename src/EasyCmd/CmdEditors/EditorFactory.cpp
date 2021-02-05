@@ -3,9 +3,9 @@
 #include "NetStatCmdEditor.h"
 #include "SystemToolEditor.h"
 
-QWidget *newPingCmdEditor() { return new PingCmdEditor; }
-QWidget *newNetStatCmdEditor() { return new NetStatCmdEditor; }
-QWidget *newSystemToolsEditor() { return new SystemToolEditor; }
+ICmdEditor *newPingCmdEditor() { return new PingCmdEditor; }
+ICmdEditor *newNetStatCmdEditor() { return new NetStatCmdEditor; }
+ICmdEditor *newSystemToolsEditor() { return new SystemToolEditor; }
 
 EditorFactory::EditorFactory()
 {
@@ -17,9 +17,9 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("systemTools", newSystemToolsEditor);
 }
 
-QWidget *EditorFactory::createEditor(const QString &name)
+ICmdEditor *EditorFactory::createEditor(const QString &name)
 {
-    QWidget *editor = NULL;
+    ICmdEditor *editor = NULL;
     newEditorFunc func = m_editor_map.value(name);
     if (func) editor = func();
     return editor;

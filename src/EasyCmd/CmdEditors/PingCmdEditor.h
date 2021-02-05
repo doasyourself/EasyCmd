@@ -8,7 +8,7 @@ namespace Ui {
 class PingCmdEditor;
 }
 
-class PingCmdEditor : public QWidget, public ICmdEditor
+class PingCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 

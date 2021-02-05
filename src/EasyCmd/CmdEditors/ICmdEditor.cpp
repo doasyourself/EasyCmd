@@ -1,6 +1,6 @@
-#include "ICmdEditor.h"
+﻿#include "ICmdEditor.h"
 
-ICmdEditor::ICmdEditor()
+ICmdEditor::ICmdEditor(QWidget *parent) : QWidget(parent)
 {
 
 }

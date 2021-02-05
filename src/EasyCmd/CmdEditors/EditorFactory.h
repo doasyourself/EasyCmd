@@ -5,15 +5,16 @@
 #include <QWidget>
 #include <QMap>
 
+class ICmdEditor;
 class EditorFactory
 {
 public:
     EditorFactory();
 
-    QWidget *createEditor(const QString &editor_name);
+    ICmdEditor *createEditor(const QString &editor_name);
 
 private:
-    typedef QWidget *(*newEditorFunc)(); /*代替工厂模式，少些点代码*/
+    typedef ICmdEditor *(*newEditorFunc)(); /*代替工厂模式，少些点代码*/
     QMap<QString, newEditorFunc> m_editor_map;
 };
 

@@ -50,12 +50,6 @@ private slots:
     void on_pushButton_execCmd_clicked();
 
     /**
-     * @brief on_pushButton_genCmd_clicked
-     *  生成命令按钮响应
-     */
-    void on_pushButton_genCmd_clicked();
-
-    /**
      * @brief on_action_about_triggered
      *  关于
      */
@@ -63,6 +57,9 @@ private slots:
 
     // 实时搜索
     void on_lineEdit_searchCmd_textEdited(const QString &arg1);
+
+    // 响应编辑器修改信号
+    void slotEditorModified();
 
 private:
     void writeToConsole(QString);

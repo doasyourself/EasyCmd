@@ -26,9 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->splitter->setStretchFactor(0, 2);
     ui->splitter->setStretchFactor(1, 5);
 
-    // 初始化禁用生成按钮
-    ui->pushButton_genCmd->setEnabled(false);
-
     // 加载命令列表
     m_cmd_model = CmdTreeModel::modelFromFile(":/CommandTree.xml");
     m_proxy_model = new CmdProxyModel;
@@ -74,7 +71,6 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     if (!src_current.parent().isValid() /*不是二级节点*/)
     {
         ui->scrollArea->setWidget(new QWidget);
-        ui->pushButton_genCmd->setEnabled(false);
         return;
     }
 
@@ -90,14 +86,17 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
 
     // 创建对应的编辑器
     static EditorFactory editor_factory;
-    QWidget *editor = editor_factory.createEditor(cmd_id);
+    ICmdEditor *editor = editor_factory.createEditor(cmd_id);
+    connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
 
     // 设置到界面上
     ui->scrollArea->setWidget(editor);
 
     // 使能按钮
-    ui->pushButton_genCmd->setEnabled(true);
     ui->pushButton_execCmd->setEnabled(true);
+
+    // 清空命令预览
+    ui->textEdit_cmdPreview->clear();
 }
 
 
@@ -137,24 +136,6 @@ void MainWindow::on_pushButton_execCmd_clicked()
     writeToConsole(cmd_string);
 }
 
-void MainWindow::on_pushButton_genCmd_clicked()
-{
-    // 清空预览窗
-    ui->textEdit_cmdPreview->clear();
-
-    // 生成命令
-    QString cmd_string;
-    ICmdEditor *editor = dynamic_cast<ICmdEditor *>(ui->scrollArea->widget());
-    if (editor)
-    {
-        cmd_string = editor->getCmdString();
-        if (!cmd_string.isEmpty())
-        {
-            ui->textEdit_cmdPreview->setText(cmd_string);
-        }
-    }
-}
-
 void MainWindow::on_action_about_triggered()
 {
     AboutUsDialog dlg;
@@ -165,4 +146,11 @@ void MainWindow::on_lineEdit_searchCmd_textEdited(const QString &arg1)
 {
     QString filter_string = ui->lineEdit_searchCmd->text();
     m_proxy_model->setFilterFixedString(filter_string);
+}
+
+void MainWindow::slotEditorModified()
+{
+    ICmdEditor *editor = qobject_cast<ICmdEditor *>(sender());
+    QString cmd_string = editor->getCmdString();
+    ui->textEdit_cmdPreview->setText(cmd_string);
 }

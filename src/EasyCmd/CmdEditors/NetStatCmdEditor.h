@@ -8,7 +8,7 @@ namespace Ui {
 class NetStatCmdEditor;
 }
 
-class NetStatCmdEditor : public QWidget, public ICmdEditor
+class NetStatCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 
