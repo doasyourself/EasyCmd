@@ -20,7 +20,7 @@ SystemToolEditor::SystemToolEditor(QWidget *parent) :
     QList<QRadioButton *> radios = findChildren<QRadioButton *>();
     foreach (QRadioButton *radio, radios)
     {
-        connect(radio, &QRadioButton::toggled, this, &ICmdEditor::sigModified);
+        connect(radio, &QRadioButton::clicked, this, &ICmdEditor::sigModified);
     }
 }
 

@@ -15,7 +15,8 @@ NetStatCmdEditor::NetStatCmdEditor(QWidget *parent) :
     QList<QCheckBox *> checkboxs = findChildren<QCheckBox *>();
     foreach (QCheckBox *chk, checkboxs)
     {
-        connect(chk, &QCheckBox::toggled, this, &ICmdEditor::sigModified);
+        // 用toggled会有问题，所以这里用clicked
+        connect(chk, &QCheckBox::clicked, this, &ICmdEditor::sigModified);
     }
 
     QList<QSpinBox *> spinboxs = findChildren<QSpinBox *>();
