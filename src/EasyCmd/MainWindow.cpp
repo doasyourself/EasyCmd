@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->splitter->setStretchFactor(0, 2);
     ui->splitter->setStretchFactor(1, 5);
 
+    ui->splitter_2->setStretchFactor(0, 5);
+    ui->splitter_2->setStretchFactor(1, 3);
+
     // 加载命令列表
     m_cmd_model = CmdTreeModel::modelFromFile(":/CommandTree.xml");
     m_proxy_model = new CmdProxyModel;
