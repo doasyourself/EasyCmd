@@ -41,8 +41,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->treeView_cmds->selectionModel(), &QItemSelectionModel::currentRowChanged,
             this, &MainWindow::slotCurrentRowChanged);
 
+    // 控制台输入
+    connect(ui->textEdit_console, &ConsoleEditor::sigNewInput, this, &MainWindow::writeToConsole);
+
     // 响应控制台输出
-    connect(&m_rw_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
+    connect(&m_console_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
 
     // 窗口居中显示
     moveToScreenCenter();
@@ -62,7 +65,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     {
         if (key == Qt::Key_C) /*处理Ctrl Break*/
         {
-            m_rw_worker.ctrlBreak();
+            m_console_worker.ctrlBreak();
         }
     }
 }
@@ -102,10 +105,9 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     ui->textEdit_cmdPreview->clear();
 }
 
-
 void MainWindow::writeToConsole(QString cmd_string)
 {
-    QMetaObject::invokeMethod(&m_rw_worker, "slotWrite", Qt::AutoConnection, Q_ARG(QString, cmd_string));
+    QMetaObject::invokeMethod(&m_console_worker, "slotWrite", Qt::AutoConnection, Q_ARG(QString, cmd_string));
 }
 
 void MainWindow::moveToScreenCenter()
@@ -116,17 +118,14 @@ void MainWindow::moveToScreenCenter()
 
 void MainWindow::on_pushButton_ctrlbreak_clicked()
 {
-    m_rw_worker.ctrlBreak();
+    m_console_worker.ctrlBreak();
 }
 
 void MainWindow::slotConsoleOutput(QString output)
 {
     // 在尾部追加，最后把鼠标移动到尾部
-    ui->plainTextEdit->moveCursor(QTextCursor::End);
-    ui->plainTextEdit->insertPlainText(output);
-    ui->plainTextEdit->moveCursor(QTextCursor::End);
+    ui->textEdit_console->appendOuput(output);
 }
-
 
 void MainWindow::on_pushButton_execCmd_clicked()
 {

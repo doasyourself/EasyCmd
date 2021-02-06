@@ -18,17 +18,19 @@ DESTDIR = $$PWD/dist
 SOURCES += main.cpp\
     CmdProxyModel.cpp \
     CmdTreeModel.cpp \
+    ConsoleEditor.cpp \
+    ConsoleRwWorker.cpp \
         MainWindow.cpp \
-    CmdReadWriteWorker.cpp \
     AboutUsDialog.cpp \
     Utils.cpp \
     ZXmlDomItem.cpp
 
 HEADERS  += MainWindow.h \
     CmdProxyModel.h \
-    CmdReadWriteWorker.h \
     AboutUsDialog.h \
     CmdTreeModel.h \
+    ConsoleEditor.h \
+    ConsoleRwWorker.h \
     Utils.h \
     ZXmlDomItem.h
 

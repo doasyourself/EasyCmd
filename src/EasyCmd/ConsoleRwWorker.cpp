@@ -1,11 +1,11 @@
-﻿#include "CmdReadWriteWorker.h"
+﻿#include "ConsoleRwWorker.h"
 #include <Windows.h>
 #include <QDebug>
 #include <QThread>
 
 #pragma comment(lib, "User32.lib")
 
-CmdReadWriteWorker::CmdReadWriteWorker()
+ConsoleRwWorker::ConsoleRwWorker()
 {
     connect(&m_cmd_process, SIGNAL(readyRead()), SLOT(slotReadyRead()));
 
@@ -20,14 +20,14 @@ CmdReadWriteWorker::CmdReadWriteWorker()
     Q_ASSERT(ok);
 }
 
-CmdReadWriteWorker::~CmdReadWriteWorker()
+ConsoleRwWorker::~ConsoleRwWorker()
 {
     // 等待进程退出
     m_cmd_process.kill();
     m_cmd_process.waitForFinished(10000);
 }
 
-void CmdReadWriteWorker::ctrlBreak()
+void ConsoleRwWorker::ctrlBreak()
 {
     // 进程运行才做操作
     if (m_cmd_process.state() == QProcess::NotRunning) return;
@@ -52,13 +52,13 @@ void CmdReadWriteWorker::ctrlBreak()
 
 }
 
-void CmdReadWriteWorker::slotWrite(QString input)
+void ConsoleRwWorker::slotWrite(QString input)
 {
     QByteArray ba = input.toLocal8Bit();
     m_cmd_process.write(ba.data(), ba.size());
 }
 
-void CmdReadWriteWorker::slotReadyRead()
+void ConsoleRwWorker::slotReadyRead()
 {
     QString output = QString::fromLocal8Bit(m_cmd_process.readAll());
     if (!output.isEmpty())

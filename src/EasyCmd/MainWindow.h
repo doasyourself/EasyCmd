@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QSortFilterProxyModel>
-#include "CmdReadWriteWorker.h"
+#include "ConsoleRwWorker.h"
 #include "CmdTreeModel.h"
 
 namespace Ui {
@@ -69,7 +69,7 @@ private:
     Ui::MainWindow *ui;
 
     // cmd读写
-    CmdReadWriteWorker m_rw_worker;
+    ConsoleRwWorker m_console_worker;
 
     // 命令行model
     CmdTreeModel *m_cmd_model;

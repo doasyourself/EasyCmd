@@ -1,5 +1,5 @@
-﻿#ifndef CMDREADWRITEWORKER_H
-#define CMDREADWRITEWORKER_H
+﻿#ifndef ConsoleRwWorker_H
+#define ConsoleRwWorker_H
 
 /*******************************************************************************
 ** 读取进程输出不是采用定时轮询（初始方案），而是响应readyRead立即读取（最终方案）。
@@ -11,19 +11,18 @@
 #include <QProcess>
 #include <QTimer>
 
-class CmdReadWriteWorker : public QObject
+class ConsoleRwWorker : public QObject
 {
     Q_OBJECT
 
 public:
-    CmdReadWriteWorker();
-    ~CmdReadWriteWorker();
+    ConsoleRwWorker();
+    ~ConsoleRwWorker();
     void ctrlBreak();
 
 public slots:
     void slotWrite(QString);
     void slotReadyRead();
-
 
 signals:
     void sigOutput(QString text);
@@ -33,4 +32,4 @@ private:
     QTimer m_read_timer;
 };
 
-#endif // CMDREADWRITEWORKER_H
+#endif // ConsoleRwWorker_H
