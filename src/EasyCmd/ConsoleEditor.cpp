@@ -96,13 +96,21 @@ void ConsoleEditor::keyReleaseEvent(QKeyEvent *e)
 
 void ConsoleEditor::mousePressEvent(QMouseEvent *e)
 {
-    // 鼠标始终保持在行末尾
-    moveCursor(QTextCursor::End);
-
     // 左键
     Qt::MouseButton button = e->button();
     if (button & Qt::LeftButton)
     {
+        int new_pos = cursorForPosition(e->pos()).position();
+        if (new_pos < m_last_output_pos) /*必须加这个条件，否则会跑到新键入的内容最后*/
+        {
+            // 鼠标始终保持在上次输出的末尾
+            moveCursor(QTextCursor::End);
+        }
+        else
+        {
+            QTextEdit::mousePressEvent(e);
+        }
+
         // 实现当前行高亮
         QList<ExtraSelection> extra_sels;
         if (!isReadOnly())
