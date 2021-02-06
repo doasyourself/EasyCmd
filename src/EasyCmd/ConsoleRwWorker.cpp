@@ -49,7 +49,6 @@ void ConsoleRwWorker::ctrlBreak()
 
     FreeConsole();
     SetConsoleCtrlHandler(NULL, FALSE);
-
 }
 
 void ConsoleRwWorker::slotWrite(QString input)
