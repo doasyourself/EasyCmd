@@ -14,7 +14,8 @@ public:
     virtual QString getCmdString() = 0;
 
 signals:
-    void sigModified();
+    void sigModified();/*更新命令*/
+    void sigExecute();/*立即执行命令*/
 };
 
 #endif // ICMDEDITOR_H

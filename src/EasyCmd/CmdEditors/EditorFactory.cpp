@@ -2,10 +2,12 @@
 #include "PingCmdEditor.h"
 #include "NetStatCmdEditor.h"
 #include "SystemToolEditor.h"
+#include "LauncherEditor.h"
 
 ICmdEditor *newPingCmdEditor() { return new PingCmdEditor; }
 ICmdEditor *newNetStatCmdEditor() { return new NetStatCmdEditor; }
 ICmdEditor *newSystemToolsEditor() { return new SystemToolEditor; }
+ICmdEditor *newLauncherEditor() { return new LauncherEditor; }
 
 EditorFactory::EditorFactory()
 {
@@ -15,6 +17,7 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("ping", newPingCmdEditor);
     m_editor_map.insert("netstat", newNetStatCmdEditor);
     m_editor_map.insert("systemTools", newSystemToolsEditor);
+    m_editor_map.insert("launcher", newLauncherEditor);
 }
 
 ICmdEditor *EditorFactory::createEditor(const QString &name)

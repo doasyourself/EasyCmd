@@ -74,12 +74,6 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
 {
     QModelIndex src_current = m_proxy_model->mapToSource(current);
 
-    if (!src_current.parent().isValid() /*不是二级节点*/)
-    {
-        ui->scrollArea->setWidget(new QWidget);
-        return;
-    }
-
     // 获取编辑器id
     QModelIndex first_col_index = m_cmd_model->index(src_current.row(), CmdTreeModel::COL_COMMAND, src_current.parent());
     QString cmd_id = m_cmd_model->data(first_col_index, Qt::UserRole).toString();
@@ -93,6 +87,10 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     // 创建对应的编辑器
     static EditorFactory editor_factory;
     ICmdEditor *editor = editor_factory.createEditor(cmd_id);
+
+    /*找不到编辑器则返回*/
+    if (!editor) return;
+
     connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
 
     // 设置到界面上

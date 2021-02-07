@@ -10,6 +10,7 @@ ConsoleEditor::ConsoleEditor(QWidget *parent)
     : QTextEdit(parent)
 {
     m_last_output_pos = this->textCursor().position();
+    setUndoRedoEnabled(true);/*允许撤销*/
     setupActions();
     setupMenu();
 }
@@ -24,6 +25,7 @@ void ConsoleEditor::appendOuput(const QString &text)
 void ConsoleEditor::keyPressEvent(QKeyEvent *e)
 {
     int key = e->key();
+    Qt::KeyboardModifiers modifier = e->modifiers();
 
     // 限制向左选择
     if (key == Qt::Key_Left)
@@ -91,6 +93,24 @@ void ConsoleEditor::keyPressEvent(QKeyEvent *e)
 
         // 发出命令通知
         emit sigNewInput(cmd);
+    }
+    else if (key == Qt::Key_Z && (modifier & Qt::ControlModifier)) /*给Ctrl + Z撤销加限制*/
+    {
+        QTextCursor cursor = this->textCursor();
+        int current_pos = cursor.position();
+        if (current_pos > m_last_output_pos)
+        {
+            QTextEdit::keyPressEvent(e);/*允许撤销*/
+        }
+        else
+        {
+            /*不允许撤销*/
+        }
+    }
+    else if (key == Qt::Key_C && (modifier & Qt::ControlModifier)) /*解决Ctrl+C无效的问题，因为当前使用的是extraselection*/
+    {
+        // 用extraselection实现Ctrl+C
+        slotActionCopy();
     }
     else
     {

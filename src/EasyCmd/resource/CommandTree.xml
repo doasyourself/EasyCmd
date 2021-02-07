@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--name为显示名，id为编辑器id（英文），desc为描述信息-->
 <root>
+    <node name="启动器" id="launcher"></node>
     <node name="系统管理">
         <node name="系统工具" id="systemTools" desc="打开系统自带工具"></node>
     </node>
