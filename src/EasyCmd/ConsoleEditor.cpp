@@ -2,11 +2,16 @@
 #include "ConsoleRwWorker.h"
 #include <QKeyEvent>
 #include <QDebug>
+#include <QMenu>
+#include <QGuiApplication>
+#include <QClipboard>
 
 ConsoleEditor::ConsoleEditor(QWidget *parent)
     : QTextEdit(parent)
 {
     m_last_output_pos = this->textCursor().position();
+    setupActions();
+    setupMenu();
 }
 
 void ConsoleEditor::appendOuput(const QString &text)
@@ -18,7 +23,6 @@ void ConsoleEditor::appendOuput(const QString &text)
     ExtraSelection sel;
     sel.cursor.setPosition(2, QTextCursor::MoveAnchor);//移到起始位置
     sel.cursor.movePosition(QTextCursor::NoMove, QTextCursor::MoveAnchor, 30);//移动结束位置
-    //sel.cursor.select(QTextCursor::WordUnderCursor);//选择
     sel.format = this->currentCharFormat();
     extra_selection.append(sel);
     setExtraSelections(extra_selection);
@@ -158,4 +162,57 @@ void ConsoleEditor::mouseMoveEvent(QMouseEvent *e)
 
 void ConsoleEditor::mouseReleaseEvent(QMouseEvent *e)
 {
+    // 上下文菜单下保持选中状态
+    QList<ExtraSelection> extra_sels;
+    extra_sels.append(m_current_row_selection);
+    extra_sels.append(m_current_selection);
+    setExtraSelections(extra_sels);
 }
+
+/*原本的双击选中会影响鼠标位置，现在统一用extraselection实现*/
+void ConsoleEditor::mouseDoubleClickEvent(QMouseEvent *e)
+{
+    QList<ExtraSelection> extra_sels;
+    extra_sels.append(m_current_row_selection);
+
+    // 双击选择鼠标下面的单词
+    m_current_selection.cursor.select(QTextCursor::WordUnderCursor);
+
+    extra_sels.append(m_current_selection);
+    setExtraSelections(extra_sels);
+}
+
+void ConsoleEditor::contextMenuEvent(QContextMenuEvent *e)
+{
+    m_ctx_menu->exec(mapToGlobal(e->pos()));
+}
+
+void ConsoleEditor::setupActions()
+{
+    m_action_copy = new QAction(tr("Copy"), this);
+    m_action_paste = new QAction(tr("Paste"), this);
+    connect(m_action_copy, &QAction::triggered, this, &ConsoleEditor::slotActionCopy);
+    connect(m_action_paste, &QAction::triggered, this, &ConsoleEditor::slotActionPaste);
+}
+
+void ConsoleEditor::setupMenu()
+{
+    m_ctx_menu = new QMenu(this);
+    m_ctx_menu->addAction(m_action_copy);
+    m_ctx_menu->addAction(m_action_paste);
+}
+
+void ConsoleEditor::slotActionCopy()
+{
+    // 把当前m_current_selection的内容拷贝到剪贴板
+    QString selected_text = m_current_selection.cursor.selectedText();
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(selected_text);
+}
+
+void ConsoleEditor::slotActionPaste()
+{
+    // 把当前剪贴板内容粘贴到当前光标位置
+    paste();
+}
+
