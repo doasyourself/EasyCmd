@@ -16,16 +16,9 @@ ConsoleEditor::ConsoleEditor(QWidget *parent)
 
 void ConsoleEditor::appendOuput(const QString &text)
 {
-    this->append(text);
+    // 这里不用appendText，因为append会添加新行。
+    insertPlainText(text);
     m_last_output_pos = this->textCursor().position();
-
-    QList<ExtraSelection> extra_selection;
-    ExtraSelection sel;
-    sel.cursor.setPosition(2, QTextCursor::MoveAnchor);//移到起始位置
-    sel.cursor.movePosition(QTextCursor::NoMove, QTextCursor::MoveAnchor, 30);//移动结束位置
-    sel.format = this->currentCharFormat();
-    extra_selection.append(sel);
-    setExtraSelections(extra_selection);
 }
 
 void ConsoleEditor::keyPressEvent(QKeyEvent *e)
@@ -69,22 +62,34 @@ void ConsoleEditor::keyPressEvent(QKeyEvent *e)
     }
     else if (key == Qt::Key_Return)
     {
-        QTextEdit::keyPressEvent(e);
+        // 回车时，鼠标保持在当前输入的末尾，保证当前所有新的输入均为命令，
+        // 而不是回车符之前的才有效
+        moveCursor(QTextCursor::End);
 
+        QTextCursor cursor = this->textCursor();
         QTextDocument *doc = document();
-        int current_pos = this->textCursor().position();
+        int current_pos = cursor.position();
 
-        QString cmd;
-
+        // 获取命令字符串
         // 下面的循环条件是实验得出的
-        for (int pos = m_last_output_pos; pos < current_pos - 1; pos++)
+        QString cmd;
+        for (int pos = m_last_output_pos; pos < current_pos; pos++)
         {
             QChar ch = doc->characterAt(pos);
             cmd.append(ch);
         }
         cmd.append("\n");
 
-        // 发出通知
+        // 回车后，清除屏幕上当前的输入，因为当前的输入会被cmd.exe输出（回显），导致命令显示两次。
+        // 不是什么大问题，但这是为了和cmd.exe保持一致。
+        // 下面开始选中当前输入的内容
+        cursor.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor, current_pos - m_last_output_pos);
+
+        // 删除当前选中的内容
+        cursor.deleteChar();
+        setTextCursor(cursor);
+
+        // 发出命令通知
         emit sigNewInput(cmd);
     }
     else

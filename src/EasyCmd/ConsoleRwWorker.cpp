@@ -53,8 +53,14 @@ void ConsoleRwWorker::ctrlBreak()
 
 void ConsoleRwWorker::slotWrite(QString input)
 {
-    QByteArray ba = input.toLocal8Bit();
-    m_cmd_process.write(ba.data(), ba.size());
+    // 仿照cmd.exe的行为，自动将命令根据换行符划分成多个命令
+    QStringList cmds = input.split("\n", QString::SkipEmptyParts);
+    foreach (QString cmd, cmds)
+    {
+        cmd += "\n";/*每条命令末尾必须有换行符*/
+        QByteArray ba = cmd.toLocal8Bit();
+        m_cmd_process.write(ba.data(), ba.size());
+    }
 }
 
 void ConsoleRwWorker::slotReadyRead()

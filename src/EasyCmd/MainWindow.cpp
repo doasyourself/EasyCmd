@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     // 加载翻译文件:Start
     static QTranslator translator;
-    if (translator.load(":/projectName.qm"))
+    if (translator.load(":/easycmd.qm"))
     {
         qApp->installTranslator(&translator);
     }
