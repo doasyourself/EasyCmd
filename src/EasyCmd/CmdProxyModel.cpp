@@ -1,5 +1,4 @@
 ﻿#include "CmdProxyModel.h"
-
 #include <QDebug>
 
 CmdProxyModel::CmdProxyModel(QObject *parent)
