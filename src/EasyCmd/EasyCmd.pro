@@ -47,3 +47,5 @@ TRANSLATIONS += $$PWD/resource/easycmd.ts
 
 RESOURCES += \
     resource/resource.qrc
+
+RC_FILE = $$PWD/resource/rc/app.rc
