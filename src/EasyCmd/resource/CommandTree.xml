@@ -8,7 +8,28 @@
     <node name="网络">
         <node name="ping" desc="测试网络连通状况"></node>
         <node name="netstat" desc="显示网络连接、路由表和网络接口信息"></node>
+        <node name="ipconfig" desc="跟踪路由"></node>
+        <node name="net" desc="管理网络"></node>
+        <node name="tracert" desc="跟踪路由"></node>
     </node>
-    <node name="文件管理"></node>
-    <node name="应用程序"></node>
+    <node name="文件管理">
+        <node name="cd"></node>
+        <node name="dir"></node>
+        <node name="md"></node>
+        <node name="rd"></node>
+        <node name="copy"></node>
+        <node name="xcopy"></node>
+        <node name="move"></node>
+        <node name="del"></node>
+        <node name="type"></node>
+        <node name="attrib"></node>
+    </node>
+    <node name="进程管理">
+        <node name="tasklist"></node>
+        <node name="taskkill"></node>
+    </node>
+    <node name="应用程序">
+        <node name="Ftp"></node>
+        <node name="MySQL"></node>
+    </node>
 </root>
