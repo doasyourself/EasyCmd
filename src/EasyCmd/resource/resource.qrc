@@ -2,5 +2,10 @@
     <qresource prefix="/">
         <file>easycmd.qm</file>
         <file>CommandTree.xml</file>
+        <file>img/logo/logo16.ico</file>
+        <file>img/logo/logo32.ico</file>
+        <file>img/logo/logo48.ico</file>
+        <file>img/logo/logo64.ico</file>
+        <file>qss/menu1.qss</file>
     </qresource>
 </RCC>

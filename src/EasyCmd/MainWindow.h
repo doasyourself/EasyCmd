@@ -5,11 +5,13 @@
 #include <QSortFilterProxyModel>
 #include "ConsoleRwWorker.h"
 #include "CmdTreeModel.h"
+#include "AppTrayIcon.h"
 
 namespace Ui {
 class MainWindow;
 }
 class QTreeWidgetItem;
+class QSystemTrayIcon;
 
 class MainWindow : public QMainWindow
 {
@@ -65,6 +67,9 @@ private:
     void writeToConsole(QString);
     void moveToScreenCenter();
 
+    bool createTrayIcon();
+    void createTrayMenu();
+
 private:
     Ui::MainWindow *ui;
 
@@ -74,6 +79,9 @@ private:
     // 命令行model
     CmdTreeModel *m_cmd_model;
     QSortFilterProxyModel *m_proxy_model;
+
+    // 托盘图标
+    AppTrayIcon m_tray_icon;
 };
 
 #endif // MAINWINDOW_H

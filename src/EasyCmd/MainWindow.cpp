@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     // 加载翻译文件:End
 
+    // 托盘图标
+    qApp->setQuitOnLastWindowClosed(false);
+
     ui->setupUi(this);
     ui->splitter->setStretchFactor(0, 2);
     ui->splitter->setStretchFactor(1, 5);
@@ -49,6 +52,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // 窗口居中显示
     moveToScreenCenter();
+
+    // 创建托盘图标
+    m_tray_icon.setMainWindow(this);
+    m_tray_icon.create();
 }
 
 MainWindow::~MainWindow()
@@ -154,3 +161,4 @@ void MainWindow::slotEditorModified()
     QString cmd_string = editor->getCmdString();
     ui->textEdit_cmdPreview->setText(cmd_string);
 }
+

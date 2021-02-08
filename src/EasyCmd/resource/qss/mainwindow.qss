@@ -1,0 +1,80 @@
+﻿#topbar
+{
+    background:#1c232b;
+    color:#fff;
+}
+#app-title
+{
+    color:#fff;
+}
+#username
+{
+    color:#fff;
+    font-size:15px;
+}
+#navBar
+{
+    background:#333436;
+}
+QListWidget
+{
+    alternate-background-color: yellow;
+    font-size: 15px;
+    color: #111;
+    show-decoration-selected: 0;
+}
+QListWidget::item
+{
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+}
+QListWidget::item:alternate
+{
+    background: #f5f5f5;
+}
+QListWidget::item:selected
+{
+}
+
+QListWidget::item:selected:!active
+{
+    background: #ddd;
+}
+QListWidget::item:selected:active
+{
+    background: #c8f7a8;
+    color: #000;
+}
+QListWidget::item:hover
+{
+    background: #eee;/*#c8f7a8;*/
+}
+#bottom_bar
+{
+    background: #1c232b;
+}
+
+QScrollBar {
+  border: 0px solid grey;
+  background: white;
+  height: 15px;
+  margin: 0px 20px 0 20px;
+}
+
+QScrollBar::handle {
+  background: #ccc;
+  min-width: 20px;
+}
+QScrollBar::add-line {
+  background: #aaa;
+  width: 20px;
+  subcontrol-position: right;
+  subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line {
+  background: #aaa;
+  width: 20px;
+  subcontrol-position: left;
+  subcontrol-origin: margin;
+}

@@ -55,6 +55,19 @@
     </message>
 </context>
 <context>
+    <name>AppTrayIcon</name>
+    <message>
+        <location filename="../AppTrayIcon.cpp" line="48"/>
+        <source>Open MainWindow</source>
+        <translation>打开主窗口</translation>
+    </message>
+    <message>
+        <location filename="../AppTrayIcon.cpp" line="54"/>
+        <source>Exit</source>
+        <translation>退出</translation>
+    </message>
+</context>
+<context>
     <name>CmdTreeModel</name>
     <message>
         <location filename="../CmdTreeModel.cpp" line="21"/>
@@ -86,14 +99,42 @@
 <context>
     <name>ConsoleEditor</name>
     <message>
-        <location filename="../ConsoleEditor.cpp" line="192"/>
+        <location filename="../ConsoleEditor.cpp" line="217"/>
         <source>Copy</source>
         <translation>拷贝</translation>
     </message>
     <message>
-        <location filename="../ConsoleEditor.cpp" line="193"/>
+        <location filename="../ConsoleEditor.cpp" line="218"/>
         <source>Paste</source>
         <translation>粘贴</translation>
+    </message>
+</context>
+<context>
+    <name>LauncherEditor</name>
+    <message>
+        <location filename="../CmdEditors/LauncherEditor.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/LauncherEditor.ui" line="50"/>
+        <source>添加</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/LauncherEditor.ui" line="57"/>
+        <source>删除</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/LauncherEditor.ui" line="73"/>
+        <source>文件名</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/LauncherEditor.ui" line="78"/>
+        <source>文件路径</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -139,7 +180,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MainWindow.ui" line="289"/>
+        <location filename="../MainWindow.ui" line="281"/>
         <source>关于</source>
         <translation type="unfinished"></translation>
     </message>

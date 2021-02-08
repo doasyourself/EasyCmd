@@ -13,7 +13,11 @@ TEMPLATE = app
 
 include($$PWD/CmdEditors/CmdEditors.pri)
 
-DESTDIR = $$PWD/dist
+CONFIG(debug|release,debug) {
+    DESTDIR = $$PWD/dist/debug
+} else {
+    DESTDIR = $$PWD/dist/release
+}
 
 SOURCES += main.cpp\
     CmdProxyModel.cpp \
@@ -23,7 +27,8 @@ SOURCES += main.cpp\
         MainWindow.cpp \
     AboutUsDialog.cpp \
     Utils.cpp \
-    ZXmlDomItem.cpp
+    ZXmlDomItem.cpp \
+    AppTrayIcon.cpp
 
 HEADERS  += MainWindow.h \
     CmdProxyModel.h \
@@ -32,7 +37,8 @@ HEADERS  += MainWindow.h \
     ConsoleEditor.h \
     ConsoleRwWorker.h \
     Utils.h \
-    ZXmlDomItem.h
+    ZXmlDomItem.h \
+    AppTrayIcon.h
 
 FORMS    += MainWindow.ui \
     AboutUsDialog.ui
