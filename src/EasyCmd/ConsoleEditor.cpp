@@ -10,6 +10,8 @@ ConsoleEditor::ConsoleEditor(QWidget *parent)
     : QTextEdit(parent)
 {
     m_last_output_pos = this->textCursor().position();
+    setFontFamily("Courier New");
+    setFontPointSize(10);
     setUndoRedoEnabled(true);/*允许撤销*/
     setupActions();
     setupMenu();
