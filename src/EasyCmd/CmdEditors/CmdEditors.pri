@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/CmdEditorHeader.h \
     $$PWD/NetStatCmdEditor.h \
     $$PWD/SystemToolEditor.h \
-    $$PWD/IpconfigEditor.h
+    $$PWD/IpconfigEditor.h \
+    $$PWD/TasklistEditor.h
 
 SOURCES += \
     $$PWD/EditorFactory.cpp \
@@ -17,11 +18,13 @@ SOURCES += \
     $$PWD/PingCmdEditor.cpp \
     $$PWD/NetStatCmdEditor.cpp \
     $$PWD/SystemToolEditor.cpp \
-    $$PWD/IpconfigEditor.cpp
+    $$PWD/IpconfigEditor.cpp \
+    $$PWD/TasklistEditor.cpp
 
 FORMS += \
     $$PWD/LauncherEditor.ui \
     $$PWD/PingCmdEditor.ui \
     $$PWD/NetStatCmdEditor.ui \
     $$PWD/SystemToolEditor.ui \
-    $$PWD/IpconfigEditor.ui
+    $$PWD/IpconfigEditor.ui \
+    $$PWD/TasklistEditor.ui

@@ -20,6 +20,7 @@ void ConsoleEditor::appendOuput(const QString &text)
     // 这里不用appendText，因为append会添加新行。
     insertPlainText(text);
     m_last_output_pos = this->textCursor().position();
+    moveCursor(QTextCursor::End);
 }
 
 void ConsoleEditor::keyPressEvent(QKeyEvent *e)

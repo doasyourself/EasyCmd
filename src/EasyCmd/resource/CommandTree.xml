@@ -25,8 +25,8 @@
         <node name="attrib"></node>
     </node>
     <node name="进程管理">
-        <node name="tasklist"></node>
-        <node name="taskkill"></node>
+        <node name="tasklist" desc="查看进程列表"></node>
+        <node name="taskkill" desc="结束进程"></node>
     </node>
     <node name="应用程序">
         <node name="Ftp"></node>

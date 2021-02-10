@@ -1,6 +1,12 @@
 ﻿#ifndef IPCONFIGEDITOR_H
 #define IPCONFIGEDITOR_H
 
+/*************************************************************************
+** 此命令支持无参，参考msdoc：https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig
+**
+**
+*************************************************************************/
+
 #include <QWidget>
 #include "ICmdEditor.h"
 
@@ -17,6 +23,7 @@ public:
     ~IpconfigEditor();
 
     virtual bool isModified() const;
+    virtual QString getCmdName();
     virtual QString getCmdString();
 
 
@@ -36,6 +43,16 @@ private slots:
     void on_checkBox_displaydns_toggled(bool checked);
 
     void slotOptionChanged();
+
+    void on_lineEdit_setclassid_textChanged(const QString &arg1);
+
+    void on_lineEdit_showclassid_textChanged(const QString &arg1);
+
+    void on_lineEdit_release_textChanged(const QString &arg1);
+
+    void on_lineEdit_renew_textChanged(const QString &arg1);
+
+    void on_lineEdit_newClassid_textChanged(const QString &arg1);
 
 private:
     void genCmdString();

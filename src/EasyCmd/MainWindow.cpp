@@ -98,16 +98,18 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     /*找不到编辑器则返回*/
     if (!editor) return;
 
+    /*监听编辑器命令改变信号*/
     connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
+
+    /* 更新一次命令，保证当前显示的命令时刻为最新的 */
+    QString cmd_string = editor->getCmdName();
+    ui->textEdit_cmdPreview->setText(cmd_string);
 
     // 设置到界面上
     ui->scrollArea->setWidget(editor);
 
     // 使能按钮
     ui->pushButton_execCmd->setEnabled(true);
-
-    // 清空命令预览
-    ui->textEdit_cmdPreview->clear();
 }
 
 void MainWindow::writeToConsole(QString cmd_string)

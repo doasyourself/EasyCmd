@@ -47,7 +47,7 @@
            <string/>
           </property>
           <property name="placeholderText">
-           <string>输入ip地址或url</string>
+           <string>输入ip地址或url，必填</string>
           </property>
           <property name="clearButtonEnabled">
            <bool>true</bool>

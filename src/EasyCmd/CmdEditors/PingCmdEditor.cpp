@@ -38,14 +38,21 @@ bool PingCmdEditor::isModified() const
     return false;
 }
 
+QString PingCmdEditor::getCmdName()
+{
+    return "ping";
+}
+
 QString PingCmdEditor::getCmdString()
 {
+    QString cmd_string("ping");
+
     // 检查ip合法性
     QString ip_url = ui->lineEdit_ip_url->text();
     if (ip_url.isEmpty())
     {
         QMessageBox::information(this, tr("Info"), tr("Please input correct ip/url!"));
-        return "";
+        return cmd_string;
     }
 
     // Start: 获取配置项
@@ -88,7 +95,6 @@ QString PingCmdEditor::getCmdString()
     }
     // End
 
-    QString cmd_string("ping");
     cmd_string += options;
     cmd_string += " " + ui->lineEdit_ip_url->text();
     cmd_string += "\n";
