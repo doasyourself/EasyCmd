@@ -41,43 +41,16 @@
         <property name="horizontalSpacing">
          <number>20</number>
         </property>
-        <item row="5" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QCheckBox" name="checkBox_release">
-            <property name="minimumSize">
-             <size>
-              <width>250</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>释放所有匹配的连接：</string>
-            </property>
-            <property name="autoExclusive">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_release">
-            <property name="toolTip">
-             <string>空表示更新所有</string>
-            </property>
-            <property name="placeholderText">
-             <string>适配器名称，支持通配符</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
         <item row="4" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="spacing">
+           <number>2</number>
+          </property>
           <item>
            <widget class="QCheckBox" name="checkBox_showclassid">
             <property name="minimumSize">
              <size>
-              <width>250</width>
+              <width>260</width>
               <height>0</height>
              </size>
             </property>
@@ -103,11 +76,14 @@
         </item>
         <item row="6" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>2</number>
+          </property>
           <item>
            <widget class="QCheckBox" name="checkBox_renew">
             <property name="minimumSize">
              <size>
-              <width>250</width>
+              <width>260</width>
               <height>0</height>
              </size>
             </property>
@@ -133,11 +109,14 @@
         </item>
         <item row="3" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>2</number>
+          </property>
           <item>
            <widget class="QCheckBox" name="checkBox_setclassid">
             <property name="minimumSize">
              <size>
-              <width>250</width>
+              <width>260</width>
               <height>0</height>
              </size>
             </property>
@@ -159,17 +138,47 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_newClassid">
+            <property name="placeholderText">
+             <string>新的classid</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
-        <item row="0" column="0">
-         <widget class="QCheckBox" name="checkBox_all">
-          <property name="text">
-           <string>显示所有适配器的完整 TCP/IP 配置信息</string>
+        <item row="5" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>2</number>
           </property>
-          <property name="autoExclusive">
-           <bool>false</bool>
-          </property>
-         </widget>
+          <item>
+           <widget class="QCheckBox" name="checkBox_release">
+            <property name="minimumSize">
+             <size>
+              <width>260</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>释放所有匹配的连接：</string>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_release">
+            <property name="toolTip">
+             <string>空表示更新所有</string>
+            </property>
+            <property name="placeholderText">
+             <string>适配器名称，支持通配符</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="1" column="0">
          <widget class="QCheckBox" name="checkBox_flushdns">
@@ -185,6 +194,16 @@
          <widget class="QCheckBox" name="checkBox_displaydns">
           <property name="text">
            <string>显示DNS客户解析器缓存的内容</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox_all">
+          <property name="text">
+           <string>显示所有适配器的完整 TCP/IP 配置信息</string>
           </property>
           <property name="autoExclusive">
            <bool>false</bool>

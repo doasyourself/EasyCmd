@@ -34,6 +34,11 @@ bool SystemToolEditor::isModified() const
     return !m_current_cmd.isEmpty();
 }
 
+QString SystemToolEditor::getCmdName()
+{
+    return "";
+}
+
 QString SystemToolEditor::getCmdString()
 {
     return m_current_cmd;

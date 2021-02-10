@@ -12,6 +12,9 @@ IpconfigEditor::IpconfigEditor(QWidget *parent) :
     {
         connect(chb, &QCheckBox::toggled, this, &IpconfigEditor::slotOptionChanged);
     }
+
+    // 生成无参数命令
+    genCmdString();
 }
 
 IpconfigEditor::~IpconfigEditor()
@@ -22,6 +25,11 @@ IpconfigEditor::~IpconfigEditor()
 bool IpconfigEditor::isModified() const
 {
     return false;
+}
+
+QString IpconfigEditor::getCmdName()
+{
+    return "ipconfig";
 }
 
 QString IpconfigEditor::getCmdString()
@@ -123,12 +131,11 @@ void IpconfigEditor::on_checkBox_displaydns_toggled(bool checked)
 void IpconfigEditor::slotOptionChanged()
 {
     genCmdString();
-    emit sigModified();
 }
 
 void IpconfigEditor::genCmdString()
 {
-    m_cmd = "ipconfig";
+    QString new_cmd = "ipconfig";
     QString options;
     if (ui->checkBox_all->isChecked())
     {
@@ -148,7 +155,7 @@ void IpconfigEditor::genCmdString()
         QString adapter = ui->lineEdit_release->text();
         if (!adapter.isEmpty())
         {
-            options += " " + adapter;
+            options += QString(" \"%1\"").arg(adapter);
         }
     }
     else if (ui->checkBox_renew->isChecked())
@@ -157,7 +164,7 @@ void IpconfigEditor::genCmdString()
         QString adapter = ui->lineEdit_renew->text();
         if (!adapter.isEmpty())
         {
-            options += " " + adapter;
+            options += QString(" \"%1\"").arg(adapter);
         }
     }
     else if (ui->checkBox_setclassid->isChecked())
@@ -166,7 +173,13 @@ void IpconfigEditor::genCmdString()
         QString adapter = ui->lineEdit_setclassid->text();
         if (!adapter.isEmpty())
         {
-            options += " " + adapter;
+            options += QString(" \"%1\"").arg(adapter);
+        }
+
+        QString new_class_id = ui->lineEdit_newClassid->text();
+        if (!new_class_id.isEmpty())
+        {
+            options += QString(" \"%1\"").arg(new_class_id);
         }
     }
     else if (ui->checkBox_showclassid->isChecked())
@@ -175,9 +188,41 @@ void IpconfigEditor::genCmdString()
         QString adapter = ui->lineEdit_showclassid->text();
         if (!adapter.isEmpty())
         {
-            options += " " + adapter;
+            options += QString(" \"%1\"").arg(adapter);
         }
     }
 
-    m_cmd += options;
+    new_cmd += options;
+
+    // 判断命令是否改变
+    if (new_cmd != m_cmd)
+    {
+        m_cmd = new_cmd;
+        emit sigModified();
+    }
+}
+
+void IpconfigEditor::on_lineEdit_setclassid_textChanged(const QString &arg1)
+{
+    genCmdString();
+}
+
+void IpconfigEditor::on_lineEdit_showclassid_textChanged(const QString &arg1)
+{
+    genCmdString();
+}
+
+void IpconfigEditor::on_lineEdit_release_textChanged(const QString &arg1)
+{
+    genCmdString();
+}
+
+void IpconfigEditor::on_lineEdit_renew_textChanged(const QString &arg1)
+{
+    genCmdString();
+}
+
+void IpconfigEditor::on_lineEdit_newClassid_textChanged(const QString &arg1)
+{
+    genCmdString();
 }

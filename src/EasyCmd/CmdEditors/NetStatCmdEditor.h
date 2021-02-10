@@ -17,6 +17,7 @@ public:
     virtual ~NetStatCmdEditor();
 
     virtual bool isModified() const;
+    virtual QString getCmdName();
     virtual QString getCmdString();
 
 private slots:

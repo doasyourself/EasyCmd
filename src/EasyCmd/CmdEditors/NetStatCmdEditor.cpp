@@ -36,6 +36,11 @@ bool NetStatCmdEditor::isModified() const
     return false;
 }
 
+QString NetStatCmdEditor::getCmdName()
+{
+    return "netstat";
+}
+
 QString NetStatCmdEditor::getCmdString()
 {
     // Start: 获取配置项

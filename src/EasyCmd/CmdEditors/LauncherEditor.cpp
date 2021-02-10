@@ -115,6 +115,11 @@ bool LauncherEditor::isModified() const
     return false;
 }
 
+QString LauncherEditor::getCmdName()
+{
+    return "";
+}
+
 QString LauncherEditor::getCmdString()
 {
     return m_cmd;
@@ -143,6 +148,7 @@ void LauncherEditor::on_pushButton_del_clicked()
 
 void LauncherEditor::slotItemClicked(QTableWidgetItem *item)
 {
+    QString new_cmd;
     int row = item->row();
     QTableWidgetItem *path_item = ui->tableWidget->item(row, COL_PATH);
     if (path_item)
@@ -156,8 +162,14 @@ void LauncherEditor::slotItemClicked(QTableWidgetItem *item)
             filepath = fi.symLinkTarget();
         }
 
-        m_cmd = QString("\"%1\"\n").arg(filepath);/*路径可能包含空格，要用引号包起来*/
-        emit sigModified();
+        new_cmd = QString("\"%1\"\n").arg(filepath);/*路径可能包含空格，要用引号包起来*/
+
+        // 判断命令是否改变
+        if (new_cmd != m_cmd)
+        {
+            m_cmd = new_cmd;
+            emit sigModified();
+        }
     }
 }
 
