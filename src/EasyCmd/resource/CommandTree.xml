@@ -8,7 +8,7 @@
     <node name="网络">
         <node name="ping" desc="测试网络连通状况"></node>
         <node name="netstat" desc="显示网络连接、路由表和网络接口信息"></node>
-        <node name="ipconfig" desc="跟踪路由"></node>
+        <node name="ipconfig" desc="查询TCP/IP配置信息"></node>
         <node name="net" desc="管理网络"></node>
         <node name="tracert" desc="跟踪路由"></node>
     </node>

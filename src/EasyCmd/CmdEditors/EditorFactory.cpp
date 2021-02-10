@@ -3,11 +3,13 @@
 #include "NetStatCmdEditor.h"
 #include "SystemToolEditor.h"
 #include "LauncherEditor.h"
+#include "IpconfigEditor.h"
 
 ICmdEditor *newPingCmdEditor() { return new PingCmdEditor; }
 ICmdEditor *newNetStatCmdEditor() { return new NetStatCmdEditor; }
 ICmdEditor *newSystemToolsEditor() { return new SystemToolEditor; }
 ICmdEditor *newLauncherEditor() { return new LauncherEditor; }
+ICmdEditor *newIpconfigEditor() { return new IpconfigEditor; }
 
 EditorFactory::EditorFactory()
 {
@@ -18,6 +20,7 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("netstat", newNetStatCmdEditor);
     m_editor_map.insert("systemTools", newSystemToolsEditor);
     m_editor_map.insert("launcher", newLauncherEditor);
+    m_editor_map.insert("ipconfig", newIpconfigEditor);
 }
 
 ICmdEditor *EditorFactory::createEditor(const QString &name)

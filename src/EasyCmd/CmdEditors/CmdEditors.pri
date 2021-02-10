@@ -7,7 +7,8 @@ HEADERS += \
     $$PWD/PingCmdEditor.h \
     $$PWD/CmdEditorHeader.h \
     $$PWD/NetStatCmdEditor.h \
-    $$PWD/SystemToolEditor.h
+    $$PWD/SystemToolEditor.h \
+    $$PWD/IpconfigEditor.h
 
 SOURCES += \
     $$PWD/EditorFactory.cpp \
@@ -15,10 +16,12 @@ SOURCES += \
     $$PWD/LauncherEditor.cpp \
     $$PWD/PingCmdEditor.cpp \
     $$PWD/NetStatCmdEditor.cpp \
-    $$PWD/SystemToolEditor.cpp
+    $$PWD/SystemToolEditor.cpp \
+    $$PWD/IpconfigEditor.cpp
 
 FORMS += \
     $$PWD/LauncherEditor.ui \
     $$PWD/PingCmdEditor.ui \
     $$PWD/NetStatCmdEditor.ui \
-    $$PWD/SystemToolEditor.ui
+    $$PWD/SystemToolEditor.ui \
+    $$PWD/IpconfigEditor.ui

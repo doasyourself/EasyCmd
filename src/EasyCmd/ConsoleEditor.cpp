@@ -132,8 +132,7 @@ void ConsoleEditor::mousePressEvent(QMouseEvent *e)
         int new_pos = cursorForPosition(e->pos()).position();
         if (new_pos < m_last_output_pos) /*必须加这个条件，否则会跑到新键入的内容最后*/
         {
-            // 鼠标始终保持在上次输出的末尾
-            moveCursor(QTextCursor::End);
+            // 保持鼠标不动
         }
         else
         {
