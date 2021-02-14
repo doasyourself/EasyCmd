@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     AboutUsDialog.cpp \
     Utils.cpp \
     ZXmlDomItem.cpp \
-    AppTrayIcon.cpp
+    AppTrayIcon.cpp \
+    MessageBubble.cpp
 
 HEADERS  += MainWindow.h \
     CmdProxyModel.h \
@@ -38,10 +39,13 @@ HEADERS  += MainWindow.h \
     ConsoleRwWorker.h \
     Utils.h \
     ZXmlDomItem.h \
-    AppTrayIcon.h
+    AppTrayIcon.h \
+    Global.h \
+    MessageBubble.h
 
 FORMS    += MainWindow.ui \
-    AboutUsDialog.ui
+    AboutUsDialog.ui \
+    MessageBubble.ui
 
 TRANSLATIONS += $$PWD/resource/easycmd.ts
 

@@ -1,5 +1,6 @@
 ﻿#include "Utils.h"
 #include <QLocale>
+#include <QLabel>
 
 Utils::Utils()
 {
@@ -15,4 +16,26 @@ QDateTime Utils::getCompileDateTime()
     const QTime buildTime = QTime::fromString(__TIME__, "hh:mm:ss");
 
     return QDateTime(buildDate, buildTime);
+}
+
+void Utils::showTip(QLabel *label, const QString &txt, Utils::TipLevel tl)
+{
+    label->setText(txt);
+    switch (tl)
+    {
+    case TL_INFO:
+    {
+        label->setStyleSheet("color:green;");
+        break;
+    }
+    case TL_CRITICAL:
+    {
+        label->setStyleSheet("color:red;");
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
 }

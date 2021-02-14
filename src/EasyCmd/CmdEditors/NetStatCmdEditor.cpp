@@ -10,6 +10,8 @@ NetStatCmdEditor::NetStatCmdEditor(QWidget *parent) :
 
     // 初始化需要设置一次界面
     on_checkBox_option_s_toggled(false);
+    on_checkBox_option_p_toggled(false);
+    on_checkBox_option_interval_toggled(false);
 
     // 监听修改操作
     QList<QCheckBox *> checkboxs = findChildren<QCheckBox *>();
@@ -138,4 +140,14 @@ void NetStatCmdEditor::on_checkBox_option_s_toggled(bool checked)
 
     ui->comboBox_option_p->clear();
     ui->comboBox_option_p->addItems(protos);
+}
+
+void NetStatCmdEditor::on_checkBox_option_p_toggled(bool checked)
+{
+    ui->comboBox_option_p->setEnabled(checked);
+}
+
+void NetStatCmdEditor::on_checkBox_option_interval_toggled(bool checked)
+{
+    ui->spinBox_option_interval->setEnabled(checked);
 }

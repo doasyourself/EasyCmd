@@ -17,7 +17,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>参数</string>
+      <string>必填参数</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
@@ -52,7 +52,7 @@
       <string/>
      </property>
      <property name="title">
-      <string>可选项</string>
+      <string>可选参数</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>

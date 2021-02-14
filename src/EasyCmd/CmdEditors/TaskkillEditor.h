@@ -1,5 +1,5 @@
-﻿#ifndef TasklistEditor_H
-#define TasklistEditor_H
+﻿#ifndef TaskkillEditor_H
+#define TaskkillEditor_H
 
 /*******************************************************************************
 ** 实现tasklist命令编辑器
@@ -10,24 +10,24 @@
 #include "ICmdEditor.h"
 
 namespace Ui {
-class TasklistEditor;
+class TaskkillEditor;
 }
 
-class TasklistEditor : public ICmdEditor
+class TaskkillEditor : public ICmdEditor
 {
     Q_OBJECT
 
 public:
-    explicit TasklistEditor(QWidget *parent = 0);
-    ~TasklistEditor();
+    explicit TaskkillEditor(QWidget *parent = 0);
+    ~TaskkillEditor();
 
     virtual bool isModified() const;
     virtual QString getCmdName();
     virtual QString getCmdString();
 
 private:
-    Ui::TasklistEditor *ui;
+    Ui::TaskkillEditor *ui;
     QString m_cmd;
 };
 
-#endif // TasklistEditor_H
+#endif // TaskkillEditor_H

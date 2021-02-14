@@ -5,6 +5,7 @@
 #include "LauncherEditor.h"
 #include "IpconfigEditor.h"
 #include "TasklistEditor.h"
+#include "TaskkillEditor.h"
 
 ICmdEditor *newPingCmdEditor() { return new PingCmdEditor; }
 ICmdEditor *newNetStatCmdEditor() { return new NetStatCmdEditor; }
@@ -12,6 +13,7 @@ ICmdEditor *newSystemToolsEditor() { return new SystemToolEditor; }
 ICmdEditor *newLauncherEditor() { return new LauncherEditor; }
 ICmdEditor *newIpconfigEditor() { return new IpconfigEditor; }
 ICmdEditor *newTasklistEditor() { return new TasklistEditor; }
+ICmdEditor *newTaskkillEditor() { return new TaskkillEditor; }
 
 EditorFactory::EditorFactory()
 {
@@ -24,6 +26,7 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("launcher", newLauncherEditor);
     m_editor_map.insert("ipconfig", newIpconfigEditor);
     m_editor_map.insert("tasklist", newTasklistEditor);
+    m_editor_map.insert("taskkill", newTaskkillEditor);
 }
 
 ICmdEditor *EditorFactory::createEditor(const QString &name)

@@ -23,6 +23,10 @@ public:
 private slots:
     void on_checkBox_option_s_toggled(bool checked);
 
+    void on_checkBox_option_p_toggled(bool checked);
+
+    void on_checkBox_option_interval_toggled(bool checked);
+
 private:
     Ui::NetStatCmdEditor *ui;
 };

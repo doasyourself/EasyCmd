@@ -7,14 +7,16 @@ IpconfigEditor::IpconfigEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    on_checkBox_setclassid_toggled(false);
+    on_checkBox_showclassid_toggled(false);
+    on_checkBox_release_toggled(false);
+    on_checkBox_renew_toggled(false);
+
     QList<QCheckBox *> chb_list = findChildren<QCheckBox *>();
     foreach (QCheckBox *chb, chb_list)
     {
         connect(chb, &QCheckBox::toggled, this, &IpconfigEditor::slotOptionChanged);
     }
-
-    // 生成无参数命令
-    genCmdString();
 }
 
 IpconfigEditor::~IpconfigEditor()
@@ -48,6 +50,9 @@ void IpconfigEditor::on_checkBox_setclassid_toggled(bool checked)
         ui->checkBox_renew->setChecked(false);
         ui->checkBox_showclassid->setChecked(false);
     }
+
+    ui->lineEdit_setclassid->setEnabled(checked);
+    ui->lineEdit_newClassid->setEnabled(checked);
 }
 
 void IpconfigEditor::on_checkBox_showclassid_toggled(bool checked)
@@ -61,6 +66,8 @@ void IpconfigEditor::on_checkBox_showclassid_toggled(bool checked)
         ui->checkBox_renew->setChecked(false);
         ui->checkBox_setclassid->setChecked(false);
     }
+
+    ui->lineEdit_showclassid->setEnabled(checked);
 }
 
 void IpconfigEditor::on_checkBox_release_toggled(bool checked)
@@ -74,6 +81,8 @@ void IpconfigEditor::on_checkBox_release_toggled(bool checked)
         ui->checkBox_setclassid->setChecked(false);
         ui->checkBox_showclassid->setChecked(false);
     }
+
+    ui->lineEdit_release->setEnabled(checked);
 }
 
 void IpconfigEditor::on_checkBox_renew_toggled(bool checked)
@@ -87,6 +96,8 @@ void IpconfigEditor::on_checkBox_renew_toggled(bool checked)
         ui->checkBox_setclassid->setChecked(false);
         ui->checkBox_showclassid->setChecked(false);
     }
+
+    ui->lineEdit_renew->setEnabled(checked);
 }
 
 void IpconfigEditor::on_checkBox_all_toggled(bool checked)

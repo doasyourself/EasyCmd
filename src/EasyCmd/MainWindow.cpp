@@ -102,7 +102,7 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
 
     /* 更新一次命令，保证当前显示的命令时刻为最新的 */
-    QString cmd_string = editor->getCmdName();
+    QString cmd_string = editor->getCmdString();
     ui->textEdit_cmdPreview->setText(cmd_string);
 
     // 设置到界面上

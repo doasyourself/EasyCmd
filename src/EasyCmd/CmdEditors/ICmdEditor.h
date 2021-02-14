@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QWidget>
+#include "Global.h"
 
 class ICmdEditor : public QWidget
 {

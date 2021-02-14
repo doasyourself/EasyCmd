@@ -1,6 +1,6 @@
 ﻿#include "PingCmdEditor.h"
 #include "ui_PingCmdEditor.h"
-#include <QMessageBox>
+#include "Utils.h"
 
 PingCmdEditor::PingCmdEditor(QWidget *parent) :
     ICmdEditor(parent),
@@ -8,13 +8,12 @@ PingCmdEditor::PingCmdEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // 监听修改信号
-    QList<QRadioButton *> radios = findChildren<QRadioButton *>();
-    foreach (QRadioButton *radio, radios)
-    {
-        connect(radio, &QRadioButton::clicked, this, &ICmdEditor::sigModified);
-    }
+    // 初始化
+    on_checkBox_option_l_toggled(false);
+    on_checkBox_option_i_toggled(false);
+    on_checkBox_option_w_toggled(false);
 
+    // 监听修改信号
     QList<QCheckBox *> checkboxs = findChildren<QCheckBox *>();
     foreach (QCheckBox *chk, checkboxs)
     {
@@ -47,23 +46,15 @@ QString PingCmdEditor::getCmdString()
 {
     QString cmd_string("ping");
 
-    // 检查ip合法性
-    QString ip_url = ui->lineEdit_ip_url->text();
-    if (ip_url.isEmpty())
-    {
-        QMessageBox::information(this, tr("Info"), tr("Please input correct ip/url!"));
-        return cmd_string;
-    }
-
-    // Start: 获取配置项
+    // Start: 先获取配置项
     QString options;
-    if (ui->radioButton_infiniteTimes->isChecked()) /*无限次*/
+    if (ui->checkBox_infiniteTimes->isChecked()) /*无限次*/
     {
         options += " -t"; /*约定前面带空格，下同*/
     }
-    else
+    else if (ui->checkBox_finiteTimes->isChecked())
     {
-        options += " -n" + QString::number(ui->spinBox_times->value());
+        options += " -n " + QString::number(ui->spinBox_times->value());
     }
 
     if (ui->checkBox_option_a->isChecked())
@@ -71,9 +62,9 @@ QString PingCmdEditor::getCmdString()
         options += " -a";
     }
 
-    int option_l = ui->spinBox_options_l->value();
-    if (option_l >= 0) /*小于0为无效值，界面上默认为-1，即默认不添加此选项，下同*/
+    if (ui->checkBox_option_l->isChecked()) /*小于0为无效值，界面上默认为-1，即默认不添加此选项，下同*/
     {
+        int option_l = ui->spinBox_options_l->value();
         options += " -l " + QString::number(option_l);
     }
 
@@ -82,21 +73,69 @@ QString PingCmdEditor::getCmdString()
         options += " -f";
     }
 
-    int options_i = ui->spinBox_options_i->value();
-    if (options_i >= 0)
+    if (ui->checkBox_option_i->isChecked())
     {
+        int options_i = ui->spinBox_options_i->value();
         options += " -i " + QString::number(options_i);
     }
 
-    int options_w = ui->spinBox_options_w->value();
-    if (options_w >= 0)
+    if (ui->checkBox_option_w->isChecked())
     {
+        int options_w = ui->spinBox_options_w->value();
         options += " -w " + QString::number(options_w);
     }
     // End
 
     cmd_string += options;
-    cmd_string += " " + ui->lineEdit_ip_url->text();
-    cmd_string += "\n";
+
+    // 检查ip合法性
+    QString ip_url = ui->lineEdit_ip_url->text();
+    if (ip_url.isEmpty())
+    {
+        Utils::showTip(ui->label_info_ip_url, tr("Please input correct ip/url!"), Utils::TL_CRITICAL);
+    }
+    else
+    {
+        ui->label_info_ip_url->clear();
+        cmd_string += " " + ip_url;
+        cmd_string += "\n";
+    }
+
     return cmd_string;
+}
+
+void PingCmdEditor::on_checkBox_option_l_toggled(bool checked)
+{
+    ui->spinBox_options_l->setEnabled(checked);
+}
+
+void PingCmdEditor::on_checkBox_option_i_toggled(bool checked)
+{
+    ui->spinBox_options_i->setEnabled(checked);
+}
+
+void PingCmdEditor::on_checkBox_option_w_toggled(bool checked)
+{
+    ui->spinBox_options_w->setEnabled(checked);
+}
+
+void PingCmdEditor::on_lineEdit_ip_url_textChanged(const QString &arg1)
+{
+    emit sigModified();
+}
+
+void PingCmdEditor::on_checkBox_infiniteTimes_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_finiteTimes->setChecked(false);/*互斥*/
+    }
+}
+
+void PingCmdEditor::on_checkBox_finiteTimes_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->checkBox_infiniteTimes->setChecked(false);/*互斥*/
+    }
 }

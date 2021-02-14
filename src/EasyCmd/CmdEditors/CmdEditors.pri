@@ -9,7 +9,8 @@ HEADERS += \
     $$PWD/NetStatCmdEditor.h \
     $$PWD/SystemToolEditor.h \
     $$PWD/IpconfigEditor.h \
-    $$PWD/TasklistEditor.h
+    $$PWD/TasklistEditor.h \
+    $$PWD/TaskkillEditor.h
 
 SOURCES += \
     $$PWD/EditorFactory.cpp \
@@ -19,7 +20,8 @@ SOURCES += \
     $$PWD/NetStatCmdEditor.cpp \
     $$PWD/SystemToolEditor.cpp \
     $$PWD/IpconfigEditor.cpp \
-    $$PWD/TasklistEditor.cpp
+    $$PWD/TasklistEditor.cpp \
+    $$PWD/TaskkillEditor.cpp
 
 FORMS += \
     $$PWD/LauncherEditor.ui \
@@ -27,4 +29,5 @@ FORMS += \
     $$PWD/NetStatCmdEditor.ui \
     $$PWD/SystemToolEditor.ui \
     $$PWD/IpconfigEditor.ui \
-    $$PWD/TasklistEditor.ui
+    $$PWD/TasklistEditor.ui \
+    $$PWD/TaskkillEditor.ui
