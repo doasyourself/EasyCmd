@@ -25,6 +25,21 @@ public:
     virtual QString getCmdName();
     virtual QString getCmdString();
 
+private slots:
+    void on_checkBox_remote_system_toggled(bool checked);
+
+    void on_checkBox_option_m_toggled(bool checked);
+
+    void on_checkBox_option_v_toggled(bool checked);
+
+    void on_checkBox_option_svc_toggled(bool checked);
+
+    void on_comboBox_option_fo_currentIndexChanged(const QString &arg1);
+
+    void on_checkBox_option_fo_toggled(bool checked);
+
+    void on_checkBox_option_fi_toggled(bool checked);
+
 private:
     Ui::TasklistEditor *ui;
     QString m_cmd;
