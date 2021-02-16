@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>647</width>
-    <height>569</height>
+    <height>1097</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -282,49 +282,353 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkBox_option_fi">
+        <property name="minimumSize">
+         <size>
+          <width>230</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>230</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>设置筛选器</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_filter">
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item row="1" column="1">
+            <widget class="QWidget" name="widget_operators" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_status"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_imageName"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_pid"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_session"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_sessionName"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_cpuTime"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_memusage"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_userName"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_service"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_windowTitle"/>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_module"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_filterType">
+             <item>
+              <property name="text">
+               <string>STATUS（状态）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>IMAGENAME（映像名）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PID（进程ID）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>SESSION（会话编号）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>SESSIONNAME（会话名称）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CPUTIME（CPU时间）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>MEMUSAGE（内存使用量）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>USERNAME（用户名）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>SERVICES（服务名称）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>WINDOWTITLE（窗口标题名）</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>模块名</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>判断符：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>判断内容：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>选择筛选器：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QWidget" name="widget_filterValues" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QComboBox" name="comboBox_fiValue_status">
+                <item>
+                 <property name="text">
+                  <string>RUNNING</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>SUSPENDED</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>NOT RESPONDING</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>UNKNOWN</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_imageName">
+                <property name="placeholderText">
+                 <string>映像名称</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_pid">
+                <property name="placeholderText">
+                 <string>PID</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_session">
+                <property name="placeholderText">
+                 <string>会话编号</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_sessionName">
+                <property name="placeholderText">
+                 <string>会话名称</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTimeEdit" name="timeEdit_fiValue_cpuTime">
+                <property name="showGroupSeparator" stdset="0">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumTime">
+                 <time>
+                  <hour>23</hour>
+                  <minute>59</minute>
+                  <second>59</second>
+                 </time>
+                </property>
+                <property name="displayFormat">
+                 <string>HH:mm:ss</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="spinBox_fiValue_memUsage">
+                <property name="suffix">
+                 <string>KB</string>
+                </property>
+                <property name="maximum">
+                 <number>1000000000</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_userName">
+                <property name="placeholderText">
+                 <string>用户名，格式为：[域\]用户</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_service">
+                <property name="placeholderText">
+                 <string>服务名称</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_windowTitle">
+                <property name="placeholderText">
+                 <string>窗口标题</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_module">
+                <property name="placeholderText">
+                 <string>模块名称</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <layout class="QGridLayout" name="gridLayout_3">
         <property name="topMargin">
          <number>0</number>
         </property>
-        <item row="0" column="0">
-         <widget class="QCheckBox" name="checkBox_option_fi">
-          <property name="minimumSize">
-           <size>
-            <width>230</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>230</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>设置筛选器</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
-         <widget class="QCheckBox" name="checkBox_option_fo">
-          <property name="minimumSize">
-           <size>
-            <width>230</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>230</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>指定输出格式</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
          <widget class="QCheckBox" name="checkBox_option_nh">
           <property name="minimumSize">
            <size>
@@ -343,7 +647,26 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox_option_fo">
+          <property name="minimumSize">
+           <size>
+            <width>230</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>230</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>指定输出格式</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
          <widget class="QComboBox" name="comboBox_option_fo">
           <item>
            <property name="text">
@@ -361,9 +684,6 @@
            </property>
           </item>
          </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_option_fi"/>
         </item>
        </layout>
       </item>

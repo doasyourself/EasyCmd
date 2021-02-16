@@ -1,6 +1,7 @@
 ﻿#include "TasklistEditor.h"
 #include "ui_TasklistEditor.h"
 #include "Utils.h"
+#include <QStackedLayout>
 
 const char *_S_HostName = "_S_Hostname";
 
@@ -16,8 +17,11 @@ TasklistEditor::TasklistEditor(QWidget *parent) :
     on_checkBox_option_fi_toggled(false);
     on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText());
 
-    // 初始化yin'cang隐藏错误信息提示
+    // 初始化隐藏错误信息提示
     ui->label_info_option_s->hide();
+
+    // 初始化过滤器
+    initFilters();
 }
 
 TasklistEditor::~TasklistEditor()
@@ -100,7 +104,7 @@ QString TasklistEditor::getCmdString()
         // 过滤条件
         if (ui->checkBox_option_fi->isChecked())
         {
-            options += QString(" /FI \"%1\"").arg(ui->lineEdit_option_fi->text());
+            options += QString(" /FI \"%1\"").arg("");
         }
 
         // 设置输出格式
@@ -182,7 +186,7 @@ void TasklistEditor::on_checkBox_option_fo_toggled(bool checked)
 
 void TasklistEditor::on_checkBox_option_fi_toggled(bool checked)
 {
-    ui->lineEdit_option_fi->setEnabled(checked);
+    ui->groupBox_filter->setEnabled(checked);
     emit sigModified();
 }
 
@@ -214,16 +218,100 @@ void TasklistEditor::on_lineEdit_option_m_textChanged(const QString &arg1)
     emit sigModified();
 }
 
-// 筛选器筛选
-void TasklistEditor::on_lineEdit_option_fi_textChanged(const QString &arg1)
-{
-    Q_UNUSED(arg1);
-    emit sigModified();
-}
-
 // 无表头选项
 void TasklistEditor::on_checkBox_option_nh_toggled(bool checked)
 {
     Q_UNUSED(checked);
+    emit sigModified();
+}
+
+void TasklistEditor::initFilters()
+{
+    // 判断符
+    ui->comboBox_op_status->addItem(tr("eq"), "eq");
+    ui->comboBox_op_status->addItem(tr("ne"), "ne");
+
+    ui->comboBox_op_imageName->addItem(tr("eq"), "eq");
+    ui->comboBox_op_imageName->addItem(tr("ne"), "ne");
+
+    ui->comboBox_op_pid->addItem(tr("eq"), "eq");
+    ui->comboBox_op_pid->addItem(tr("ne"), "ne");
+    ui->comboBox_op_pid->addItem(tr("gt"), "gt");
+    ui->comboBox_op_pid->addItem(tr("lt"), "lt");
+    ui->comboBox_op_pid->addItem(tr("ge"), "ge");
+    ui->comboBox_op_pid->addItem(tr("le"), "le");
+
+    ui->comboBox_op_session->addItem(tr("eq"), "eq");
+    ui->comboBox_op_session->addItem(tr("ne"), "ne");
+    ui->comboBox_op_session->addItem(tr("gt"), "gt");
+    ui->comboBox_op_session->addItem(tr("lt"), "lt");
+    ui->comboBox_op_session->addItem(tr("ge"), "ge");
+    ui->comboBox_op_session->addItem(tr("le"), "le");
+
+    ui->comboBox_op_sessionName->addItem(tr("eq"), "eq");
+    ui->comboBox_op_sessionName->addItem(tr("ne"), "ne");
+
+    ui->comboBox_op_cpuTime->addItem(tr("eq"), "eq");
+    ui->comboBox_op_cpuTime->addItem(tr("ne"), "ne");
+    ui->comboBox_op_cpuTime->addItem(tr("gt"), "gt");
+    ui->comboBox_op_cpuTime->addItem(tr("lt"), "lt");
+    ui->comboBox_op_cpuTime->addItem(tr("ge"), "ge");
+    ui->comboBox_op_cpuTime->addItem(tr("le"), "le");
+
+    ui->comboBox_op_memusage->addItem(tr("eq"), "eq");
+    ui->comboBox_op_memusage->addItem(tr("ne"), "ne");
+    ui->comboBox_op_memusage->addItem(tr("gt"), "gt");
+    ui->comboBox_op_memusage->addItem(tr("lt"), "lt");
+    ui->comboBox_op_memusage->addItem(tr("ge"), "ge");
+    ui->comboBox_op_memusage->addItem(tr("le"), "le");
+
+    ui->comboBox_op_userName->addItem(tr("eq"), "eq");
+    ui->comboBox_op_userName->addItem(tr("ne"), "ne");
+
+    ui->comboBox_op_service->addItem(tr("eq"), "eq");
+    ui->comboBox_op_service->addItem(tr("ne"), "ne");
+
+    ui->comboBox_op_windowTitle->addItem(tr("eq"), "eq");
+    ui->comboBox_op_windowTitle->addItem(tr("ne"), "ne");
+
+    ui->comboBox_op_module->addItem(tr("eq"), "eq");
+    ui->comboBox_op_module->addItem(tr("ne"), "ne");
+
+    m_op_layout = new QStackedLayout;
+    m_op_layout->addWidget(ui->comboBox_op_status);
+    m_op_layout->addWidget(ui->comboBox_op_imageName);
+    m_op_layout->addWidget(ui->comboBox_op_pid);
+    m_op_layout->addWidget(ui->comboBox_op_session);
+    m_op_layout->addWidget(ui->comboBox_op_sessionName);
+    m_op_layout->addWidget(ui->comboBox_op_cpuTime);
+    m_op_layout->addWidget(ui->comboBox_op_memusage);
+    m_op_layout->addWidget(ui->comboBox_op_userName);
+    m_op_layout->addWidget(ui->comboBox_op_service);
+    m_op_layout->addWidget(ui->comboBox_op_windowTitle);
+    m_op_layout->addWidget(ui->comboBox_op_module);
+    delete ui->widget_operators->layout();
+    ui->widget_operators->setLayout(m_op_layout);
+
+    // 筛选值编辑器
+    m_fiValue_layout = new QStackedLayout;
+    m_fiValue_layout->addWidget(ui->comboBox_fiValue_status);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_imageName);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_pid);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_session);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_sessionName);
+    m_fiValue_layout->addWidget(ui->timeEdit_fiValue_cpuTime);
+    m_fiValue_layout->addWidget(ui->spinBox_fiValue_memUsage);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_userName);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_service);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_windowTitle);
+    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_module);
+    delete ui->widget_filterValues->layout();
+    ui->widget_filterValues->setLayout(m_fiValue_layout);
+}
+
+void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
+{
+    m_op_layout->setCurrentIndex(index);
+    m_fiValue_layout->setCurrentIndex(index);
     emit sigModified();
 }

@@ -12,6 +12,7 @@
 namespace Ui {
 class TasklistEditor;
 }
+class QStackedLayout;
 
 class TasklistEditor : public ICmdEditor
 {
@@ -48,12 +49,17 @@ private slots:
 
     void on_lineEdit_option_m_textChanged(const QString &arg1);
 
-    void on_lineEdit_option_fi_textChanged(const QString &arg1);
-
     void on_checkBox_option_nh_toggled(bool checked);
+
+    void on_comboBox_filterType_currentIndexChanged(int index);
+
+private:
+    void initFilters();
 
 private:
     Ui::TasklistEditor *ui;
+    QStackedLayout *m_op_layout;
+    QStackedLayout *m_fiValue_layout;
 };
 
 #endif // TasklistEditor_H
