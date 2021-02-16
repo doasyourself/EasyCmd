@@ -50,12 +50,20 @@ MainWindow::MainWindow(QWidget *parent) :
     // 响应控制台输出
     connect(&m_console_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
 
+    // 响应控制台状态和错误
+    QProcess *cmd = m_console_worker.getCmdProcess();
+    connect(cmd, &QProcess::stateChanged, this, &MainWindow::slotCmdStateChanged);
+    connect(cmd, &QProcess::errorOccurred, this, &MainWindow::slotCmdErrorOccurred);
+
     // 窗口居中显示
     moveToScreenCenter();
 
     // 创建托盘图标
     m_tray_icon.setMainWindow(this);
     m_tray_icon.create();
+
+    // 启动cmd进程
+    m_console_worker.start();
 }
 
 MainWindow::~MainWindow()
@@ -163,4 +171,87 @@ void MainWindow::slotEditorModified()
     QString cmd_string = editor->getCmdString();
     ui->textEdit_cmdPreview->setText(cmd_string);
 }
+
+void MainWindow::slotCmdErrorOccurred(QProcess::ProcessError error)
+{
+    QString error_srting;
+    switch (error)
+    {
+    case QProcess::FailedToStart:
+    {
+        error_srting = tr("Cmd FailedToStart");
+        break;
+    }
+    case QProcess::Crashed:
+    {
+        error_srting = tr("Cmd Crashed");
+        break;
+    }
+    case QProcess::Timedout:
+    {
+        error_srting = tr("Cmd Timedout");
+        break;
+    }
+    case QProcess::ReadError:
+    {
+        error_srting = tr("Cmd ReadError");
+        break;
+    }
+    case QProcess::WriteError:
+    {
+        error_srting = tr("Cmd WriteError");
+        break;
+    }
+    case QProcess::UnknownError:
+    {
+        error_srting = tr("Cmd UnknownError");
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+
+    ui->statusBar->showMessage(error_srting);
+}
+
+void MainWindow::slotCmdStateChanged(QProcess::ProcessState newState)
+{
+    QString state_string;
+    switch (newState)
+    {
+    case QProcess::NotRunning:
+    {
+        state_string = tr("Cmd process NotRunning.");
+        break;
+    }
+    case QProcess::Starting:
+    {
+        state_string = tr("Cmd process Starting.");
+        break;
+    }
+    case QProcess::Running:
+    {
+        state_string = tr("Cmd process Running.");
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+
+    ui->statusBar->showMessage(state_string);
+}
+
+
+
+
+
+
+
+
+
+
 

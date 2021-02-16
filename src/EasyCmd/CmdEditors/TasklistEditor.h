@@ -40,9 +40,20 @@ private slots:
 
     void on_checkBox_option_fi_toggled(bool checked);
 
+    void on_lineEdit_option_s_textChanged(const QString &arg1);
+
+    void on_lineEdit_option_u_textChanged(const QString &arg1);
+
+    void on_lineEdit_option_p_textChanged(const QString &arg1);
+
+    void on_lineEdit_option_m_textChanged(const QString &arg1);
+
+    void on_lineEdit_option_fi_textChanged(const QString &arg1);
+
+    void on_checkBox_option_nh_toggled(bool checked);
+
 private:
     Ui::TasklistEditor *ui;
-    QString m_cmd;
 };
 
 #endif // TasklistEditor_H

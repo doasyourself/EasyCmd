@@ -15,9 +15,6 @@ ConsoleRwWorker::ConsoleRwWorker()
 
     /*将标准输出和标准错误输出合并在一起输出，防止遗漏输出内容*/
     m_cmd_process.setProcessChannelMode(QProcess::MergedChannels);
-    m_cmd_process.start();
-    bool ok = m_cmd_process.waitForStarted(2000);
-    Q_ASSERT(ok);
 }
 
 ConsoleRwWorker::~ConsoleRwWorker()
@@ -49,6 +46,18 @@ void ConsoleRwWorker::ctrlBreak()
 
     FreeConsole();
     SetConsoleCtrlHandler(NULL, FALSE);
+}
+
+void ConsoleRwWorker::start()
+{
+    m_cmd_process.start();
+    bool ok = m_cmd_process.waitForStarted(2000);
+    Q_ASSERT(ok);
+}
+
+QProcess *ConsoleRwWorker::getCmdProcess()
+{
+    return &m_cmd_process;
 }
 
 void ConsoleRwWorker::slotWrite(QString input)

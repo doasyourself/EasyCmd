@@ -63,6 +63,12 @@ private slots:
     // 响应编辑器修改信号
     void slotEditorModified();
 
+    // 响应命令行进程错误
+    void slotCmdErrorOccurred(QProcess::ProcessError error);
+
+    // 响应命令行进程状态
+    void slotCmdStateChanged(QProcess::ProcessState newState);
+
 private:
     void writeToConsole(QString);
     void moveToScreenCenter();

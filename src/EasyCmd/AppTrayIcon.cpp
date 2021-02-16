@@ -19,7 +19,7 @@ AppTrayIcon::~AppTrayIcon()
 
 void AppTrayIcon::create()
 {
-    qApp->setQuitOnLastWindowClosed(false);/*显式退出*/
+    qApp->setQuitOnLastWindowClosed(false);/*设置为显式退出模式*/
     createTrayIcon();
     m_tray_icon->show();
 }

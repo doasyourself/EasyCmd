@@ -20,6 +20,7 @@ QDateTime Utils::getCompileDateTime()
 
 void Utils::showTip(QLabel *label, const QString &txt, Utils::TipLevel tl)
 {
+    label->show();
     label->setText(txt);
     switch (tl)
     {

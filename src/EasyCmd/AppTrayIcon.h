@@ -19,6 +19,10 @@ public:
     AppTrayIcon(QObject *parent = Q_NULLPTR);
     ~AppTrayIcon();
 
+    /**
+     * @brief create
+     *  创建托盘
+     */
     void create();
     void setMainWindow(QWidget *main_window);
     void createTrayIcon();

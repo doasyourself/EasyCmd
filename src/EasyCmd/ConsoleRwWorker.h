@@ -18,7 +18,25 @@ class ConsoleRwWorker : public QObject
 public:
     ConsoleRwWorker();
     ~ConsoleRwWorker();
+
+    /**
+     * @brief ctrlBreak
+     *  中断当前执行
+     */
     void ctrlBreak();
+
+    /**
+     * @brief start
+     *  启动执行
+     */
+    void start();
+
+    /**
+     * @brief getCmdProcess
+     *  获取当前命令行进程
+     * @return
+     */
+    QProcess *getCmdProcess();
 
 public slots:
     void slotWrite(QString);
@@ -29,7 +47,6 @@ signals:
 
 private:
     QProcess m_cmd_process;
-    QTimer m_read_timer;
 };
 
 #endif // ConsoleRwWorker_H
