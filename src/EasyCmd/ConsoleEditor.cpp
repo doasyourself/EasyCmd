@@ -9,7 +9,12 @@
 ConsoleEditor::ConsoleEditor(QWidget *parent)
     : QTextEdit(parent)
 {
+    m_current_history_index = 0;
     m_last_output_pos = this->textCursor().position();
+
+    // 监听控制台输入命令
+    connect(this, &ConsoleEditor::sigNewInput, this, &ConsoleEditor::slotNewInput);
+
     setFontFamily("Courier New");
     setFontPointSize(10);
     setUndoRedoEnabled(true);/*允许撤销*/
@@ -30,8 +35,8 @@ void ConsoleEditor::keyPressEvent(QKeyEvent *e)
     int key = e->key();
     Qt::KeyboardModifiers modifier = e->modifiers();
 
-    // 限制向左选择
-    if (key == Qt::Key_Left)
+    // 限制文本漫游
+    if (key == Qt::Key_Left || key == Qt::Key_PageUp || key == Qt::Key_PageDown)
     {
         QTextCursor cursor = this->textCursor();
         if (m_last_output_pos >= cursor.position())
@@ -41,6 +46,46 @@ void ConsoleEditor::keyPressEvent(QKeyEvent *e)
         else
         {
             QTextEdit::keyPressEvent(e);
+        }
+    }
+    else if (key == Qt::Key_Up) /*上键*/
+    {
+        // 开始从最新向更旧漫游
+        if (m_current_history_index > 0)/*安全漫游的条件，必须*/
+        {
+            QTextCursor cursor = this->textCursor();
+            int current_pos = cursor.position();
+
+            // 选中当前输入的内容
+            cursor.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor, current_pos - m_last_output_pos);
+
+            // 删除当前选中的内容
+            cursor.deleteChar();
+
+            QString next_old_cmd = m_cmd_history.at(--m_current_history_index);
+            cursor.insertText(next_old_cmd);
+
+            setTextCursor(cursor);
+        }
+    }
+    else if (key == Qt::Key_Down) /*下键*/
+    {
+        // 开始从最新向更旧漫游
+        if (m_current_history_index < m_cmd_history.size() - 1)/*安全漫游的条件，必须*/
+        {
+            QTextCursor cursor = this->textCursor();
+            int current_pos = cursor.position();
+
+            // 选中当前输入的内容
+            cursor.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor, current_pos - m_last_output_pos);
+
+            // 删除当前选中的内容
+            cursor.deleteChar();
+
+            QString next_old_cmd = m_cmd_history.at(++m_current_history_index);
+            cursor.insertText(next_old_cmd);
+
+            setTextCursor(cursor);
         }
     }
     /*回退删除，删到上次输出位置就不允许删除了*/
@@ -241,5 +286,11 @@ void ConsoleEditor::slotActionPaste()
 {
     // 把当前剪贴板内容粘贴到当前光标位置
     paste();
+}
+
+void ConsoleEditor::slotNewInput(const QString &text)
+{
+    m_cmd_history.append(text.trimmed()/*去除末尾的换行符*/);
+    m_current_history_index = m_cmd_history.size();/*指向当前显示的内容*/
 }
 
