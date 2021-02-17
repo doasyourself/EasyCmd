@@ -182,7 +182,7 @@
          <bool>true</bool>
         </property>
         <property name="checkable">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="checked">
          <bool>false</bool>
@@ -205,6 +205,28 @@
            <property name="topMargin">
             <number>0</number>
            </property>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_filterType"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>判断内容：</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="1">
             <widget class="QWidget" name="widget_operators" native="true">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -253,9 +275,6 @@
              </layout>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_filterType"/>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_3">
              <property name="minimumSize">
@@ -272,25 +291,6 @@
              </property>
              <property name="text">
               <string>判断符：</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="minimumSize">
-              <size>
-               <width>230</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>230</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>判断内容：</string>
              </property>
             </widget>
            </item>
@@ -427,6 +427,40 @@
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_addFilter">
+             <property name="text">
+              <string>添加筛选器</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_clearFilter">
+             <property name="text">
+              <string>清空筛选器</string>
+             </property>
             </widget>
            </item>
           </layout>

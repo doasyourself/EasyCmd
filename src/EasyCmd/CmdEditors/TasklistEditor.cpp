@@ -37,7 +37,6 @@ TasklistEditor::TasklistEditor(QWidget *parent) :
     on_groupBox_remote_system_toggled(false);
     on_checkBox_option_m_toggled(false);
     on_checkBox_option_fo_toggled(false);
-    on_groupBox_filter_toggled(false);
     on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText());
 
     // 初始化隐藏错误信息提示
@@ -74,8 +73,8 @@ QString TasklistEditor::getCmdString()
             QString hostname = ui->lineEdit_option_s->text();
             if (hostname.isEmpty()) // error
             {
+                /* 有错误也要继续，否则会导致后面的配置不显示*/
                 Utils::showTip(ui->label_info_option_s, tr("Hostname can't be empty!"));
-                break;
             }
             else
             {
@@ -189,6 +188,7 @@ void TasklistEditor::on_comboBox_option_fo_currentIndexChanged(const QString &tx
     emit sigModified();
 }
 
+// 输出格式选项
 void TasklistEditor::on_checkBox_option_fo_toggled(bool checked)
 {
     ui->comboBox_option_fo->setEnabled(checked);/*使能复选框*/
@@ -346,7 +346,8 @@ void TasklistEditor::initFilters()
 
 void TasklistEditor::setupFilterTypes(bool remote_system)
 {
-    ui->comboBox_filterType->clear();
+    ui->comboBox_filterType->clear();/*清空列表重新加载*/
+
     if (remote_system)/*帮助中说，远程系统没有STATUS和WINDOWTITLE选项*/
     {
         ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
@@ -375,6 +376,7 @@ void TasklistEditor::setupFilterTypes(bool remote_system)
     }
 }
 
+// 过滤器类型切换响应
 void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
 {
     int filter_type = ui->comboBox_filterType->currentData().toInt();
@@ -383,14 +385,11 @@ void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
     emit sigModified();
 }
 
+// 远程/本地切换
 void TasklistEditor::on_groupBox_remote_system_toggled(bool checked)
 {
     setupFilterTypes(checked);/*加载过滤器类型列表*/
-    emit sigModified();
-}
-
-void TasklistEditor::on_groupBox_filter_toggled(bool arg1)
-{
+    m_filter_list.clear();/*清空当前过滤器列表缓存*/
     emit sigModified();
 }
 

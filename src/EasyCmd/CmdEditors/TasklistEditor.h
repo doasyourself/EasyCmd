@@ -51,8 +51,6 @@ private slots:
 
     void on_groupBox_remote_system_toggled(bool arg1);
 
-    void on_groupBox_filter_toggled(bool arg1);
-
     void on_pushButton_addFilter_clicked();
 
     void on_pushButton_clearFilter_clicked();
