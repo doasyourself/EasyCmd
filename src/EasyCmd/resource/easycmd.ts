@@ -99,14 +99,93 @@
 <context>
     <name>ConsoleEditor</name>
     <message>
-        <location filename="../ConsoleEditor.cpp" line="217"/>
+        <location filename="../ConsoleEditor.cpp" line="264"/>
         <source>Copy</source>
         <translation>拷贝</translation>
     </message>
     <message>
-        <location filename="../ConsoleEditor.cpp" line="218"/>
+        <location filename="../ConsoleEditor.cpp" line="265"/>
         <source>Paste</source>
         <translation>粘贴</translation>
+    </message>
+</context>
+<context>
+    <name>IpconfigEditor</name>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="20"/>
+        <source>必填参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="26"/>
+        <source>无</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="36"/>
+        <source>可选参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="58"/>
+        <source>显示指定适配器的DHCP类别ID：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="68"/>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="101"/>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="134"/>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="174"/>
+        <source>空表示更新所有</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="71"/>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="104"/>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="137"/>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="177"/>
+        <source>适配器名称，支持通配符</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="91"/>
+        <source>更新指定适配器：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="124"/>
+        <source>设置指定适配器的DHCP类别ID：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="144"/>
+        <source>新的classid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="164"/>
+        <source>释放所有匹配的连接：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="186"/>
+        <source>清理并重设DNS客户解析器缓存的内容</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="196"/>
+        <source>显示DNS客户解析器缓存的内容</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/IpconfigEditor.ui" line="206"/>
+        <source>显示所有适配器的完整 TCP/IP 配置信息</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -184,6 +263,59 @@
         <source>关于</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="182"/>
+        <source>Cmd FailedToStart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="187"/>
+        <source>Cmd Crashed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="192"/>
+        <source>Cmd Timedout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="197"/>
+        <source>Cmd ReadError</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="202"/>
+        <source>Cmd WriteError</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="207"/>
+        <source>Cmd UnknownError</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="226"/>
+        <source>Cmd process NotRunning.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="231"/>
+        <source>Cmd process Starting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="236"/>
+        <source>Cmd process Running.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MessageBubble</name>
+    <message>
+        <location filename="../MessageBubble.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NetStatCmdEditor</name>
@@ -193,18 +325,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/NetStatCmdEditor.ui" line="20"/>
-        <source>参数</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../CmdEditors/NetStatCmdEditor.ui" line="40"/>
         <source>无</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../CmdEditors/NetStatCmdEditor.ui" line="20"/>
+        <source>必填参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../CmdEditors/NetStatCmdEditor.ui" line="55"/>
-        <source>可选项</source>
+        <source>可选参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -361,114 +493,91 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="20"/>
-        <source>参数</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="40"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="51"/>
         <source>ip地址：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="50"/>
-        <source>输入ip地址或url</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="65"/>
-        <source>可选项</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="73"/>
-        <source>-t</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="76"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="78"/>
         <source>持续ping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="88"/>
-        <source>-n</source>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="20"/>
+        <source>必填参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="91"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="41"/>
+        <source>输入ip地址或url，必填</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="70"/>
+        <source>可选参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="87"/>
         <source>指定次数：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="117"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="113"/>
         <source>-a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="120"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="116"/>
         <source>将地址解析为计算机名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="129"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="125"/>
         <source>-l</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="135"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="128"/>
         <source>指定发送数据长度：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="142"/>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="189"/>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="226"/>
-        <source>未设置</source>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="209"/>
+        <source>等待回复的超时时间：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="167"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="160"/>
         <source>-f</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="170"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="163"/>
         <source>数据包中设置“不分段”标记(仅IPv4)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="179"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="172"/>
         <source>-i TTL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="182"/>
+        <location filename="../CmdEditors/PingCmdEditor.ui" line="175"/>
         <source>生存时间：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="216"/>
-        <source>-w timeout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../CmdEditors/PingCmdEditor.ui" line="219"/>
-        <source>等待回复超时时间：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../CmdEditors/PingCmdEditor.ui" line="229"/>
         <source>毫秒</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.cpp" line="47"/>
         <source>Info</source>
-        <translation>提示</translation>
+        <translation type="vanished">提示</translation>
     </message>
     <message>
-        <location filename="../CmdEditors/PingCmdEditor.cpp" line="47"/>
+        <location filename="../CmdEditors/PingCmdEditor.cpp" line="95"/>
         <source>Please input correct ip/url!</source>
         <translation type="unfinished">请输入正确的IP或URL地址！</translation>
     </message>
@@ -559,6 +668,387 @@
         <location filename="../CmdEditors/SystemToolEditor.ui" line="140"/>
         <source>本地服务设置</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskkillEditor</name>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="20"/>
+        <source>参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="26"/>
+        <source>无</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="36"/>
+        <source>可选项</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="42"/>
+        <source>连接到远程系统</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="49"/>
+        <source>列出调用指定的 DLL 模块的所有进程</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="56"/>
+        <source>显示每个进程中的服务</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="63"/>
+        <source>显示详细信息</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="70"/>
+        <source>设置筛选器</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="77"/>
+        <source>指定输出格式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TaskkillEditor.ui" line="84"/>
+        <source>不显示表头</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TasklistEditor</name>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="20"/>
+        <source>必填参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="26"/>
+        <source>无</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="36"/>
+        <source>可选参数</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="42"/>
+        <source>连接到远程系统</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="87"/>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="97"/>
+        <source>/S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="90"/>
+        <source>主机地址/名称：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="100"/>
+        <source>ip/url/主机名称</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="119"/>
+        <source>密码：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="126"/>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="136"/>
+        <source>可选</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="133"/>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="155"/>
+        <source>/U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="158"/>
+        <source>用户名：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="209"/>
+        <source>dll模块名，如Shell32.dll，可不填</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="228"/>
+        <source>列出调用指定DLL的所有进程:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="250"/>
+        <source>显示每个进程中的服务</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="272"/>
+        <source>显示详细信息</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="299"/>
+        <source>设置筛选器</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="395"/>
+        <source>判断符：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="414"/>
+        <source>判断内容：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="433"/>
+        <source>选择筛选器：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="459"/>
+        <source>RUNNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="464"/>
+        <source>SUSPENDED</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="469"/>
+        <source>NOT RESPONDING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="474"/>
+        <source>UNKNOWN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="482"/>
+        <source>映像名称</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="489"/>
+        <source>PID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="496"/>
+        <source>会话编号</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="503"/>
+        <source>会话名称</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="520"/>
+        <source>HH:mm:ss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="527"/>
+        <source>KB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="537"/>
+        <source>用户名，格式为：[域\]用户</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="544"/>
+        <source>服务名称</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="551"/>
+        <source>窗口标题</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="558"/>
+        <source>模块名称</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="590"/>
+        <source>不显示表头</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="609"/>
+        <source>指定输出格式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="617"/>
+        <source>TABLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="622"/>
+        <source>LIST</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.ui" line="627"/>
+        <source>CSV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="71"/>
+        <source>Hostname can&apos;t be empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="245"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="248"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="251"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="258"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="265"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="268"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="275"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="282"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="285"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="288"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="291"/>
+        <source>eq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="246"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="249"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="252"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="259"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="266"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="269"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="276"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="283"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="286"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="289"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="292"/>
+        <source>ne</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="253"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="260"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="270"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="277"/>
+        <source>gt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="254"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="261"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="271"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="278"/>
+        <source>lt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="255"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="262"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="272"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="279"/>
+        <source>ge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="256"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="263"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="273"/>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="280"/>
+        <source>le</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="326"/>
+        <source>STATUS(Process Status)</source>
+        <translation>STATUS(进程状态)</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="327"/>
+        <source>IMAGENAME(Process Imagename)</source>
+        <translation>IMAGENAME（进程映像名）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="328"/>
+        <source>PID(Process ID)</source>
+        <translation>PID(进程ID)</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="329"/>
+        <source>SESSION(Process Session ID)</source>
+        <translation>SESSION（进程会话编号）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="330"/>
+        <source>SESSIONNAME(Process Session Name)</source>
+        <translation>SESSIONNAME（进程会话名称）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="331"/>
+        <source>CPUTIME(Process CpuTime Usage)</source>
+        <translation>CPUTIME（CPU使用时间）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="332"/>
+        <source>MEMUSAGE(Process Memory Usage)</source>
+        <translation>MEMUSAGE（内存使用量）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="333"/>
+        <source>USERNAME(Process Username)</source>
+        <translation>USERNAME（进程所属用户名）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="334"/>
+        <source>SERVICES(Service Name)</source>
+        <translation>SERVICES（服务名称）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="335"/>
+        <source>WINDOWTITLE(Process Window Title)</source>
+        <translation>WINDOWTITLE（窗口标题）</translation>
+    </message>
+    <message>
+        <location filename="../CmdEditors/TasklistEditor.cpp" line="336"/>
+        <source>MODULES(Process Modules)</source>
+        <translation>MODULES（进程模块）</translation>
     </message>
 </context>
 </TS>

@@ -375,63 +375,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_filterType">
-             <item>
-              <property name="text">
-               <string>STATUS（状态）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>IMAGENAME（映像名）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>PID（进程ID）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>SESSION（会话编号）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>SESSIONNAME（会话名称）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>CPUTIME（CPU时间）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>MEMUSAGE（内存使用量）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>USERNAME（用户名）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>SERVICES（服务名称）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>WINDOWTITLE（窗口标题名）</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>模块名</string>
-              </property>
-             </item>
-            </widget>
+            <widget class="QComboBox" name="comboBox_filterType"/>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_3">

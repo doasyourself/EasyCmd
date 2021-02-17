@@ -1,9 +1,28 @@
-﻿#include "TasklistEditor.h"
+﻿/*******************************************************************************
+** FI：Filter
+** FO: Format
+********************************************************************************/
+
+#include "TasklistEditor.h"
 #include "ui_TasklistEditor.h"
 #include "Utils.h"
 #include <QStackedLayout>
 
-const char *_S_HostName = "_S_Hostname";
+/*过滤器类型*/
+enum FilterType
+{
+    STATUS = 0,
+    IMAGENAME,
+    PID,
+    SESSION,
+    SESSIONNAME,
+    CPUTIME,
+    MEMUSAGE,
+    USERNAME,
+    SERVICES,
+    WINDOWTITLE,
+    MODULES,/**帮助里面显示的是模块，经测试是关键字MODULES**/
+};
 
 TasklistEditor::TasklistEditor(QWidget *parent) :
     ICmdEditor(parent),
@@ -104,7 +123,100 @@ QString TasklistEditor::getCmdString()
         // 过滤条件
         if (ui->checkBox_option_fi->isChecked())
         {
-            options += QString(" /FI \"%1\"").arg("");
+            options += QString(" /FI ");
+
+            // 计算过滤条件
+            QString fi_type;
+            QString fi_op;
+            QString fi_value;
+            int filter_type = ui->comboBox_filterType->currentData().toInt();
+            switch (filter_type)
+            {
+            case STATUS:
+            {
+                fi_type = "STATUS";
+                fi_op = ui->comboBox_op_status->currentText();
+                fi_value = ui->comboBox_fiValue_status->currentText();
+                break;
+            }
+            case IMAGENAME:
+            {
+                fi_type = "IMAGENAME";
+                fi_op = ui->comboBox_op_imageName->currentText();
+                fi_value = ui->lineEdit_fiValue_imageName->text();
+                break;
+            }
+            case PID:
+            {
+                fi_type = "IMAGENAME";
+                fi_op = ui->comboBox_op_pid->currentText();
+                fi_value = ui->lineEdit_fiValue_pid->text();
+                break;
+            }
+            case SESSION:
+            {
+                fi_type = "SESSION";
+                fi_op = ui->comboBox_op_session->currentText();
+                fi_value = ui->lineEdit_fiValue_session->text();
+                break;
+            }
+            case SESSIONNAME:
+            {
+                fi_type = "SESSIONNAME";
+                fi_op = ui->comboBox_op_sessionName->currentText();
+                fi_value = ui->lineEdit_fiValue_sessionName->text();
+                break;
+            }
+            case CPUTIME:
+            {
+                fi_type = "CPUTIME";
+                fi_op = ui->comboBox_op_cpuTime->currentText();
+                fi_value = ui->timeEdit_fiValue_cpuTime->text();
+                break;
+            }
+            case MEMUSAGE:
+            {
+                fi_type = "MEMUSAGE";
+                fi_op = ui->comboBox_op_memusage->currentText();
+                fi_value = ui->spinBox_fiValue_memUsage->text();
+                break;
+            }
+            case USERNAME:
+            {
+                fi_type = "USERNAME";
+                fi_op = ui->comboBox_op_userName->currentText();
+                fi_value = ui->lineEdit_fiValue_userName->text();
+                break;
+            }
+            case SERVICES:
+            {
+                fi_type = "SERVICES";
+                fi_op = ui->comboBox_op_service->currentText();
+                fi_value = ui->lineEdit_fiValue_service->text();
+                break;
+            }
+            case WINDOWTITLE:
+            {
+                fi_type = "WINDOWTITLE";
+                fi_op = ui->comboBox_op_windowTitle->currentText();
+                fi_value = ui->lineEdit_fiValue_windowTitle->text();
+                break;
+            }
+            case MODULES:
+            {
+                fi_type = "MODULES";
+                fi_op = ui->comboBox_op_module->currentText();
+                fi_value = ui->lineEdit_fiValue_module->text();
+                break;
+            }
+            default:
+            {
+                Q_ASSERT(0);
+                break;
+            }
+            }
+
+            options += QString("\"%1 %2 %3\"").arg(fi_type).arg(fi_op).arg(fi_value);
         }
 
         // 设置输出格式
@@ -227,7 +339,7 @@ void TasklistEditor::on_checkBox_option_nh_toggled(bool checked)
 
 void TasklistEditor::initFilters()
 {
-    // 判断符
+    /************** 判断符 **************/
     ui->comboBox_op_status->addItem(tr("eq"), "eq");
     ui->comboBox_op_status->addItem(tr("ne"), "ne");
 
@@ -277,6 +389,20 @@ void TasklistEditor::initFilters()
     ui->comboBox_op_module->addItem(tr("eq"), "eq");
     ui->comboBox_op_module->addItem(tr("ne"), "ne");
 
+    // 监听修改操作
+    connect(ui->comboBox_op_status, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_imageName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_pid, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_session, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_sessionName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_cpuTime, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_memusage, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_userName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_service, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_windowTitle, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->comboBox_op_module, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+
+    // 加入到堆栈布局
     m_op_layout = new QStackedLayout;
     m_op_layout->addWidget(ui->comboBox_op_status);
     m_op_layout->addWidget(ui->comboBox_op_imageName);
@@ -292,7 +418,20 @@ void TasklistEditor::initFilters()
     delete ui->widget_operators->layout();
     ui->widget_operators->setLayout(m_op_layout);
 
-    // 筛选值编辑器
+    /************* 筛选值编辑器 ****************/
+    // 监听修改操作
+    connect(ui->comboBox_fiValue_status, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_imageName, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_pid, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_session, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_sessionName, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->timeEdit_fiValue_cpuTime, &QTimeEdit::timeChanged, this, &TasklistEditor::sigModified);
+    connect(ui->spinBox_fiValue_memUsage, QOverload<int>::of(&QSpinBox::valueChanged), this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_userName, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_service, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_windowTitle, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    connect(ui->lineEdit_fiValue_module, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+
     m_fiValue_layout = new QStackedLayout;
     m_fiValue_layout->addWidget(ui->comboBox_fiValue_status);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_imageName);
@@ -307,6 +446,19 @@ void TasklistEditor::initFilters()
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_module);
     delete ui->widget_filterValues->layout();
     ui->widget_filterValues->setLayout(m_fiValue_layout);
+
+    // 最后再添加过滤类型，因为会发出切换信号，其他都准备好再切换
+    ui->comboBox_filterType->addItem(tr("STATUS(Process Status)"), STATUS);
+    ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
+    ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
+    ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
+    ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
+    ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
+    ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
+    ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
+    ui->comboBox_filterType->addItem(tr("SERVICES(Service Name)"), SERVICES);
+    ui->comboBox_filterType->addItem(tr("WINDOWTITLE(Process Window Title)"), WINDOWTITLE);
+    ui->comboBox_filterType->addItem(tr("MODULES(Process Modules)"), MODULES);
 }
 
 void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)

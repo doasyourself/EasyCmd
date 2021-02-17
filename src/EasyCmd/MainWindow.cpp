@@ -44,8 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->treeView_cmds->selectionModel(), &QItemSelectionModel::currentRowChanged,
             this, &MainWindow::slotCurrentRowChanged);
 
-    // 控制台输入
+    // 响应控制台输入
     connect(ui->textEdit_console, &ConsoleEditor::sigNewInput, this, &MainWindow::writeToConsole);
+    ui->textEdit_console->setWordWrapMode(QTextOption::NoWrap);/*坚持不换行，否则对表格不友好*/
 
     // 响应控制台输出
     connect(&m_console_worker, SIGNAL(sigOutput(QString)), SLOT(slotConsoleOutput(QString)));
@@ -127,7 +128,7 @@ void MainWindow::writeToConsole(QString cmd_string)
 
 void MainWindow::moveToScreenCenter()
 {
-    QDesktopWidget* desktop = QApplication::desktop(); // =qApp->desktop();也可以
+    QDesktopWidget* desktop = QApplication::desktop();
     move((desktop->width() - this->width())/2, (desktop->height() - this->height())/2);
 }
 
