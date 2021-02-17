@@ -30,10 +30,11 @@ TasklistEditor::TasklistEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    on_checkBox_remote_system_toggled(false);
+    // 初始化调用一次
+    on_groupBox_remote_system_toggled(false);
     on_checkBox_option_m_toggled(false);
     on_checkBox_option_fo_toggled(false);
-    on_checkBox_option_fi_toggled(false);
+    on_groupBox_filter_toggled(false);
     on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText());
 
     // 初始化隐藏错误信息提示
@@ -66,7 +67,7 @@ QString TasklistEditor::getCmdString()
     do
     {
         // /S选项
-        if (ui->checkBox_remote_system->isChecked())
+        if (ui->groupBox_remote_system->isChecked())
         {
             options += " /S";
 
@@ -121,7 +122,7 @@ QString TasklistEditor::getCmdString()
         }
 
         // 过滤条件
-        if (ui->checkBox_option_fi->isChecked())
+        if (ui->groupBox_filter->isChecked())
         {
             options += QString(" /FI ");
 
@@ -235,12 +236,6 @@ QString TasklistEditor::getCmdString()
     return cmd;
 }
 
-void TasklistEditor::on_checkBox_remote_system_toggled(bool checked)
-{
-    ui->groupBox_remote_system->setEnabled(checked);
-    emit sigModified();
-}
-
 void TasklistEditor::on_checkBox_option_m_toggled(bool checked)
 {
     ui->lineEdit_option_m->setEnabled(checked);
@@ -282,7 +277,7 @@ void TasklistEditor::on_checkBox_option_svc_toggled(bool checked)
 void TasklistEditor::on_comboBox_option_fo_currentIndexChanged(const QString &txt)
 {
     // 更新/NH选项状态
-    bool is_nh_enable = ui->checkBox_option_fo->isChecked() && (txt == "TABLE" || txt == "CSV");
+    bool is_nh_enable = (txt == "TABLE" || txt == "CSV");
     ui->checkBox_option_nh->setEnabled(is_nh_enable);
     emit sigModified();
 }
@@ -294,12 +289,6 @@ void TasklistEditor::on_checkBox_option_fo_toggled(bool checked)
     {
         on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText()); /*更新/NH选项状态*/
     }
-}
-
-void TasklistEditor::on_checkBox_option_fi_toggled(bool checked)
-{
-    ui->groupBox_filter->setEnabled(checked);
-    emit sigModified();
 }
 
 // 主机名编辑框
@@ -465,5 +454,15 @@ void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
 {
     m_op_layout->setCurrentIndex(index);
     m_fiValue_layout->setCurrentIndex(index);
+    emit sigModified();
+}
+
+void TasklistEditor::on_groupBox_remote_system_toggled(bool checked)
+{
+    emit sigModified();
+}
+
+void TasklistEditor::on_groupBox_filter_toggled(bool arg1)
+{
     emit sigModified();
 }

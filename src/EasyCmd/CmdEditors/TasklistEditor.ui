@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBox_args">
      <property name="title">
       <string>必填参数</string>
      </property>
@@ -31,24 +31,26 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="groupBox_options">
      <property name="title">
       <string>可选参数</string>
      </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QCheckBox" name="checkBox_remote_system">
-        <property name="text">
-         <string>连接到远程系统</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QGroupBox" name="groupBox_remote_system">
         <property name="title">
-         <string/>
+         <string>连接到远程系统</string>
         </property>
         <property name="flat">
+         <bool>true</bool>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
          <bool>false</bool>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -56,7 +58,7 @@
           <number>0</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>5</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -183,14 +185,14 @@
          <string/>
         </property>
         <property name="flat">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <property name="leftMargin">
           <number>0</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>5</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
@@ -282,28 +284,18 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_option_fi">
-        <property name="minimumSize">
-         <size>
-          <width>230</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>230</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>设置筛选器</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QGroupBox" name="groupBox_filter">
         <property name="title">
-         <string/>
+         <string>设置筛选器</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <property name="leftMargin">
@@ -568,68 +560,92 @@
        </widget>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <property name="topMargin">
-         <number>0</number>
+       <widget class="QGroupBox" name="groupBox_option3">
+        <property name="title">
+         <string/>
         </property>
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="checkBox_option_nh">
-          <property name="minimumSize">
-           <size>
-            <width>230</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>230</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>不显示表头</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QCheckBox" name="checkBox_option_fo">
-          <property name="minimumSize">
-           <size>
-            <width>230</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>230</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>指定输出格式</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QComboBox" name="comboBox_option_fo">
-          <item>
-           <property name="text">
-            <string>TABLE</string>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <property name="topMargin">
+            <number>0</number>
            </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>LIST</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>CSV</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBox_option_nh">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>不显示表头</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBox_option_fo">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>指定输出格式</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_option_fo">
+             <item>
+              <property name="text">
+               <string>TABLE</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>LIST</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CSV</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>

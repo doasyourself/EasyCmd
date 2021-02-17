@@ -27,8 +27,6 @@ public:
     virtual QString getCmdString();
 
 private slots:
-    void on_checkBox_remote_system_toggled(bool checked);
-
     void on_checkBox_option_m_toggled(bool checked);
 
     void on_checkBox_option_v_toggled(bool checked);
@@ -38,8 +36,6 @@ private slots:
     void on_comboBox_option_fo_currentIndexChanged(const QString &arg1);
 
     void on_checkBox_option_fo_toggled(bool checked);
-
-    void on_checkBox_option_fi_toggled(bool checked);
 
     void on_lineEdit_option_s_textChanged(const QString &arg1);
 
@@ -52,6 +48,10 @@ private slots:
     void on_checkBox_option_nh_toggled(bool checked);
 
     void on_comboBox_filterType_currentIndexChanged(int index);
+
+    void on_groupBox_remote_system_toggled(bool arg1);
+
+    void on_groupBox_filter_toggled(bool arg1);
 
 private:
     void initFilters();
