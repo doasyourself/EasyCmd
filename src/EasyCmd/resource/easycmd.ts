@@ -946,7 +946,7 @@
         <location filename="../CmdEditors/TasklistEditor.cpp" line="288"/>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="291"/>
         <source>eq</source>
-        <translation type="unfinished"></translation>
+        <translation>等于</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="246"/>
@@ -961,7 +961,7 @@
         <location filename="../CmdEditors/TasklistEditor.cpp" line="289"/>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="292"/>
         <source>ne</source>
-        <translation type="unfinished"></translation>
+        <translation>不等于</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="253"/>
@@ -969,7 +969,7 @@
         <location filename="../CmdEditors/TasklistEditor.cpp" line="270"/>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="277"/>
         <source>gt</source>
-        <translation type="unfinished"></translation>
+        <translation>大于</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="254"/>
@@ -977,7 +977,7 @@
         <location filename="../CmdEditors/TasklistEditor.cpp" line="271"/>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="278"/>
         <source>lt</source>
-        <translation type="unfinished"></translation>
+        <translation>小于</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="255"/>
@@ -985,7 +985,7 @@
         <location filename="../CmdEditors/TasklistEditor.cpp" line="272"/>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="279"/>
         <source>ge</source>
-        <translation type="unfinished"></translation>
+        <translation>大于等于</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="256"/>
@@ -993,7 +993,7 @@
         <location filename="../CmdEditors/TasklistEditor.cpp" line="273"/>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="280"/>
         <source>le</source>
-        <translation type="unfinished"></translation>
+        <translation>小于等于</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="326"/>

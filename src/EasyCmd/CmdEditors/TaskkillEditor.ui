@@ -233,9 +233,6 @@
                <widget class="QComboBox" name="comboBox_op_session"/>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_op_sessionName"/>
-              </item>
-              <item>
                <widget class="QComboBox" name="comboBox_op_cpuTime"/>
               </item>
               <item>
@@ -245,13 +242,13 @@
                <widget class="QComboBox" name="comboBox_op_userName"/>
               </item>
               <item>
+               <widget class="QComboBox" name="comboBox_op_module"/>
+              </item>
+              <item>
                <widget class="QComboBox" name="comboBox_op_service"/>
               </item>
               <item>
                <widget class="QComboBox" name="comboBox_op_windowTitle"/>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBox_op_module"/>
               </item>
              </layout>
             </widget>
@@ -343,11 +340,6 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>SUSPENDED</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
                   <string>NOT RESPONDING</string>
                  </property>
                 </item>
@@ -376,13 +368,6 @@
                <widget class="QLineEdit" name="lineEdit_fiValue_session">
                 <property name="placeholderText">
                  <string>会话编号</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_fiValue_sessionName">
-                <property name="placeholderText">
-                 <string>会话名称</string>
                 </property>
                </widget>
               </item>
@@ -421,6 +406,13 @@
                </widget>
               </item>
               <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_module">
+                <property name="placeholderText">
+                 <string>模块名称</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLineEdit" name="lineEdit_fiValue_service">
                 <property name="placeholderText">
                  <string>服务名称</string>
@@ -431,13 +423,6 @@
                <widget class="QLineEdit" name="lineEdit_fiValue_windowTitle">
                 <property name="placeholderText">
                  <string>窗口标题</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_fiValue_module">
-                <property name="placeholderText">
-                 <string>模块名称</string>
                 </property>
                </widget>
               </item>

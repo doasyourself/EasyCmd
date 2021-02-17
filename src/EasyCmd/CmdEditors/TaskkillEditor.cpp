@@ -15,7 +15,6 @@ enum FilterType
     IMAGENAME,
     PID,
     SESSION,
-    SESSIONNAME,
     CPUTIME,
     MEMUSAGE,
     USERNAME,
@@ -110,77 +109,70 @@ QString TaskkillEditor::getCmdString()
             case STATUS:
             {
                 fi_type = "STATUS";
-                fi_op = ui->comboBox_op_status->currentText();
+                fi_op = ui->comboBox_op_status->currentData().toString();
                 fi_value = ui->comboBox_fiValue_status->currentText();
                 break;
             }
             case IMAGENAME:
             {
                 fi_type = "IMAGENAME";
-                fi_op = ui->comboBox_op_imageName->currentText();
+                fi_op = ui->comboBox_op_imageName->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_imageName->text();
                 break;
             }
             case PID:
             {
                 fi_type = "IMAGENAME";
-                fi_op = ui->comboBox_op_pid->currentText();
+                fi_op = ui->comboBox_op_pid->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_pid->text();
                 break;
             }
             case SESSION:
             {
                 fi_type = "SESSION";
-                fi_op = ui->comboBox_op_session->currentText();
+                fi_op = ui->comboBox_op_session->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_session->text();
-                break;
-            }
-            case SESSIONNAME:
-            {
-                fi_type = "SESSIONNAME";
-                fi_op = ui->comboBox_op_sessionName->currentText();
-                fi_value = ui->lineEdit_fiValue_sessionName->text();
                 break;
             }
             case CPUTIME:
             {
                 fi_type = "CPUTIME";
-                fi_op = ui->comboBox_op_cpuTime->currentText();
+                fi_op = ui->comboBox_op_cpuTime->currentData().toString();
                 fi_value = ui->timeEdit_fiValue_cpuTime->text();
                 break;
             }
             case MEMUSAGE:
             {
                 fi_type = "MEMUSAGE";
-                fi_op = ui->comboBox_op_memusage->currentText();
+                fi_op = ui->comboBox_op_memusage->currentData().toString();
                 fi_value = ui->spinBox_fiValue_memUsage->text();
                 break;
             }
             case USERNAME:
             {
                 fi_type = "USERNAME";
-                fi_op = ui->comboBox_op_userName->currentText();
+                fi_op = ui->comboBox_op_userName->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_userName->text();
                 break;
             }
             case SERVICES:
             {
                 fi_type = "SERVICES";
-                fi_op = ui->comboBox_op_service->currentText();
+                fi_op = ui->comboBox_op_service->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_service->text();
                 break;
             }
             case WINDOWTITLE:
             {
                 fi_type = "WINDOWTITLE";
-                fi_op = ui->comboBox_op_windowTitle->currentText();
+                fi_op = ui->comboBox_op_windowTitle->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_windowTitle->text();
                 break;
             }
             case MODULES:
             {
                 fi_type = "MODULES";
-                fi_op = ui->comboBox_op_module->currentText();
+                fi_op = ui->comboBox_op_module->currentData().toString();
                 fi_value = ui->lineEdit_fiValue_module->text();
                 break;
             }
@@ -279,9 +271,6 @@ void TaskkillEditor::initFilters()
     ui->comboBox_op_session->addItem(tr("ge"), "ge");
     ui->comboBox_op_session->addItem(tr("le"), "le");
 
-    ui->comboBox_op_sessionName->addItem(tr("eq"), "eq");
-    ui->comboBox_op_sessionName->addItem(tr("ne"), "ne");
-
     ui->comboBox_op_cpuTime->addItem(tr("eq"), "eq");
     ui->comboBox_op_cpuTime->addItem(tr("ne"), "ne");
     ui->comboBox_op_cpuTime->addItem(tr("gt"), "gt");
@@ -313,7 +302,6 @@ void TaskkillEditor::initFilters()
     connect(ui->comboBox_op_imageName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
     connect(ui->comboBox_op_pid, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
     connect(ui->comboBox_op_session, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
-    connect(ui->comboBox_op_sessionName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
     connect(ui->comboBox_op_cpuTime, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
     connect(ui->comboBox_op_memusage, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
     connect(ui->comboBox_op_userName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillEditor::sigModified);
@@ -327,7 +315,6 @@ void TaskkillEditor::initFilters()
     m_op_layout->addWidget(ui->comboBox_op_imageName);
     m_op_layout->addWidget(ui->comboBox_op_pid);
     m_op_layout->addWidget(ui->comboBox_op_session);
-    m_op_layout->addWidget(ui->comboBox_op_sessionName);
     m_op_layout->addWidget(ui->comboBox_op_cpuTime);
     m_op_layout->addWidget(ui->comboBox_op_memusage);
     m_op_layout->addWidget(ui->comboBox_op_userName);
@@ -343,7 +330,6 @@ void TaskkillEditor::initFilters()
     connect(ui->lineEdit_fiValue_imageName, &QLineEdit::textChanged, this, &TaskkillEditor::sigModified);
     connect(ui->lineEdit_fiValue_pid, &QLineEdit::textChanged, this, &TaskkillEditor::sigModified);
     connect(ui->lineEdit_fiValue_session, &QLineEdit::textChanged, this, &TaskkillEditor::sigModified);
-    connect(ui->lineEdit_fiValue_sessionName, &QLineEdit::textChanged, this, &TaskkillEditor::sigModified);
     connect(ui->timeEdit_fiValue_cpuTime, &QTimeEdit::timeChanged, this, &TaskkillEditor::sigModified);
     connect(ui->spinBox_fiValue_memUsage, QOverload<int>::of(&QSpinBox::valueChanged), this, &TaskkillEditor::sigModified);
     connect(ui->lineEdit_fiValue_userName, &QLineEdit::textChanged, this, &TaskkillEditor::sigModified);
@@ -356,7 +342,6 @@ void TaskkillEditor::initFilters()
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_imageName);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_pid);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_session);
-    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_sessionName);
     m_fiValue_layout->addWidget(ui->timeEdit_fiValue_cpuTime);
     m_fiValue_layout->addWidget(ui->spinBox_fiValue_memUsage);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_userName);
@@ -375,7 +360,6 @@ void TaskkillEditor::setupFilterTypes(bool remote_system)
         ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
         ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
         ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
-        ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
         ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
         ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
         ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
@@ -388,7 +372,6 @@ void TaskkillEditor::setupFilterTypes(bool remote_system)
         ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
         ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
         ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
-        ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
         ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
         ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
         ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);

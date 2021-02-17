@@ -471,7 +471,7 @@
               <item>
                <widget class="QLineEdit" name="lineEdit_fiValue_imageName">
                 <property name="placeholderText">
-                 <string>映像名称</string>
+                 <string>进程映像名称，支持通配符*</string>
                 </property>
                </widget>
               </item>
@@ -552,6 +552,40 @@
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_addFilter">
+             <property name="text">
+              <string>添加筛选器</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_clearFilter">
+             <property name="text">
+              <string>清空筛选器</string>
+             </property>
             </widget>
            </item>
           </layout>

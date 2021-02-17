@@ -53,6 +53,10 @@ private slots:
 
     void on_groupBox_filter_toggled(bool arg1);
 
+    void on_pushButton_addFilter_clicked();
+
+    void on_pushButton_clearFilter_clicked();
+
 private:
     void initFilters();/*初始化过滤器*/
     void setupFilterTypes(bool remote_system);/*加载过滤器列表*/
@@ -61,6 +65,7 @@ private:
     Ui::TasklistEditor *ui;
     QStackedLayout *m_op_layout;
     QStackedLayout *m_fiValue_layout;
+    QStringList m_filter_list;/*筛选器列表*/
 };
 
 #endif // TasklistEditor_H
