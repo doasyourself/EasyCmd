@@ -2,8 +2,10 @@
 #define TaskkillEditor_H
 
 /*******************************************************************************
-** 实现tasklist命令编辑器
-**
+** 实现taskkill命令编辑器
+** TODO:
+** 1.PID支持多条设置
+** 2.只有在应用筛选器的情况下，/IM 切换才能使用通配符 '*'
 *******************************************************************************/
 
 #include <QWidget>
@@ -27,17 +29,11 @@ public:
     virtual QString getCmdString();
 
 private slots:
-    void on_comboBox_option_fo_currentIndexChanged(const QString &arg1);
-
-    void on_checkBox_option_fo_toggled(bool checked);
-
     void on_lineEdit_option_s_textChanged(const QString &arg1);
 
     void on_lineEdit_option_u_textChanged(const QString &arg1);
 
     void on_lineEdit_option_p_textChanged(const QString &arg1);
-
-    void on_checkBox_option_nh_toggled(bool checked);
 
     void on_comboBox_filterType_currentIndexChanged(int index);
 
@@ -46,6 +42,18 @@ private slots:
     void on_pushButton_addFilter_clicked();
 
     void on_pushButton_clearFilter_clicked();
+
+    void on_spinBox_option_value_pid_valueChanged(int arg1);
+
+    void on_lineEdit_option_value_im_textChanged(const QString &arg1);
+
+    void on_checkBox_option_t_toggled(bool checked);
+
+    void on_checkBox_option_f_toggled(bool checked);
+
+    void on_radioButton_option_pid_toggled(bool checked);
+
+    void on_radioButton_option_im_toggled(bool checked);
 
 private:
     void initFilters();/*初始化过滤器*/

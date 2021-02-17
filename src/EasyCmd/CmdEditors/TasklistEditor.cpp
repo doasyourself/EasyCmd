@@ -71,7 +71,7 @@ QString TasklistEditor::getCmdString()
             options += " /S";
 
             QString hostname = ui->lineEdit_option_s->text();
-            if (hostname.isEmpty()) // error
+            if (hostname.isEmpty()) // error occur
             {
                 /* 有错误也要继续，否则会导致后面的配置不显示*/
                 Utils::showTip(ui->label_info_option_s, tr("Hostname can't be empty!"));
@@ -121,10 +121,7 @@ QString TasklistEditor::getCmdString()
         }
 
         // 过滤条件
-        if (ui->groupBox_filter->isChecked())
-        {
-            options += m_filter_list.join("");
-        }
+        options += m_filter_list.join("");
 
         // 设置输出格式
         if (ui->checkBox_option_fo->isChecked())

@@ -34,8 +34,6 @@ TaskkillEditor::TaskkillEditor(QWidget *parent) :
 
     // 初始化调用一次，触发切换信号
     on_groupBox_remote_system_toggled(false);
-    on_checkBox_option_fo_toggled(false);
-    on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText());
 
     // 初始化隐藏错误信息提示
     ui->label_info_option_s->hide();
@@ -69,7 +67,7 @@ QString TaskkillEditor::getCmdString()
             options += " /S";
 
             QString hostname = ui->lineEdit_option_s->text();
-            if (hostname.isEmpty()) // error
+            if (hostname.isEmpty()) // error occur
             {
                 /*出现错误也要继续，不然后面的配置会不显示*/
                 Utils::showTip(ui->label_info_option_s, tr("Hostname can't be empty!"));
@@ -94,43 +92,36 @@ QString TaskkillEditor::getCmdString()
         }
 
         // 过滤条件
-        if (ui->groupBox_filter->isChecked())
+        options += m_filter_list.join("");
+
+        // 直接指定PID
+        if (ui->radioButton_option_pid->isChecked())
         {
-            options += m_filter_list.join("");
+            options += QString(" /PID %1").arg(ui->spinBox_option_value_pid->value());
         }
 
-        // 设置输出格式
-        if (ui->checkBox_option_fo->isChecked())
+        // 直接指定进程名
+        if (ui->radioButton_option_im->isChecked())
         {
-            options += " /FO " + ui->comboBox_option_fo->currentText();
+            options += QString(" /IM \"%1\"").arg(ui->lineEdit_option_value_im->text());
         }
 
-        if (ui->checkBox_option_nh->isChecked())
+        // 同时终止子进程
+        if (ui->checkBox_option_t->isChecked())
         {
-            options += " /NH";
+            options += " /T";
+        }
+
+        // 强制终止
+        if (ui->checkBox_option_f->isChecked() ||
+            ui->groupBox_remote_system->isChecked()/*远程进程始终需要强制终止*/)
+        {
+            options += " /F";
         }
     } while (0);
 
     cmd += options;
     return cmd;
-}
-
-// 格式改变
-void TaskkillEditor::on_comboBox_option_fo_currentIndexChanged(const QString &txt)
-{
-    // 更新/NH选项状态
-    bool is_nh_enable = (txt == "TABLE" || txt == "CSV");
-    ui->checkBox_option_nh->setEnabled(is_nh_enable);
-    emit sigModified();
-}
-
-void TaskkillEditor::on_checkBox_option_fo_toggled(bool checked)
-{
-    ui->comboBox_option_fo->setEnabled(checked);/*使能复选框*/
-    if (checked)
-    {
-        on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText()); /*更新/NH选项状态*/
-    }
 }
 
 // 主机名编辑框
@@ -151,13 +142,6 @@ void TaskkillEditor::on_lineEdit_option_u_textChanged(const QString &arg1)
 void TaskkillEditor::on_lineEdit_option_p_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1);
-    emit sigModified();
-}
-
-// 无表头选项
-void TaskkillEditor::on_checkBox_option_nh_toggled(bool checked)
-{
-    Q_UNUSED(checked);
     emit sigModified();
 }
 
@@ -304,6 +288,16 @@ void TaskkillEditor::on_comboBox_filterType_currentIndexChanged(int index)
 
 void TaskkillEditor::on_groupBox_remote_system_toggled(bool checked)
 {
+    if (checked)
+    {
+        ui->checkBox_option_f->setChecked(true);/*终止远程始终需要强制终止/F*/
+        ui->checkBox_option_f->setEnabled(false);
+    }
+    else
+    {
+        ui->checkBox_option_f->setEnabled(true);
+    }
+
     setupFilterTypes(checked);/*加载过滤器类型*/
     m_filter_list.clear();/*清空当前过滤器列表缓存*/
     emit sigModified();
@@ -405,5 +399,39 @@ void TaskkillEditor::on_pushButton_addFilter_clicked()
 void TaskkillEditor::on_pushButton_clearFilter_clicked()
 {
     m_filter_list.clear();
+    emit sigModified();
+}
+
+void TaskkillEditor::on_spinBox_option_value_pid_valueChanged(int  checked)
+{
+    emit sigModified();
+}
+
+void TaskkillEditor::on_lineEdit_option_value_im_textChanged(const QString &arg1)
+{
+    emit sigModified();
+}
+
+void TaskkillEditor::on_checkBox_option_t_toggled(bool checked)
+{
+    emit sigModified();
+}
+
+void TaskkillEditor::on_checkBox_option_f_toggled(bool checked)
+{
+    emit sigModified();
+}
+
+void TaskkillEditor::on_radioButton_option_pid_toggled(bool checked)
+{
+    // /PID和/IM选项互斥
+    ui->spinBox_option_value_pid->setEnabled(checked);
+    emit sigModified();
+}
+
+void TaskkillEditor::on_radioButton_option_im_toggled(bool checked)
+{
+    // /PID和/IM选项互斥
+    ui->lineEdit_option_value_im->setEnabled(checked);
     emit sigModified();
 }
