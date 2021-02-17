@@ -1003,7 +1003,7 @@
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="327"/>
         <source>IMAGENAME(Process Imagename)</source>
-        <translation>IMAGENAME（进程映像名）</translation>
+        <translation>IMAGENAME（进程名）</translation>
     </message>
     <message>
         <location filename="../CmdEditors/TasklistEditor.cpp" line="328"/>

@@ -54,7 +54,8 @@ private slots:
     void on_groupBox_filter_toggled(bool arg1);
 
 private:
-    void initFilters();
+    void initFilters();/*初始化过滤器*/
+    void setupFilterTypes(bool remote_system);/*加载过滤器列表*/
 
 private:
     Ui::TasklistEditor *ui;

@@ -30,6 +30,9 @@ TasklistEditor::TasklistEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // 初始化过滤器
+    initFilters();
+
     // 初始化调用一次
     on_groupBox_remote_system_toggled(false);
     on_checkBox_option_m_toggled(false);
@@ -39,9 +42,6 @@ TasklistEditor::TasklistEditor(QWidget *parent) :
 
     // 初始化隐藏错误信息提示
     ui->label_info_option_s->hide();
-
-    // 初始化过滤器
-    initFilters();
 }
 
 TasklistEditor::~TasklistEditor()
@@ -435,30 +435,50 @@ void TasklistEditor::initFilters()
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_module);
     delete ui->widget_filterValues->layout();
     ui->widget_filterValues->setLayout(m_fiValue_layout);
+}
 
-    // 最后再添加过滤类型，因为会发出切换信号，其他都准备好再切换
-    ui->comboBox_filterType->addItem(tr("STATUS(Process Status)"), STATUS);
-    ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
-    ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
-    ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
-    ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
-    ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
-    ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
-    ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
-    ui->comboBox_filterType->addItem(tr("SERVICES(Service Name)"), SERVICES);
-    ui->comboBox_filterType->addItem(tr("WINDOWTITLE(Process Window Title)"), WINDOWTITLE);
-    ui->comboBox_filterType->addItem(tr("MODULES(Process Modules)"), MODULES);
+void TasklistEditor::setupFilterTypes(bool remote_system)
+{
+    ui->comboBox_filterType->clear();
+    if (remote_system)/*帮助中说，远程系统没有STATUS和WINDOWTITLE选项*/
+    {
+        ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
+        ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
+        ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
+        ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
+        ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
+        ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
+        ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
+        ui->comboBox_filterType->addItem(tr("SERVICES(Service Name)"), SERVICES);
+        ui->comboBox_filterType->addItem(tr("MODULES(Process Modules)"), MODULES);
+    }
+    else
+    {
+        ui->comboBox_filterType->addItem(tr("STATUS(Process Status)"), STATUS);
+        ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
+        ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
+        ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
+        ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
+        ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
+        ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
+        ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
+        ui->comboBox_filterType->addItem(tr("SERVICES(Service Name)"), SERVICES);
+        ui->comboBox_filterType->addItem(tr("WINDOWTITLE(Process Window Title)"), WINDOWTITLE);
+        ui->comboBox_filterType->addItem(tr("MODULES(Process Modules)"), MODULES);
+    }
 }
 
 void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
 {
-    m_op_layout->setCurrentIndex(index);
-    m_fiValue_layout->setCurrentIndex(index);
+    int filter_type = ui->comboBox_filterType->currentData().toInt();
+    m_op_layout->setCurrentIndex(filter_type);
+    m_fiValue_layout->setCurrentIndex(filter_type);
     emit sigModified();
 }
 
 void TasklistEditor::on_groupBox_remote_system_toggled(bool checked)
 {
+    setupFilterTypes(checked);/*加载过滤器类型列表*/
     emit sigModified();
 }
 
