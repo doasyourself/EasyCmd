@@ -22,6 +22,11 @@ class ICmdEditor : public QWidget
 public:
     explicit ICmdEditor(QWidget *parent = NULL);
 
+    /**
+     * @brief isModified
+     *  暂时不用
+     * @return
+     */
     virtual bool isModified() const = 0;
 
     /**

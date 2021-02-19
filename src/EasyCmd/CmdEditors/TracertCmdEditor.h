@@ -1,0 +1,44 @@
+﻿#ifndef TRACERTCMDEDITOR_H
+#define TRACERTCMDEDITOR_H
+
+#include <QWidget>
+#include "ICmdEditor.h"
+
+namespace Ui {
+class TracertCmdEditor;
+}
+
+class TracertCmdEditor : public ICmdEditor
+{
+    Q_OBJECT
+
+public:
+    explicit TracertCmdEditor(QWidget *parent = 0);
+    ~TracertCmdEditor();
+
+    /**
+     * @brief isModified
+     *  暂时不用
+     * @return
+     */
+    virtual bool isModified() const;
+
+    /**
+     * @brief getCmdName
+     *  获取命令名称，在编辑器初始化后作为初始命令显示。
+     * @return
+     */
+    virtual QString getCmdName();
+
+    /**
+     * @brief getCmdString
+     *  获取完整命令，包括命令名称、参数、可选择项，可以进行校验，对用户进行提示。
+     * @return
+     */
+    virtual QString getCmdString();
+
+private:
+    Ui::TracertCmdEditor *ui;
+};
+
+#endif // TRACERTCMDEDITOR_H
