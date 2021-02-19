@@ -58,6 +58,8 @@ private slots:
 
     void on_radioButton_explorer_clicked();
 
+    void on_radioButton_systeminfo_toggled(bool checked);
+
 private:
     Ui::SystemToolEditor *ui;
     QString m_current_cmd;
