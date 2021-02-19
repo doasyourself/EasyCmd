@@ -209,6 +209,10 @@ void ConsoleEditor::mousePressEvent(QMouseEvent *e)
         }
         setExtraSelections(extra_sels);
     }
+    else if (button & Qt::LeftButton)
+    {
+        /**不需要右键按下自动粘贴内容，因为右键有菜单**/
+    }
 }
 
 void ConsoleEditor::mouseMoveEvent(QMouseEvent *e)
