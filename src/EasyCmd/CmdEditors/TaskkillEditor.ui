@@ -504,13 +504,6 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="spinBox_option_value_pid">
-             <property name="maximum">
-              <number>1000000000</number>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="0">
             <widget class="QRadioButton" name="radioButton_option_pid">
              <property name="minimumSize">
@@ -546,6 +539,13 @@
              </property>
              <property name="text">
               <string>进程名：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_option_value_pid">
+             <property name="placeholderText">
+              <string>支持指定多个PID，用空格分开</string>
              </property>
             </widget>
            </item>

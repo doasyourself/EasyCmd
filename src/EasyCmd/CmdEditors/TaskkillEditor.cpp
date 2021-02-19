@@ -97,7 +97,12 @@ QString TaskkillEditor::getCmdString()
         // 直接指定PID
         if (ui->radioButton_option_pid->isChecked())
         {
-            options += QString(" /PID %1").arg(ui->spinBox_option_value_pid->value());
+            QString pids = ui->lineEdit_option_value_pid->text();
+            QStringList pid_list = pids.split(" ");/*多个PID用空格分开，不用逗号，因为有中英文逗号之分*/
+            foreach (const QString &pid, pid_list)
+            {
+                options += QString(" /PID %1").arg(pid);
+            }
         }
 
         // 直接指定进程名
@@ -425,7 +430,7 @@ void TaskkillEditor::on_checkBox_option_f_toggled(bool checked)
 void TaskkillEditor::on_radioButton_option_pid_toggled(bool checked)
 {
     // /PID和/IM选项互斥
-    ui->spinBox_option_value_pid->setEnabled(checked);
+    ui->lineEdit_option_value_pid->setEnabled(checked);
     emit sigModified();
 }
 
