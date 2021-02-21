@@ -3,7 +3,7 @@
 
 /*******************************************************************************
 ** tracert命令编辑器
-** 暂不实现-j选项，因为不会用
+** 微软在线文档：https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/tracert
 **
 ********************************************************************************/
 
@@ -65,6 +65,10 @@ private slots:
     void on_spinBox_option_value_w_valueChanged(int arg1);
 
     void on_spinBox_option_value_h_valueChanged(int arg1);
+
+    void on_checkBox_option_j_toggled(bool checked);
+
+    void on_lineEdit_option_value_j_textChanged(const QString &arg1);
 
 private:
     Ui::TracertCmdEditor *ui;

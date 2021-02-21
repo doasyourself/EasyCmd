@@ -66,20 +66,17 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QSpinBox" name="spinBox_option_value_w">
-          <property name="suffix">
-           <string>毫秒</string>
+        <item row="4" column="0">
+         <widget class="QCheckBox" name="checkBox_option_R">
+          <property name="toolTip">
+           <string>-R</string>
           </property>
-          <property name="maximum">
-           <number>100000000</number>
-          </property>
-          <property name="value">
-           <number>1000</number>
+          <property name="text">
+           <string>跟踪往返行程路径(仅IPv6)</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QCheckBox" name="checkBox_option_w">
           <property name="toolTip">
            <string>-w</string>
@@ -111,16 +108,6 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QCheckBox" name="checkBox_option_R">
-          <property name="toolTip">
-           <string>-R</string>
-          </property>
-          <property name="text">
-           <string>跟踪往返行程路径(仅IPv6)</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QCheckBox" name="checkBox_option_d">
           <property name="minimumSize">
@@ -143,15 +130,42 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="spinBox_option_value_w">
+          <property name="suffix">
+           <string>毫秒</string>
+          </property>
+          <property name="maximum">
+           <number>100000000</number>
+          </property>
+          <property name="value">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLineEdit" name="lineEdit_option_value_S"/>
+        </item>
+        <item row="5" column="0">
          <widget class="QCheckBox" name="checkBox_option_S">
           <property name="text">
            <string>要使用的源地址(仅IPv6)</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_option_value_S"/>
+        <item row="2" column="0">
+         <widget class="QCheckBox" name="checkBox_option_j">
+          <property name="text">
+           <string>与主机列表一起的松散源路由(仅IPv4)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_option_value_j">
+          <property name="placeholderText">
+           <string>IP列表，用空格隔开</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

@@ -10,6 +10,7 @@ TracertCmdEditor::TracertCmdEditor(QWidget *parent) :
     on_checkBox_option_S_toggled(false);
     on_checkBox_option_w_toggled(false);
     on_checkBox_option_h_toggled(false);
+    on_checkBox_option_j_toggled(false);
     on_lineEdit_arg_value_targetName_textChanged(ui->lineEdit_arg_value_targetName->text());
 }
 
@@ -39,6 +40,11 @@ QString TracertCmdEditor::getCmdString()
     if (ui->checkBox_option_h->isChecked())
     {
         options += QString(" -h %1").arg(ui->spinBox_option_value_h->value());
+    }
+
+    if (ui->checkBox_option_j->isChecked())
+    {
+        options += QString(" -j %1").arg(ui->lineEdit_option_value_j->text().trimmed());
     }
 
     if (ui->checkBox_option_w->isChecked())
@@ -133,6 +139,17 @@ void TracertCmdEditor::on_spinBox_option_value_w_valueChanged(int arg1)
 }
 
 void TracertCmdEditor::on_spinBox_option_value_h_valueChanged(int arg1)
+{
+    emit sigModified();
+}
+
+void TracertCmdEditor::on_checkBox_option_j_toggled(bool checked)
+{
+    ui->lineEdit_option_value_j->setEnabled(checked);
+    emit sigModified();
+}
+
+void TracertCmdEditor::on_lineEdit_option_value_j_textChanged(const QString &arg1)
 {
     emit sigModified();
 }
