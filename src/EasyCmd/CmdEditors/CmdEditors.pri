@@ -11,7 +11,8 @@ HEADERS += \
     $$PWD/IpconfigEditor.h \
     $$PWD/TasklistEditor.h \
     $$PWD/TaskkillEditor.h \
-    $$PWD/TracertCmdEditor.h
+    $$PWD/TracertCmdEditor.h \
+    $$PWD/CdCmdEditor.h
 
 SOURCES += \
     $$PWD/EditorFactory.cpp \
@@ -23,7 +24,8 @@ SOURCES += \
     $$PWD/IpconfigEditor.cpp \
     $$PWD/TasklistEditor.cpp \
     $$PWD/TaskkillEditor.cpp \
-    $$PWD/TracertCmdEditor.cpp
+    $$PWD/TracertCmdEditor.cpp \
+    $$PWD/CdCmdEditor.cpp
 
 FORMS += \
     $$PWD/LauncherEditor.ui \
@@ -33,4 +35,5 @@ FORMS += \
     $$PWD/IpconfigEditor.ui \
     $$PWD/TasklistEditor.ui \
     $$PWD/TaskkillEditor.ui \
-    $$PWD/TracertCmdEditor.ui
+    $$PWD/TracertCmdEditor.ui \
+    $$PWD/CdCmdEditor.ui

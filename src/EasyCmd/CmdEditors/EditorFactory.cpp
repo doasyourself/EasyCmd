@@ -7,6 +7,7 @@
 #include "TasklistEditor.h"
 #include "TaskkillEditor.h"
 #include "TracertCmdEditor.h"
+#include "CdCmdEditor.h"
 
 ICmdEditor *newPingCmdEditor() { return new PingCmdEditor; }
 ICmdEditor *newNetStatCmdEditor() { return new NetStatCmdEditor; }
@@ -16,6 +17,7 @@ ICmdEditor *newIpconfigEditor() { return new IpconfigEditor; }
 ICmdEditor *newTasklistEditor() { return new TasklistEditor; }
 ICmdEditor *newTaskkillEditor() { return new TaskkillEditor; }
 ICmdEditor *newTracertCmdEditor() { return new TracertCmdEditor; }
+ICmdEditor *newCdCmdEditor() { return new CdCmdEditor; }
 
 EditorFactory::EditorFactory()
 {
@@ -30,6 +32,7 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("tasklist", newTasklistEditor);
     m_editor_map.insert("taskkill", newTaskkillEditor);
     m_editor_map.insert("tracert", newTracertCmdEditor);
+    m_editor_map.insert("cd", newCdCmdEditor);
 }
 
 ICmdEditor *EditorFactory::createEditor(const QString &name)
