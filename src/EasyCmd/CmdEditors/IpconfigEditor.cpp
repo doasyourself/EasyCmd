@@ -17,6 +17,9 @@ IpconfigEditor::IpconfigEditor(QWidget *parent) :
     {
         connect(chb, &QCheckBox::toggled, this, &IpconfigEditor::slotOptionChanged);
     }
+
+    // 初始生成一次命令
+    genCmdString();
 }
 
 IpconfigEditor::~IpconfigEditor()
@@ -146,7 +149,7 @@ void IpconfigEditor::slotOptionChanged()
 
 void IpconfigEditor::genCmdString()
 {
-    QString new_cmd = "ipconfig";
+    QString new_cmd = getCmdName();
     QString options;
     if (ui->checkBox_all->isChecked())
     {

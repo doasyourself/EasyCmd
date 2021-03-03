@@ -128,8 +128,12 @@ void MainWindow::writeToConsole(QString cmd_string)
 
 void MainWindow::moveToScreenCenter()
 {
-    QDesktopWidget* desktop = QApplication::desktop();
-    move((desktop->width() - this->width())/2, (desktop->height() - this->height())/2);
+    // 考虑多屏幕，在当前屏幕居中，而不是桌面居中
+    QDesktopWidget *desktop = qApp->desktop();
+    int screen_number = desktop->screenNumber(this);
+    QRect rc = desktop->screenGeometry(screen_number);
+
+    move((rc.width() - this->width())/2, (rc.height() - this->height())/2);
 }
 
 void MainWindow::on_pushButton_ctrlbreak_clicked()

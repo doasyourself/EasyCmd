@@ -8,6 +8,9 @@
 #include "TaskkillEditor.h"
 #include "TracertCmdEditor.h"
 #include "CdCmdEditor.h"
+#include "MkDirCmdEditor.h"
+#include "RmDirCmdEditor.h"
+#include "DirCmdEditor.h"
 
 ICmdEditor *newPingCmdEditor() { return new PingCmdEditor; }
 ICmdEditor *newNetStatCmdEditor() { return new NetStatCmdEditor; }
@@ -18,6 +21,9 @@ ICmdEditor *newTasklistEditor() { return new TasklistEditor; }
 ICmdEditor *newTaskkillEditor() { return new TaskkillEditor; }
 ICmdEditor *newTracertCmdEditor() { return new TracertCmdEditor; }
 ICmdEditor *newCdCmdEditor() { return new CdCmdEditor; }
+ICmdEditor *newDirCmdEditor() { return new DirCmdEditor; }
+ICmdEditor *newMkDirCmdEditor() { return new MkDirCmdEditor; }
+ICmdEditor *newRmDirCmdEditor() { return new RmDirCmdEditor; }
 
 EditorFactory::EditorFactory()
 {
@@ -33,6 +39,9 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("taskkill", newTaskkillEditor);
     m_editor_map.insert("tracert", newTracertCmdEditor);
     m_editor_map.insert("cd", newCdCmdEditor);
+    m_editor_map.insert("dir", newDirCmdEditor);
+    m_editor_map.insert("mkdir", newMkDirCmdEditor);
+    m_editor_map.insert("rmdir", newRmDirCmdEditor);
 }
 
 ICmdEditor *EditorFactory::createEditor(const QString &name)

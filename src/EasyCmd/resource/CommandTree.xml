@@ -15,8 +15,8 @@
     <node name="文件管理">
         <node name="cd"></node>
         <node name="dir"></node>
-        <node name="md"></node>
-        <node name="rd"></node>
+        <node name="mkdir"></node>
+        <node name="rmdir"></node>
         <node name="copy"></node>
         <node name="xcopy"></node>
         <node name="move"></node>

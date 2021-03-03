@@ -1,43 +1,39 @@
-﻿#include "CdCmdEditor.h"
-#include "ui_CdCmdEditor.h"
+﻿#include "DirCmdEditor.h"
+#include "ui_DirCmdEditor.h"
 #include <QFileDialog>
 
-CdCmdEditor::CdCmdEditor(QWidget *parent) :
+DirCmdEditor::DirCmdEditor(QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::CdCmdEditor)
+    ui(new Ui::DirCmdEditor)
 {
     ui->setupUi(this);
 }
 
-CdCmdEditor::~CdCmdEditor()
+DirCmdEditor::~DirCmdEditor()
 {
     delete ui;
 }
 
-bool CdCmdEditor::isModified() const
+bool DirCmdEditor::isModified() const
 {
     return true;
 }
 
-QString CdCmdEditor::getCmdName()
+QString DirCmdEditor::getCmdName()
 {
-    return "dir";
+    return "cd";
 }
 
-QString CdCmdEditor::getCmdString()
+QString DirCmdEditor::getCmdString()
 {
     QString options;
-    if (ui->checkBox_option_d->isChecked())
-    {
-        options += " /D";
-    }
 
     QString cmd = getCmdName();
     cmd += QString("%1 \"%2\"").arg(options).arg(ui->lineEdit_arg_dirpath->text());
     return cmd;
 }
 
-void CdCmdEditor::on_pushButton_arg_browserDir_clicked()
+void DirCmdEditor::on_pushButton_arg_browserDir_clicked()
 {
     QString dir = QFileDialog::getExistingDirectory(this, tr("Choose dest dir"), ui->lineEdit_arg_dirpath->text());
     if (!dir.isEmpty())
@@ -48,12 +44,12 @@ void CdCmdEditor::on_pushButton_arg_browserDir_clicked()
     emit sigModified();
 }
 
-void CdCmdEditor::on_lineEdit_arg_dirpath_textChanged(const QString &dirpath)
+void DirCmdEditor::on_lineEdit_arg_dirpath_textChanged(const QString &dirpath)
 {
     emit sigModified();
 }
 
-void CdCmdEditor::on_checkBox_option_d_toggled(bool checked)
+void DirCmdEditor::on_checkBox_option_d_toggled(bool checked)
 {
     emit sigModified();
 }
