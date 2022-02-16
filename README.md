@@ -21,4 +21,5 @@
 - 在win10上运行通过。
 
 #### 软件界面
-![工具界面](https://gitee.com/showmework/EasyCmd/blob/master/doc/images/mainwindow_snapshoot.png)
+![主界面](doc/images/mainwindow_snapshoot.png)
+![使用截图](doc/images/cmdtool_snapshoot.png)
