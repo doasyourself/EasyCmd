@@ -21,4 +21,4 @@
 - 在win10上运行通过。
 
 #### 软件界面
-![工具界面](https://github.com/doasyourself/EasyCmd/blob/master/doc/images/cmdtool_snapshoot.png)
+![工具界面](https://gitee.com/showmework/EasyCmd/blob/master/doc/images/mainwindow_snapshoot.png)
