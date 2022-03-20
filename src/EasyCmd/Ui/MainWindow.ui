@@ -136,8 +136,8 @@
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>657</width>
-                   <height>293</height>
+                   <width>624</width>
+                   <height>336</height>
                   </rect>
                  </property>
                 </widget>
@@ -276,7 +276,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -284,13 +284,41 @@
      <string>帮助</string>
     </property>
     <addaction name="action_about"/>
+    <addaction name="action_team_homepage"/>
+    <addaction name="action_project_homepage"/>
+    <addaction name="action_feedback"/>
+    <addaction name="action_check_update"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_about">
+   <property name="icon">
+    <iconset resource="../resource/resource.qrc">
+     <normaloff>:/img/info_48.png</normaloff>:/img/info_48.png</iconset>
+   </property>
    <property name="text">
     <string>关于</string>
+   </property>
+  </action>
+  <action name="action_team_homepage">
+   <property name="text">
+    <string>团队主页</string>
+   </property>
+  </action>
+  <action name="action_project_homepage">
+   <property name="text">
+    <string>项目主页</string>
+   </property>
+  </action>
+  <action name="action_feedback">
+   <property name="text">
+    <string>反馈建议</string>
+   </property>
+  </action>
+  <action name="action_check_update">
+   <property name="text">
+    <string>检查更新</string>
    </property>
   </action>
  </widget>
@@ -302,6 +330,8 @@
    <header>ConsoleEditor.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resource/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

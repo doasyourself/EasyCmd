@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QSortFilterProxyModel>
+
 #include "ConsoleRwWorker.h"
 #include "CmdTreeModel.h"
 #include "AppTrayIcon.h"
@@ -12,6 +13,7 @@ class MainWindow;
 }
 class QTreeWidgetItem;
 class QSystemTrayIcon;
+class MainWindowActionResponse;
 
 class MainWindow : public QMainWindow
 {
@@ -77,6 +79,7 @@ private:
     void createTrayMenu();
 
 private:
+    friend class MainWindowActionResponse;
     Ui::MainWindow *ui;
 
     // cmd读写
@@ -88,6 +91,9 @@ private:
 
     // 托盘图标
     AppTrayIcon m_tray_icon;
+
+    // 动作响应
+    MainWindowActionResponse *m_action_response;
 };
 
 #endif // MAINWINDOW_H

@@ -12,40 +12,22 @@ TARGET = EasyCmd
 TEMPLATE = app
 
 include($$PWD/CmdEditors/CmdEditors.pri)
+include($$PWD/Ui/Ui.pri)
 
 CONFIG(debug|release,debug) {
-    DESTDIR = $$PWD/dist/debug
+    DESTDIR = $$PWD/../dist/debug
 } else {
-    DESTDIR = $$PWD/dist/release
+    DESTDIR = $$PWD/../dist/release
 }
 
 SOURCES += main.cpp\
-    CmdProxyModel.cpp \
-    CmdTreeModel.cpp \
-    ConsoleEditor.cpp \
-    ConsoleRwWorker.cpp \
-        MainWindow.cpp \
-    AboutUsDialog.cpp \
-    Utils.cpp \
-    ZXmlDomItem.cpp \
-    AppTrayIcon.cpp \
-    MessageBubble.cpp
+    Utils.cpp
 
-HEADERS  += MainWindow.h \
-    CmdProxyModel.h \
-    AboutUsDialog.h \
-    CmdTreeModel.h \
-    ConsoleEditor.h \
-    ConsoleRwWorker.h \
-    Utils.h \
-    ZXmlDomItem.h \
-    AppTrayIcon.h \
+HEADERS  += Utils.h \
     Global.h \
-    MessageBubble.h
+    Utils.h
 
-FORMS    += MainWindow.ui \
-    AboutUsDialog.ui \
-    MessageBubble.ui
+FORMS    +=
 
 TRANSLATIONS += $$PWD/resource/easycmd.ts
 

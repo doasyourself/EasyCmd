@@ -33,7 +33,7 @@ void AppTrayIcon::createTrayIcon()
 {
     if (QSystemTrayIcon::isSystemTrayAvailable())
     {
-        QIcon tray_icon(":/img/logo/logo16.ico");
+        QIcon tray_icon(":/img/logo/logo128.ico");
         m_tray_icon = new QSystemTrayIcon(tray_icon, this);
         m_tray_icon->setToolTip(qApp->applicationDisplayName());
         createTrayMenu();

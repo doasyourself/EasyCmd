@@ -1,10 +1,11 @@
 ﻿#include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "CmdEditorHeader.h"
-#include "AboutUsDialog.h"
+#include "AboutDialog.h"
 #include "NetStatCmdEditor.h"
 #include "EditorFactory.h"
 #include "CmdProxyModel.h"
+#include "MainWindowActionResponse.h"
 
 #include <QDesktopWidget>
 #include <QKeyEvent>
@@ -39,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_proxy_model->setFilterCaseSensitivity(Qt::CaseInsensitive);
     m_proxy_model->setFilterKeyColumn(-1);
     ui->treeView_cmds->setModel(m_proxy_model);
+
+    // 响应类
+    m_action_response = new MainWindowActionResponse(this);
 
     // 响应行切换
     connect(ui->treeView_cmds->selectionModel(), &QItemSelectionModel::currentRowChanged,
@@ -160,7 +164,7 @@ void MainWindow::on_pushButton_execCmd_clicked()
 
 void MainWindow::on_action_about_triggered()
 {
-    AboutUsDialog dlg;
+    AboutDialog dlg;
     dlg.exec();
 }
 

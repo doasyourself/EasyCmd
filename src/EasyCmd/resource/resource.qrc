@@ -7,5 +7,9 @@
         <file>img/logo/logo48.ico</file>
         <file>img/logo/logo64.ico</file>
         <file>qss/menu1.qss</file>
+        <file>img/logo/logo128.ico</file>
+        <file>img/logo/logo128.png</file>
+        <file>img/info_64.png</file>
+        <file>img/info_48.png</file>
     </qresource>
 </RCC>
