@@ -3,7 +3,7 @@
 #include "CmdEditorHeader.h"
 #include "AboutDialog.h"
 #include "NetStatCmdEditor.h"
-#include "EditorFactory.h"
+#include "CmdEditorFactory.h"
 #include "CmdProxyModel.h"
 #include "MainWindowActionResponse.h"
 
@@ -105,7 +105,7 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     }
 
     // 创建对应的编辑器
-    static EditorFactory editor_factory;
+    static CmdEditorFactory editor_factory;
     ICmdEditor *editor = editor_factory.createEditor(cmd_id);
 
     /*找不到编辑器则返回*/

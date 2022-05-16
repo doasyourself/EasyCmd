@@ -7,7 +7,7 @@
 LauncherEditor::LauncherEditor(QWidget *parent) :
     ICmdEditor(parent),
     ui(new Ui::LauncherEditor),
-    m_settings("./LauncherEntries.ini", "ini")
+    m_settings("./LauncherEntries.ini", QSettings::IniFormat)
 {
     ui->setupUi(this);
 

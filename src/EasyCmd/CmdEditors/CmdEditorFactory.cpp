@@ -1,4 +1,4 @@
-﻿#include "EditorFactory.h"
+﻿#include "CmdEditorFactory.h"
 #include "PingCmdEditor.h"
 #include "NetStatCmdEditor.h"
 #include "SystemToolEditor.h"
@@ -25,11 +25,12 @@ ICmdEditor *newDirCmdEditor() { return new DirCmdEditor; }
 ICmdEditor *newMkDirCmdEditor() { return new MkDirCmdEditor; }
 ICmdEditor *newRmDirCmdEditor() { return new RmDirCmdEditor; }
 
-EditorFactory::EditorFactory()
+CmdEditorFactory::CmdEditorFactory()
 {
     m_editor_map.clear();
 
     // 关键字小写
+    // 注册/保存所有创建接口
     m_editor_map.insert("ping", newPingCmdEditor);
     m_editor_map.insert("netstat", newNetStatCmdEditor);
     m_editor_map.insert("systemTools", newSystemToolsEditor);
@@ -44,7 +45,8 @@ EditorFactory::EditorFactory()
     m_editor_map.insert("rmdir", newRmDirCmdEditor);
 }
 
-ICmdEditor *EditorFactory::createEditor(const QString &name)
+// 生产出命令编辑器
+ICmdEditor *CmdEditorFactory::createEditor(const QString &name)
 {
     ICmdEditor *editor = NULL;
     newEditorFunc func = m_editor_map.value(name);

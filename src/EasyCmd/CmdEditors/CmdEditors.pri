@@ -1,7 +1,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/EditorFactory.h \
+    $$PWD/CmdEditorFactory.h \
     $$PWD/ICmdEditor.h \
     $$PWD/LauncherEditor.h \
     $$PWD/PingCmdEditor.h \
@@ -18,7 +18,7 @@ HEADERS += \
     $$PWD/RmDirCmdEditor.h
 
 SOURCES += \
-    $$PWD/EditorFactory.cpp \
+    $$PWD/CmdEditorFactory.cpp \
     $$PWD/ICmdEditor.cpp \
     $$PWD/LauncherEditor.cpp \
     $$PWD/PingCmdEditor.cpp \

@@ -23,10 +23,13 @@ public:
     virtual QString getCmdString();
 
 private slots:
-    void on_pushButton_arg_browserDir_clicked();
+    // 选择路径按钮响应
+    void on_pushButton_selectpath_clicked();
 
-    void on_lineEdit_arg_dirpath_textChanged(const QString &dirpath);
+    // 目录文件路径改变事件响应
+    void on_lineEdit_dirfilepath_textChanged(const QString &dirfilepath);
 
+    // 选项-d切换响应
     void on_checkBox_option_d_toggled(bool checked);
 
 private:
