@@ -13,6 +13,8 @@ TEMPLATE = app
 
 include($$PWD/CmdEditors/CmdEditors.pri)
 include($$PWD/Ui/Ui.pri)
+include($$PWD/Utils/Utils.pri)
+include($$PWD/Global/Global.pri)
 
 CONFIG(debug|release,debug) {
     DESTDIR = $$PWD/../dist/debug
@@ -20,12 +22,7 @@ CONFIG(debug|release,debug) {
     DESTDIR = $$PWD/../dist/release
 }
 
-SOURCES += main.cpp\
-    Utils.cpp
-
-HEADERS  += Utils.h \
-    Global.h \
-    Utils.h
+SOURCES += main.cpp
 
 FORMS    +=
 

@@ -1,4 +1,4 @@
-﻿#ifndef ICMDEDITOR_H
+#ifndef ICMDEDITOR_H
 #define ICMDEDITOR_H
 
 /*******************************************************************************
@@ -45,7 +45,6 @@ public:
 
 signals:
     void sigModified();/*更新命令*/
-    void sigExecute();/*立即执行命令*/
 };
 
 #endif // ICMDEDITOR_H
