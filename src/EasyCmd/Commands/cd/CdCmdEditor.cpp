@@ -1,10 +1,11 @@
-﻿#include "CdCmdEditor.h"
+#include "CdCmdEditor.h"
 #include "ui_CdCmdEditor.h"
 #include <QFileDialog>
 
-CdCmdEditor::CdCmdEditor(QWidget *parent) :
+CdCmdEditor::CdCmdEditor(CdCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::CdCmdEditor)
+    ui(new Ui::CdCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 }
@@ -19,11 +20,6 @@ bool CdCmdEditor::isModified() const
     return true;
 }
 
-QString CdCmdEditor::getCmdName()
-{
-    return "dir";
-}
-
 QString CdCmdEditor::getCmdString()
 {
     QString options;
@@ -32,7 +28,7 @@ QString CdCmdEditor::getCmdString()
         options += " /D";
     }
 
-    QString cmd = getCmdName();
+    QString cmd = m_command->getCmdName();
     cmd += QString("%1 \"%2\"").arg(options).arg(ui->lineEdit_dirfilepath->text());
     return cmd;
 }

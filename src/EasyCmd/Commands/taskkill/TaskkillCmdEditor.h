@@ -1,5 +1,5 @@
-﻿#ifndef TaskkillEditor_H
-#define TaskkillEditor_H
+#ifndef TaskkillCmdEditor_H
+#define TaskkillCmdEditor_H
 
 /*******************************************************************************
 ** 实现taskkill命令编辑器
@@ -9,22 +9,22 @@
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "TaskkillCommand.h"
 
 namespace Ui {
-class TaskkillEditor;
+class TaskkillCmdEditor;
 }
 class QStackedLayout;
 
-class TaskkillEditor : public ICmdEditor
+class TaskkillCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 
 public:
-    explicit TaskkillEditor(QWidget *parent = 0);
-    ~TaskkillEditor();
+    explicit TaskkillCmdEditor(TaskkillCommand *command, QWidget *parent = 0);
+    ~TaskkillCmdEditor();
 
     virtual bool isModified() const;
-    virtual QString getCmdName();
     virtual QString getCmdString();
 
 private slots:
@@ -59,10 +59,12 @@ private:
     void setupFilterTypes(bool remote_system);/*加载过滤器列表*/
 
 private:
-    Ui::TaskkillEditor *ui;
+    Ui::TaskkillCmdEditor *ui;
+    TaskkillCommand *m_command;
+
     QStackedLayout *m_op_layout;
     QStackedLayout *m_fiValue_layout;
     QStringList m_filter_list;/*筛选器列表*/
 };
 
-#endif // TaskkillEditor_H
+#endif // TaskkillCmdEditor_H

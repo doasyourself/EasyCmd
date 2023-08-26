@@ -1,10 +1,11 @@
-﻿#include "SystemToolEditor.h"
-#include "ui_SystemToolEditor.h"
+#include "WinSystemToolCmdEditor.h"
+#include "ui_WinSystemToolCmdEditor.h"
 #include <QButtonGroup>
 
-SystemToolEditor::SystemToolEditor(QWidget *parent) :
+WinSystemToolCmdEditor::WinSystemToolCmdEditor(WinSystemToolCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::SystemToolEditor)
+    ui(new Ui::WinSystemToolCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 
@@ -17,123 +18,118 @@ SystemToolEditor::SystemToolEditor(QWidget *parent) :
     }
 }
 
-SystemToolEditor::~SystemToolEditor()
+WinSystemToolCmdEditor::~WinSystemToolCmdEditor()
 {
     delete ui;
 }
 
-bool SystemToolEditor::isModified() const
+bool WinSystemToolCmdEditor::isModified() const
 {
     return !m_current_cmd.isEmpty();
 }
 
-QString SystemToolEditor::getCmdName()
-{
-    return "";
-}
-
-QString SystemToolEditor::getCmdString()
+QString WinSystemToolCmdEditor::getCmdString()
 {
     return m_current_cmd;
 }
 
-void SystemToolEditor::on_radioButton_servicemsc_clicked()
+void WinSystemToolCmdEditor::on_radioButton_servicemsc_clicked()
 {
     m_current_cmd = "services.msc";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_notepad_clicked()
+void WinSystemToolCmdEditor::on_radioButton_notepad_clicked()
 {
     m_current_cmd = "notepad.exe";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_cleanmgr_clicked()
+void WinSystemToolCmdEditor::on_radioButton_cleanmgr_clicked()
 {
     m_current_cmd = "cleanmgr";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_compmgmtmsc_clicked()
+void WinSystemToolCmdEditor::on_radioButton_compmgmtmsc_clicked()
 {
     m_current_cmd = "compmgmt.msc";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_devmgmtmsc_clicked()
+void WinSystemToolCmdEditor::on_radioButton_devmgmtmsc_clicked()
 {
     m_current_cmd = "devmgmt.msc";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_regedt32_clicked()
+void WinSystemToolCmdEditor::on_radioButton_regedt32_clicked()
 {
     m_current_cmd = "regedt32";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_write_clicked()
+void WinSystemToolCmdEditor::on_radioButton_write_clicked()
 {
     m_current_cmd = "write";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_mspaint_clicked()
+void WinSystemToolCmdEditor::on_radioButton_mspaint_clicked()
 {
     m_current_cmd = "mspaint";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_taskmgr_clicked()
+void WinSystemToolCmdEditor::on_radioButton_taskmgr_clicked()
 {
     m_current_cmd = "taskmgr";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_charmap_clicked()
+void WinSystemToolCmdEditor::on_radioButton_charmap_clicked()
 {
     m_current_cmd = "charmap";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_magnify_clicked()
+void WinSystemToolCmdEditor::on_radioButton_magnify_clicked()
 {
     m_current_cmd = "magnify";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_mstsc_clicked()
+void WinSystemToolCmdEditor::on_radioButton_mstsc_clicked()
 {
     m_current_cmd = "mstsc";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_dxdiag_clicked()
+void WinSystemToolCmdEditor::on_radioButton_dxdiag_clicked()
 {
     m_current_cmd = "dxdiag";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_controlexe_clicked()
+void WinSystemToolCmdEditor::on_radioButton_controlexe_clicked()
 {
     m_current_cmd = "control.exe";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_calc_clicked()
+void WinSystemToolCmdEditor::on_radioButton_calc_clicked()
 {
     m_current_cmd = "calc";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_explorer_clicked()
+void WinSystemToolCmdEditor::on_radioButton_explorer_clicked()
 {
     m_current_cmd = "explorer";
     emit sigModified();
 }
 
-void SystemToolEditor::on_radioButton_systeminfo_toggled(bool checked)
+void WinSystemToolCmdEditor::on_radioButton_systeminfo_toggled(bool checked)
 {
     m_current_cmd = "systeminfo";
     emit sigModified();

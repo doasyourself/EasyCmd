@@ -1,19 +1,20 @@
-ï»¿#include "PingCmdEditor.h"
+#include "PingCmdEditor.h"
 #include "ui_PingCmdEditor.h"
 #include "Utils.h"
 
-PingCmdEditor::PingCmdEditor(QWidget *parent) :
+PingCmdEditor::PingCmdEditor(PingCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::PingCmdEditor)
+    ui(new Ui::PingCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 
-    // åˆå§‹åŒ–
+    // ³õÊ¼»¯
     on_checkBox_option_l_toggled(false);
     on_checkBox_option_i_toggled(false);
     on_checkBox_option_w_toggled(false);
 
-    // ç›‘å¬ä¿®æ”¹ä¿¡å·
+    // ¼àÌıĞŞ¸ÄĞÅºÅ
     QList<QCheckBox *> checkboxs = findChildren<QCheckBox *>();
     foreach (QCheckBox *chk, checkboxs)
     {
@@ -37,20 +38,15 @@ bool PingCmdEditor::isModified() const
     return false;
 }
 
-QString PingCmdEditor::getCmdName()
-{
-    return "ping";
-}
-
 QString PingCmdEditor::getCmdString()
 {
-    QString cmd_string("ping");
+    QString cmd_string = m_command->getCmdName();
 
-    // Start: å…ˆè·å–é…ç½®é¡¹
+    // Start: ÏÈ»ñÈ¡ÅäÖÃÏî
     QString options;
-    if (ui->checkBox_infiniteTimes->isChecked()) /*æ— é™æ¬¡*/
+    if (ui->checkBox_infiniteTimes->isChecked()) /*ÎŞÏŞ´Î*/
     {
-        options += " -t"; /*çº¦å®šå‰é¢å¸¦ç©ºæ ¼ï¼Œä¸‹åŒ*/
+        options += " -t"; /*Ô¼¶¨Ç°Ãæ´ø¿Õ¸ñ£¬ÏÂÍ¬*/
     }
     else if (ui->checkBox_finiteTimes->isChecked())
     {
@@ -62,7 +58,7 @@ QString PingCmdEditor::getCmdString()
         options += " -a";
     }
 
-    if (ui->checkBox_option_l->isChecked()) /*å°äº0ä¸ºæ— æ•ˆå€¼ï¼Œç•Œé¢ä¸Šé»˜è®¤ä¸º-1ï¼Œå³é»˜è®¤ä¸æ·»åŠ æ­¤é€‰é¡¹ï¼Œä¸‹åŒ*/
+    if (ui->checkBox_option_l->isChecked()) /*Ğ¡ÓÚ0ÎªÎŞĞ§Öµ£¬½çÃæÉÏÄ¬ÈÏÎª-1£¬¼´Ä¬ÈÏ²»Ìí¼Ó´ËÑ¡Ïî£¬ÏÂÍ¬*/
     {
         int option_l = ui->spinBox_options_l->value();
         options += " -l " + QString::number(option_l);
@@ -88,7 +84,7 @@ QString PingCmdEditor::getCmdString()
 
     cmd_string += options;
 
-    // æ£€æŸ¥ipåˆæ³•æ€§
+    // ¼ì²éipºÏ·¨ĞÔ
     QString ip_url = ui->lineEdit_ip_url->text();
     if (ip_url.isEmpty())
     {
@@ -128,7 +124,7 @@ void PingCmdEditor::on_checkBox_infiniteTimes_toggled(bool checked)
 {
     if (checked)
     {
-        ui->checkBox_finiteTimes->setChecked(false);/*äº’æ–¥*/
+        ui->checkBox_finiteTimes->setChecked(false);/*»¥³â*/
     }
 }
 
@@ -136,6 +132,6 @@ void PingCmdEditor::on_checkBox_finiteTimes_toggled(bool checked)
 {
     if (checked)
     {
-        ui->checkBox_infiniteTimes->setChecked(false);/*äº’æ–¥*/
+        ui->checkBox_infiniteTimes->setChecked(false);/*»¥³â*/
     }
 }

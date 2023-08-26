@@ -104,11 +104,13 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     }
 
     // 创建对应的编辑器
-    static CmdEditorFactory editor_factory;
-    ICmdEditor *editor = editor_factory.createEditor(cmd_id);
+    static CommandFactory command_factory;
+    ICommand *command = command_factory.createCommand(cmd_id);
 
     /*找不到编辑器则返回*/
-    if (!editor) return;
+    if (!command) return;
+
+    ICmdEditor *editor = command->createCmdEditorWidget();
 
     /*监听编辑器命令改变信号*/
     connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);

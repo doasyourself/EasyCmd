@@ -1,8 +1,9 @@
-﻿#ifndef PINGCMDEDITOR_H
+#ifndef PINGCMDEDITOR_H
 #define PINGCMDEDITOR_H
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "PingCommand.h"
 
 namespace Ui {
 class PingCmdEditor;
@@ -13,11 +14,10 @@ class PingCmdEditor : public ICmdEditor
     Q_OBJECT
 
 public:
-    explicit PingCmdEditor(QWidget *parent = 0);
+    explicit PingCmdEditor(PingCommand *command, QWidget *parent = 0);
     virtual ~PingCmdEditor();
 
     virtual bool isModified() const;
-    virtual QString getCmdName();
     virtual QString getCmdString();
 
 private slots:
@@ -35,6 +35,7 @@ private slots:
 
 private:
     Ui::PingCmdEditor *ui;
+    PingCommand *m_command;
 };
 
 #endif // PINGCMDEDITOR_H

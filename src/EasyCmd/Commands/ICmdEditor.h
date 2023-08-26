@@ -30,15 +30,7 @@ public:
     virtual bool isModified() const = 0;
 
     /**
-     * @brief getCmdName
-     *  获取命令名称，在编辑器初始化后作为初始命令显示。
-     * @return
-     */
-    virtual QString getCmdName();
-
-    /**
      * @brief getCmdString
-     *  获取完整命令，包括命令名称、参数、可选择项，可以进行校验，对用户进行提示。
      * @return
      */
     virtual QString getCmdString() = 0;

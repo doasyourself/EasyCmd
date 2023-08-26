@@ -1,4 +1,4 @@
-﻿#ifndef IPCONFIGEDITOR_H
+#ifndef IPCONFIGEDITOR_H
 #define IPCONFIGEDITOR_H
 
 /*************************************************************************
@@ -9,21 +9,21 @@
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "IPConfigCommand.h"
 
 namespace Ui {
-class IpconfigEditor;
+class IPConfigCmdEditor;
 }
 
-class IpconfigEditor : public ICmdEditor
+class IPConfigCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 
 public:
-    explicit IpconfigEditor(QWidget *parent = 0);
-    ~IpconfigEditor();
+    explicit IPConfigCmdEditor(IPConfigCommand *command, QWidget *parent = 0);
+    ~IPConfigCmdEditor();
 
     virtual bool isModified() const;
-    virtual QString getCmdName();
     virtual QString getCmdString();
 
 
@@ -58,8 +58,9 @@ private:
     void genCmdString();
 
 private:
-    Ui::IpconfigEditor *ui;
+    Ui::IPConfigCmdEditor *ui;
     QString m_cmd;
+    IPConfigCommand *m_command;
 };
 
 #endif // IPCONFIGEDITOR_H

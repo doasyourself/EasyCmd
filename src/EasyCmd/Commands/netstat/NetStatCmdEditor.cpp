@@ -2,9 +2,10 @@
 #include "ui_NetStatCmdEditor.h"
 #include <QMessageBox>
 
-NetStatCmdEditor::NetStatCmdEditor(QWidget *parent) :
+NetStatCmdEditor::NetStatCmdEditor(NetStatCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::NetStatCmdEditor)
+    ui(new Ui::NetStatCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 
@@ -36,11 +37,6 @@ NetStatCmdEditor::~NetStatCmdEditor()
 bool NetStatCmdEditor::isModified() const
 {
     return false;
-}
-
-QString NetStatCmdEditor::getCmdName()
-{
-    return "netstat";
 }
 
 QString NetStatCmdEditor::getCmdString()
@@ -115,11 +111,11 @@ QString NetStatCmdEditor::getCmdString()
 
     if (ui->checkBox_option_interval->isChecked())
     {
-        options += " " + ui->spinBox_option_interval->value();
+        options += " " + QString::number(ui->spinBox_option_interval->value());
     }
     // End
 
-    QString cmd_string("netstat");
+    QString cmd_string = m_command->getCmdName();
     cmd_string += options;
     cmd_string += "\n";
     return cmd_string;

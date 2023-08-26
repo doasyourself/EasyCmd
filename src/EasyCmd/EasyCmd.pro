@@ -22,6 +22,11 @@ CONFIG(debug|release,debug) {
     DESTDIR = $$PWD/../dist/release
 }
 
+win32:{
+    QMAKE_CXXFLAGS += /utf-8
+    QMAKE_CFLAGS += /utf-8
+}
+
 SOURCES += main.cpp
 
 FORMS    +=

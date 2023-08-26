@@ -1,9 +1,10 @@
-﻿#include "IpconfigEditor.h"
-#include "ui_IpconfigEditor.h"
+#include "IPConfigCmdEditor.h"
+#include "ui_IPConfigCmdEditor.h"
 
-IpconfigEditor::IpconfigEditor(QWidget *parent) :
+IPConfigCmdEditor::IPConfigCmdEditor(IPConfigCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::IpconfigEditor)
+    ui(new Ui::IPConfigCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 
@@ -15,34 +16,29 @@ IpconfigEditor::IpconfigEditor(QWidget *parent) :
     QList<QCheckBox *> chb_list = findChildren<QCheckBox *>();
     foreach (QCheckBox *chb, chb_list)
     {
-        connect(chb, &QCheckBox::toggled, this, &IpconfigEditor::slotOptionChanged);
+        connect(chb, &QCheckBox::toggled, this, &IPConfigCmdEditor::slotOptionChanged);
     }
 
     // 初始生成一次命令
     genCmdString();
 }
 
-IpconfigEditor::~IpconfigEditor()
+IPConfigCmdEditor::~IPConfigCmdEditor()
 {
     delete ui;
 }
 
-bool IpconfigEditor::isModified() const
+bool IPConfigCmdEditor::isModified() const
 {
     return false;
 }
 
-QString IpconfigEditor::getCmdName()
-{
-    return "ipconfig";
-}
-
-QString IpconfigEditor::getCmdString()
+QString IPConfigCmdEditor::getCmdString()
 {
     return m_cmd;
 }
 
-void IpconfigEditor::on_checkBox_setclassid_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_setclassid_toggled(bool checked)
 {
     if (checked)
     {
@@ -58,7 +54,7 @@ void IpconfigEditor::on_checkBox_setclassid_toggled(bool checked)
     ui->lineEdit_newClassid->setEnabled(checked);
 }
 
-void IpconfigEditor::on_checkBox_showclassid_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_showclassid_toggled(bool checked)
 {
     if (checked)
     {
@@ -73,7 +69,7 @@ void IpconfigEditor::on_checkBox_showclassid_toggled(bool checked)
     ui->lineEdit_showclassid->setEnabled(checked);
 }
 
-void IpconfigEditor::on_checkBox_release_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_release_toggled(bool checked)
 {
     if (checked)
     {
@@ -88,7 +84,7 @@ void IpconfigEditor::on_checkBox_release_toggled(bool checked)
     ui->lineEdit_release->setEnabled(checked);
 }
 
-void IpconfigEditor::on_checkBox_renew_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_renew_toggled(bool checked)
 {
     if (checked)
     {
@@ -103,7 +99,7 @@ void IpconfigEditor::on_checkBox_renew_toggled(bool checked)
     ui->lineEdit_renew->setEnabled(checked);
 }
 
-void IpconfigEditor::on_checkBox_all_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_all_toggled(bool checked)
 {
     if (checked)
     {
@@ -116,7 +112,7 @@ void IpconfigEditor::on_checkBox_all_toggled(bool checked)
     }
 }
 
-void IpconfigEditor::on_checkBox_flushdns_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_flushdns_toggled(bool checked)
 {
     if (checked)
     {
@@ -129,7 +125,7 @@ void IpconfigEditor::on_checkBox_flushdns_toggled(bool checked)
     }
 }
 
-void IpconfigEditor::on_checkBox_displaydns_toggled(bool checked)
+void IPConfigCmdEditor::on_checkBox_displaydns_toggled(bool checked)
 {
     if (checked)
     {
@@ -142,14 +138,14 @@ void IpconfigEditor::on_checkBox_displaydns_toggled(bool checked)
     }
 }
 
-void IpconfigEditor::slotOptionChanged()
+void IPConfigCmdEditor::slotOptionChanged()
 {
     genCmdString();
 }
 
-void IpconfigEditor::genCmdString()
+void IPConfigCmdEditor::genCmdString()
 {
-    QString new_cmd = getCmdName();
+    QString new_cmd = m_command->getCmdName();
     QString options;
     if (ui->checkBox_all->isChecked())
     {
@@ -216,27 +212,27 @@ void IpconfigEditor::genCmdString()
     }
 }
 
-void IpconfigEditor::on_lineEdit_setclassid_textChanged(const QString &arg1)
+void IPConfigCmdEditor::on_lineEdit_setclassid_textChanged(const QString &arg1)
 {
     genCmdString();
 }
 
-void IpconfigEditor::on_lineEdit_showclassid_textChanged(const QString &arg1)
+void IPConfigCmdEditor::on_lineEdit_showclassid_textChanged(const QString &arg1)
 {
     genCmdString();
 }
 
-void IpconfigEditor::on_lineEdit_release_textChanged(const QString &arg1)
+void IPConfigCmdEditor::on_lineEdit_release_textChanged(const QString &arg1)
 {
     genCmdString();
 }
 
-void IpconfigEditor::on_lineEdit_renew_textChanged(const QString &arg1)
+void IPConfigCmdEditor::on_lineEdit_renew_textChanged(const QString &arg1)
 {
     genCmdString();
 }
 
-void IpconfigEditor::on_lineEdit_newClassid_textChanged(const QString &arg1)
+void IPConfigCmdEditor::on_lineEdit_newClassid_textChanged(const QString &arg1)
 {
     genCmdString();
 }

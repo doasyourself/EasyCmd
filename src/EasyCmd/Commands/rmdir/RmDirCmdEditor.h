@@ -1,8 +1,9 @@
-﻿#ifndef RmDirCmdEditor_H
+#ifndef RmDirCmdEditor_H
 #define RmDirCmdEditor_H
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "RmDirCommand.h"
 
 namespace Ui {
 class RmDirCmdEditor;
@@ -13,12 +14,10 @@ class RmDirCmdEditor : public ICmdEditor
     Q_OBJECT
 
 public:
-    explicit RmDirCmdEditor(QWidget *parent = 0);
+    explicit RmDirCmdEditor(RmDirCommand *command, QWidget *parent = 0);
     ~RmDirCmdEditor();
 
     virtual bool isModified() const;
-
-    virtual QString getCmdName();
 
     virtual QString getCmdString();
 
@@ -29,6 +28,7 @@ private slots:
 
 private:
     Ui::RmDirCmdEditor *ui;
+    RmDirCommand *m_command;
 };
 
 #endif // RmDirCmdEditor_H

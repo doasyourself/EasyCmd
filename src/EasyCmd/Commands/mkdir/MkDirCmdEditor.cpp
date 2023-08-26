@@ -1,10 +1,11 @@
-﻿#include "MkDirCmdEditor.h"
+#include "MkDirCmdEditor.h"
 #include "ui_MkDirCmdEditor.h"
 #include <QFileDialog>
 
-MkDirCmdEditor::MkDirCmdEditor(QWidget *parent) :
+MkDirCmdEditor::MkDirCmdEditor(MkDirCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::MkDirCmdEditor)
+    ui(new Ui::MkDirCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 }
@@ -19,16 +20,11 @@ bool MkDirCmdEditor::isModified() const
     return true;
 }
 
-QString MkDirCmdEditor::getCmdName()
-{
-    return "mkdir";
-}
-
 QString MkDirCmdEditor::getCmdString()
 {
     QString options;
 
-    QString cmd = getCmdName();
+    QString cmd = m_command->getCmdName();
     cmd += QString("%1 \"%2\"").arg(options).arg(ui->lineEdit_arg_dirpath->text());
     return cmd;
 }

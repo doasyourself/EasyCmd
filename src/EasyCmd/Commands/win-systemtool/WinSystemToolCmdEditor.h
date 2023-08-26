@@ -1,4 +1,4 @@
-﻿#ifndef SYSTEMTOOLEDITOR_H
+#ifndef SYSTEMTOOLEDITOR_H
 #define SYSTEMTOOLEDITOR_H
 
 /*******************************************************************************
@@ -8,21 +8,21 @@
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "WinSystemToolCommand.h"
 
 namespace Ui {
-class SystemToolEditor;
+class WinSystemToolCmdEditor;
 }
 
-class SystemToolEditor : public ICmdEditor
+class WinSystemToolCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 
 public:
-    explicit SystemToolEditor(QWidget *parent = nullptr);
-    virtual ~SystemToolEditor();
+    explicit WinSystemToolCmdEditor(WinSystemToolCommand *command, QWidget *parent = nullptr);
+    virtual ~WinSystemToolCmdEditor();
 
     virtual bool isModified() const;
-    virtual QString getCmdName();
     virtual QString getCmdString();
 
 private slots:
@@ -61,7 +61,9 @@ private slots:
     void on_radioButton_systeminfo_toggled(bool checked);
 
 private:
-    Ui::SystemToolEditor *ui;
+    Ui::WinSystemToolCmdEditor *ui;
+    WinSystemToolCommand *m_command;
+
     QString m_current_cmd;
 };
 

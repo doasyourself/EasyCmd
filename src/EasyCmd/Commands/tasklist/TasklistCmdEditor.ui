@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TaskkillEditor</class>
- <widget class="QWidget" name="TaskkillEditor">
+ <class>TasklistCmdEditor</class>
+ <widget class="QWidget" name="TasklistCmdEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>647</width>
-    <height>1097</height>
+    <height>1167</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -177,6 +177,116 @@
        </widget>
       </item>
       <item>
+       <widget class="QGroupBox" name="groupBox_option_group2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_option_m">
+             <property name="placeholderText">
+              <string>dll模块名，如Shell32.dll，可不填</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkBox_option_m">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>列出调用指定DLL的所有进程:</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBox_option_svc">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>显示每个进程中的服务</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="checkBox_option_v">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>显示详细信息</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <widget class="QGroupBox" name="groupBox_filter">
         <property name="title">
          <string>设置筛选器</string>
@@ -208,28 +318,6 @@
            <property name="topMargin">
             <number>0</number>
            </property>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="comboBox_filterType"/>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="minimumSize">
-              <size>
-               <width>230</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>230</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>判断内容：</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="1">
             <widget class="QWidget" name="widget_operators" native="true">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -258,6 +346,9 @@
                <widget class="QComboBox" name="comboBox_op_session"/>
               </item>
               <item>
+               <widget class="QComboBox" name="comboBox_op_sessionName"/>
+              </item>
+              <item>
                <widget class="QComboBox" name="comboBox_op_cpuTime"/>
               </item>
               <item>
@@ -267,16 +358,19 @@
                <widget class="QComboBox" name="comboBox_op_userName"/>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox_op_module"/>
-              </item>
-              <item>
                <widget class="QComboBox" name="comboBox_op_service"/>
               </item>
               <item>
                <widget class="QComboBox" name="comboBox_op_windowTitle"/>
               </item>
+              <item>
+               <widget class="QComboBox" name="comboBox_op_module"/>
+              </item>
              </layout>
             </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_filterType"/>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_3">
@@ -294,6 +388,25 @@
              </property>
              <property name="text">
               <string>判断符：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>判断内容：</string>
              </property>
             </widget>
            </item>
@@ -343,6 +456,11 @@
                 </item>
                 <item>
                  <property name="text">
+                  <string>SUSPENDED</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
                   <string>NOT RESPONDING</string>
                  </property>
                 </item>
@@ -356,7 +474,7 @@
               <item>
                <widget class="QLineEdit" name="lineEdit_fiValue_imageName">
                 <property name="placeholderText">
-                 <string>映像名称，支持通配符*</string>
+                 <string>进程映像名称，支持通配符*</string>
                 </property>
                </widget>
               </item>
@@ -371,6 +489,13 @@
                <widget class="QLineEdit" name="lineEdit_fiValue_session">
                 <property name="placeholderText">
                  <string>会话编号</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_sessionName">
+                <property name="placeholderText">
+                 <string>会话名称</string>
                 </property>
                </widget>
               </item>
@@ -409,13 +534,6 @@
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_fiValue_module">
-                <property name="placeholderText">
-                 <string>模块名称</string>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="QLineEdit" name="lineEdit_fiValue_service">
                 <property name="placeholderText">
                  <string>服务名称</string>
@@ -429,13 +547,20 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_fiValue_module">
+                <property name="placeholderText">
+                 <string>模块名称</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <layout class="QHBoxLayout" name="horizontalLayout">
            <property name="topMargin">
             <number>0</number>
            </property>
@@ -497,15 +622,27 @@
            <property name="topMargin">
             <number>0</number>
            </property>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEdit_option_value_im">
-             <property name="placeholderText">
-              <string>进程（映像）名，支持通配符*</string>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="checkBox_option_nh">
+             <property name="minimumSize">
+              <size>
+               <width>230</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>230</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>不显示表头</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QRadioButton" name="radioButton_option_pid">
+            <widget class="QCheckBox" name="checkBox_option_fo">
              <property name="minimumSize">
               <size>
                <width>230</width>
@@ -519,76 +656,27 @@
               </size>
              </property>
              <property name="text">
-              <string>进程ID：</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QRadioButton" name="radioButton_option_im">
-             <property name="minimumSize">
-              <size>
-               <width>230</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>230</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>进程名：</string>
+              <string>指定输出格式</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_option_value_pid">
-             <property name="placeholderText">
-              <string>支持指定多个PID，用空格分开</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_option_other">
-        <property name="title">
-         <string/>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>9</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="checkBox_option_t">
-             <property name="text">
-              <string>同时终止子进程</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="checkBox_option_f">
-             <property name="text">
-              <string>强制终止</string>
-             </property>
+            <widget class="QComboBox" name="comboBox_option_fo">
+             <item>
+              <property name="text">
+               <string>TABLE</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>LIST</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>CSV</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>

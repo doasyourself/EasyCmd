@@ -1,29 +1,29 @@
-ï»¿#ifndef TasklistEditor_H
-#define TasklistEditor_H
+#ifndef TasklistCmdEditor_H
+#define TasklistCmdEditor_H
 
 /*******************************************************************************
-** å®ç°tasklistå‘½ä»¤ç¼–è¾‘å™¨
+** ÊµÏÖtasklistÃüÁî±à¼­Æ÷
 **
 *******************************************************************************/
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "TasklistCommand.h"
 
 namespace Ui {
-class TasklistEditor;
+class TasklistCmdEditor;
 }
 class QStackedLayout;
 
-class TasklistEditor : public ICmdEditor
+class TasklistCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 
 public:
-    explicit TasklistEditor(QWidget *parent = 0);
-    ~TasklistEditor();
+    explicit TasklistCmdEditor(TasklistCommand *command, QWidget *parent = 0);
+    ~TasklistCmdEditor();
 
     virtual bool isModified() const;
-    virtual QString getCmdName();
     virtual QString getCmdString();
 
 private slots:
@@ -56,14 +56,16 @@ private slots:
     void on_pushButton_clearFilter_clicked();
 
 private:
-    void initFilters();/*åˆå§‹åŒ–è¿‡æ»¤å™¨*/
-    void setupFilterTypes(bool remote_system);/*åŠ è½½è¿‡æ»¤å™¨åˆ—è¡¨*/
+    void initFilters();/*³õÊ¼»¯¹ıÂËÆ÷*/
+    void setupFilterTypes(bool remote_system);/*¼ÓÔØ¹ıÂËÆ÷ÁĞ±í*/
 
 private:
-    Ui::TasklistEditor *ui;
+    Ui::TasklistCmdEditor *ui;
+    TasklistCommand *m_command;
+
     QStackedLayout *m_op_layout;
     QStackedLayout *m_fiValue_layout;
-    QStringList m_filter_list;/*ç­›é€‰å™¨åˆ—è¡¨*/
+    QStringList m_filter_list;/*É¸Ñ¡Æ÷ÁĞ±í*/
 };
 
-#endif // TasklistEditor_H
+#endif // TasklistCmdEditor_H

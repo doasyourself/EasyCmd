@@ -1,4 +1,4 @@
-﻿#ifndef TRACERTCMDEDITOR_H
+#ifndef TRACERTCMDEDITOR_H
 #define TRACERTCMDEDITOR_H
 
 /*******************************************************************************
@@ -9,6 +9,7 @@
 
 #include <QWidget>
 #include "ICmdEditor.h"
+#include "TracertCommand.h"
 
 namespace Ui {
 class TracertCmdEditor;
@@ -19,7 +20,7 @@ class TracertCmdEditor : public ICmdEditor
     Q_OBJECT
 
 public:
-    explicit TracertCmdEditor(QWidget *parent = 0);
+    explicit TracertCmdEditor(TracertCommand *command, QWidget *parent = 0);
     ~TracertCmdEditor();
 
     /**
@@ -28,13 +29,6 @@ public:
      * @return
      */
     virtual bool isModified() const;
-
-    /**
-     * @brief getCmdName
-     *  获取命令名称，在编辑器初始化后作为初始命令显示。
-     * @return
-     */
-    virtual QString getCmdName();
 
     /**
      * @brief getCmdString
@@ -72,6 +66,7 @@ private slots:
 
 private:
     Ui::TracertCmdEditor *ui;
+    TracertCommand *m_command;
 };
 
 #endif // TRACERTCMDEDITOR_H

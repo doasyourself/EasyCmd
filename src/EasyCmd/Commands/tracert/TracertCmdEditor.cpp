@@ -1,10 +1,11 @@
-﻿#include "TracertCmdEditor.h"
+#include "TracertCmdEditor.h"
 #include "ui_TracertCmdEditor.h"
 #include "Utils.h"
 
-TracertCmdEditor::TracertCmdEditor(QWidget *parent) :
+TracertCmdEditor::TracertCmdEditor(TracertCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::TracertCmdEditor)
+    ui(new Ui::TracertCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
     on_checkBox_option_S_toggled(false);
@@ -22,11 +23,6 @@ TracertCmdEditor::~TracertCmdEditor()
 bool TracertCmdEditor::isModified() const
 {
     return true;
-}
-
-QString TracertCmdEditor::getCmdName()
-{
-    return "tracert";
 }
 
 QString TracertCmdEditor::getCmdString()
@@ -72,7 +68,7 @@ QString TracertCmdEditor::getCmdString()
         options += " -6";
     }
 
-    QString cmd = QString("%1%2 %3").arg(getCmdName()).arg(options).arg(ui->lineEdit_arg_value_targetName->text());
+    QString cmd = QString("%1%2 %3").arg(m_command->getCmdName()).arg(options).arg(ui->lineEdit_arg_value_targetName->text());
     return cmd;
 }
 

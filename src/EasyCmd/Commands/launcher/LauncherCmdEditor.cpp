@@ -1,12 +1,13 @@
-﻿#include "LauncherEditor.h"
-#include "ui_LauncherEditor.h"
+#include "LauncherCmdEditor.h"
+#include "ui_LauncherCmdEditor.h"
 #include <QStyle>
 #include <QFileInfo>
 
 /*******************************************************************/
-LauncherEditor::LauncherEditor(QWidget *parent) :
+LauncherCmdEditor::LauncherCmdEditor(LauncherCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::LauncherEditor),
+    ui(new Ui::LauncherCmdEditor),
+    m_command(command),
     m_settings("./LauncherEntries.ini", QSettings::IniFormat)
 {
     ui->setupUi(this);
@@ -19,20 +20,20 @@ LauncherEditor::LauncherEditor(QWidget *parent) :
 
     // 监听表格信号
     connect(ui->tableWidget, &QTableWidget::itemClicked,
-            this, &LauncherEditor::slotItemClicked);
+            this, &LauncherCmdEditor::slotItemClicked);
     connect(ui->tableWidget, &QTableWidget::itemChanged,
-            this, &LauncherEditor::slotItemChanged);
+            this, &LauncherCmdEditor::slotItemChanged);
     connect(ui->tableWidget->selectionModel(), &QItemSelectionModel::currentRowChanged,
-            this, &LauncherEditor::slotCurrentRowChanged);
+            this, &LauncherCmdEditor::slotCurrentRowChanged);
 }
 
-LauncherEditor::~LauncherEditor()
+LauncherCmdEditor::~LauncherCmdEditor()
 {
     saveEntries();
     delete ui;
 }
 
-void LauncherEditor::loadEntries()
+void LauncherCmdEditor::loadEntries()
 {
     // 读取配置
     QList<Entry> entries;
@@ -71,7 +72,7 @@ void LauncherEditor::loadEntries()
     }
 }
 
-void LauncherEditor::saveEntries()
+void LauncherCmdEditor::saveEntries()
 {
     m_settings.clear();
 
@@ -110,22 +111,22 @@ void LauncherEditor::saveEntries()
     m_settings.sync();
 }
 
-bool LauncherEditor::isModified() const
+bool LauncherCmdEditor::isModified() const
 {
     return false;
 }
 
-QString LauncherEditor::getCmdName()
+QString LauncherCmdEditor::getCmdName()
 {
     return "";
 }
 
-QString LauncherEditor::getCmdString()
+QString LauncherCmdEditor::getCmdString()
 {
     return m_cmd;
 }
 
-void LauncherEditor::on_pushButton_add_clicked()
+void LauncherCmdEditor::on_pushButton_add_clicked()
 {
     int row_count = ui->tableWidget->rowCount();
     ui->tableWidget->setRowCount(row_count + 1);
@@ -140,13 +141,13 @@ void LauncherEditor::on_pushButton_add_clicked()
     ui->tableWidget->setItem(row_index, COL_PATH, item);
 }
 
-void LauncherEditor::on_pushButton_del_clicked()
+void LauncherCmdEditor::on_pushButton_del_clicked()
 {
     ui->tableWidget->removeRow(ui->tableWidget->currentRow());
     saveEntries();
 }
 
-void LauncherEditor::slotItemClicked(QTableWidgetItem *item)
+void LauncherCmdEditor::slotItemClicked(QTableWidgetItem *item)
 {
     QString new_cmd;
     int row = item->row();
@@ -173,12 +174,12 @@ void LauncherEditor::slotItemClicked(QTableWidgetItem *item)
     }
 }
 
-void LauncherEditor::slotItemChanged(QTableWidgetItem *item)
+void LauncherCmdEditor::slotItemChanged(QTableWidgetItem *item)
 {
     saveEntries();
 }
 
-void LauncherEditor::slotCurrentRowChanged(const QModelIndex &current, const QModelIndex &previous)
+void LauncherCmdEditor::slotCurrentRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     // 自动清空
     if (!current.isValid())

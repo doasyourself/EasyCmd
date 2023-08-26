@@ -1,18 +1,19 @@
-﻿#ifndef LAUNCHEREDITOR_H
-#define LAUNCHEREDITOR_H
+#ifndef LauncherCmdEditor_H
+#define LauncherCmdEditor_H
 
 #include <QWidget>
 #include <QSettings>
 #include <QItemDelegate>
 #include "ICmdEditor.h"
+#include "LauncherCommand.h"
 
 namespace Ui {
-class LauncherEditor;
+class LauncherCmdEditor;
 }
 
 class QTableWidgetItem;
 /********************************************************************/
-class LauncherEditor : public ICmdEditor
+class LauncherCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 
@@ -32,8 +33,8 @@ public:
     };
 
 public:
-    explicit LauncherEditor(QWidget *parent = nullptr);
-    ~LauncherEditor();
+    explicit LauncherCmdEditor(LauncherCommand *command, QWidget *parent = nullptr);
+    ~LauncherCmdEditor();
 
     // 加载入口
     void loadEntries();
@@ -53,9 +54,11 @@ private slots:
     void slotCurrentRowChanged(const QModelIndex &current, const QModelIndex &previous);
 
 private:
-    Ui::LauncherEditor *ui;
+    Ui::LauncherCmdEditor *ui;
+    LauncherCommand *m_command;
+
     QSettings m_settings;
     QString m_cmd;
 };
 
-#endif // LAUNCHEREDITOR_H
+#endif // LauncherCmdEditor_H

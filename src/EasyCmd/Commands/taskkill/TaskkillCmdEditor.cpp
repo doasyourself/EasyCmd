@@ -1,71 +1,63 @@
-ï»¿/*******************************************************************************
-** FIï¼šFilter
+/*******************************************************************************
+** FI£ºFilter
 ** FO: Format
 ********************************************************************************/
 
-#include "TasklistEditor.h"
-#include "ui_TasklistEditor.h"
+#include "TaskkillCmdEditor.h"
+#include "ui_TaskkillCmdEditor.h"
 #include "Utils.h"
 #include <QStackedLayout>
 
-/*è¿‡æ»¤å™¨ç±»åž‹*/
+/*¹ýÂËÆ÷ÀàÐÍ*/
 enum FilterType
 {
     STATUS = 0,
     IMAGENAME,
     PID,
     SESSION,
-    SESSIONNAME,
     CPUTIME,
     MEMUSAGE,
     USERNAME,
     SERVICES,
     WINDOWTITLE,
-    MODULES,/**å¸®åŠ©é‡Œé¢æ˜¾ç¤ºçš„æ˜¯æ¨¡å—ï¼Œç»æµ‹è¯•æ˜¯å…³é”®å­—MODULES**/
+    MODULES,/**°ïÖúÀïÃæÏÔÊ¾µÄÊÇÄ£¿é£¬¾­²âÊÔÊÇ¹Ø¼ü×ÖMODULES**/
 };
 
-TasklistEditor::TasklistEditor(QWidget *parent) :
+TaskkillCmdEditor::TaskkillCmdEditor(TaskkillCommand *command, QWidget *parent) :
     ICmdEditor(parent),
-    ui(new Ui::TasklistEditor)
+    ui(new Ui::TaskkillCmdEditor),
+    m_command(command)
 {
     ui->setupUi(this);
 
-    // åˆå§‹åŒ–è¿‡æ»¤å™¨
+    // ³õÊ¼»¯¹ýÂËÆ÷
     initFilters();
 
-    // åˆå§‹åŒ–è°ƒç”¨ä¸€æ¬¡
+    // ³õÊ¼»¯µ÷ÓÃÒ»´Î£¬´¥·¢ÇÐ»»ÐÅºÅ
     on_groupBox_remote_system_toggled(false);
-    on_checkBox_option_m_toggled(false);
-    on_checkBox_option_fo_toggled(false);
-    on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText());
 
-    // åˆå§‹åŒ–éšè—é”™è¯¯ä¿¡æ¯æç¤º
+    // ³õÊ¼»¯Òþ²Ø´íÎóÐÅÏ¢ÌáÊ¾
     ui->label_info_option_s->hide();
 }
 
-TasklistEditor::~TasklistEditor()
+TaskkillCmdEditor::~TaskkillCmdEditor()
 {
     delete ui;
 }
 
-bool TasklistEditor::isModified() const
+bool TaskkillCmdEditor::isModified() const
 {
     return false;
 }
 
-QString TasklistEditor::getCmdName()
+QString TaskkillCmdEditor::getCmdString()
 {
-    return "tasklist";
-}
-
-QString TasklistEditor::getCmdString()
-{
-    QString cmd = getCmdName();
+    QString cmd = m_command->getCmdName();
     QString options;
 
     do
     {
-        // /Sé€‰é¡¹
+        // /SÑ¡Ïî
         if (ui->groupBox_remote_system->isChecked())
         {
             options += " /S";
@@ -73,7 +65,7 @@ QString TasklistEditor::getCmdString()
             QString hostname = ui->lineEdit_option_s->text();
             if (hostname.isEmpty()) // error occur
             {
-                /* æœ‰é”™è¯¯ä¹Ÿè¦ç»§ç»­ï¼Œå¦åˆ™ä¼šå¯¼è‡´åŽé¢çš„é…ç½®ä¸æ˜¾ç¤º*/
+                /*³öÏÖ´íÎóÒ²Òª¼ÌÐø£¬²»È»ºóÃæµÄÅäÖÃ»á²»ÏÔÊ¾*/
                 Utils::showTip(ui->label_info_option_s, tr("Hostname can't be empty!"));
             }
             else
@@ -95,43 +87,37 @@ QString TasklistEditor::getCmdString()
             }
         }
 
-        // æ¨¡å—è¿‡æ»¤
-        if (ui->checkBox_option_m->isChecked())
-        {
-            options += " /M";
+        // ¹ýÂËÌõ¼þ
+        options += m_filter_list.join("");
 
-            // æ¨¡å—å
-            QString mod_name = ui->lineEdit_option_m->text();
-            if (!mod_name.isEmpty())
+        // Ö±½ÓÖ¸¶¨PID
+        if (ui->radioButton_option_pid->isChecked())
+        {
+            QString pids = ui->lineEdit_option_value_pid->text();
+            QStringList pid_list = pids.split(" ");/*¶à¸öPIDÓÃ¿Õ¸ñ·Ö¿ª£¬²»ÓÃ¶ººÅ£¬ÒòÎªÓÐÖÐÓ¢ÎÄ¶ººÅÖ®·Ö*/
+            foreach (const QString &pid, pid_list)
             {
-                options += QString("\"%1\"").arg(mod_name);
+                options += QString(" /PID %1").arg(pid);
             }
         }
 
-        // æ˜¾ç¤ºæœåŠ¡
-        if (ui->checkBox_option_svc->isChecked())
+        // Ö±½ÓÖ¸¶¨½ø³ÌÃû
+        if (ui->radioButton_option_im->isChecked())
         {
-            options += QString(" /SVC");
+            options += QString(" /IM \"%1\"").arg(ui->lineEdit_option_value_im->text());
         }
 
-        // æ˜¾ç¤ºè¯¦ç»†ä¿¡æ¯
-        if (ui->checkBox_option_v->isChecked())
+        // Í¬Ê±ÖÕÖ¹×Ó½ø³Ì
+        if (ui->checkBox_option_t->isChecked())
         {
-            options += " /V";
+            options += " /T";
         }
 
-        // è¿‡æ»¤æ¡ä»¶
-        options += m_filter_list.join("");
-
-        // è®¾ç½®è¾“å‡ºæ ¼å¼
-        if (ui->checkBox_option_fo->isChecked())
+        // Ç¿ÖÆÖÕÖ¹
+        if (ui->checkBox_option_f->isChecked() ||
+            ui->groupBox_remote_system->isChecked()/*Ô¶³Ì½ø³ÌÊ¼ÖÕÐèÒªÇ¿ÖÆÖÕÖ¹*/)
         {
-            options += " /FO " + ui->comboBox_option_fo->currentText();
-        }
-
-        if (ui->checkBox_option_nh->isChecked())
-        {
-            options += " /NH";
+            options += " /F";
         }
     } while (0);
 
@@ -139,100 +125,30 @@ QString TasklistEditor::getCmdString()
     return cmd;
 }
 
-void TasklistEditor::on_checkBox_option_m_toggled(bool checked)
-{
-    ui->lineEdit_option_m->setEnabled(checked);
-
-    // å’Œ/svc /väº’æ–¥
-    if (checked)
-    {
-        ui->checkBox_option_svc->setChecked(false);
-        ui->checkBox_option_v->setChecked(false);
-        emit sigModified();
-    }
-}
-
-// æ˜¾ç¤ºè¯¦ç»†ä¿¡æ¯
-void TasklistEditor::on_checkBox_option_v_toggled(bool checked)
-{
-    // å’Œ/svc /mäº’æ–¥
-    if (checked)
-    {
-        ui->checkBox_option_svc->setChecked(false);
-        ui->checkBox_option_m->setChecked(false);
-        emit sigModified();
-    }
-}
-
-// æ˜¾ç¤ºæœåŠ¡
-void TasklistEditor::on_checkBox_option_svc_toggled(bool checked)
-{
-    // å’Œ/m /väº’æ–¥
-    if (checked)
-    {
-        ui->checkBox_option_m->setChecked(false);
-        ui->checkBox_option_v->setChecked(false);
-        emit sigModified();
-    }
-}
-
-// æ ¼å¼æ”¹å˜
-void TasklistEditor::on_comboBox_option_fo_currentIndexChanged(const QString &txt)
-{
-    // æ›´æ–°/NHé€‰é¡¹çŠ¶æ€
-    bool is_nh_enable = (txt == "TABLE" || txt == "CSV");
-    ui->checkBox_option_nh->setEnabled(is_nh_enable);
-    emit sigModified();
-}
-
-// è¾“å‡ºæ ¼å¼é€‰é¡¹
-void TasklistEditor::on_checkBox_option_fo_toggled(bool checked)
-{
-    ui->comboBox_option_fo->setEnabled(checked);/*ä½¿èƒ½å¤é€‰æ¡†*/
-    if (checked)
-    {
-        on_comboBox_option_fo_currentIndexChanged(ui->comboBox_option_fo->currentText()); /*æ›´æ–°/NHé€‰é¡¹çŠ¶æ€*/
-    }
-}
-
-// ä¸»æœºåç¼–è¾‘æ¡†
-void TasklistEditor::on_lineEdit_option_s_textChanged(const QString &arg1)
+// Ö÷»úÃû±à¼­¿ò
+void TaskkillCmdEditor::on_lineEdit_option_s_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1);
     emit sigModified();
 }
 
-// ç”¨æˆ·åç¼–è¾‘æ¡†
-void TasklistEditor::on_lineEdit_option_u_textChanged(const QString &arg1)
+// ÓÃ»§Ãû±à¼­¿ò
+void TaskkillCmdEditor::on_lineEdit_option_u_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1);
     emit sigModified();
 }
 
-// å¯†ç ç¼–è¾‘æ¡†
-void TasklistEditor::on_lineEdit_option_p_textChanged(const QString &arg1)
+// ÃÜÂë±à¼­¿ò
+void TaskkillCmdEditor::on_lineEdit_option_p_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1);
     emit sigModified();
 }
 
-// è¿è¡Œæ¨¡å—ç­›é€‰
-void TasklistEditor::on_lineEdit_option_m_textChanged(const QString &arg1)
+void TaskkillCmdEditor::initFilters()
 {
-    Q_UNUSED(arg1);
-    emit sigModified();
-}
-
-// æ— è¡¨å¤´é€‰é¡¹
-void TasklistEditor::on_checkBox_option_nh_toggled(bool checked)
-{
-    Q_UNUSED(checked);
-    emit sigModified();
-}
-
-void TasklistEditor::initFilters()
-{
-    /************** åˆ¤æ–­ç¬¦ **************/
+    /************** ÅÐ¶Ï·û **************/
     ui->comboBox_op_status->addItem(tr("eq"), "eq");
     ui->comboBox_op_status->addItem(tr("ne"), "ne");
 
@@ -252,9 +168,6 @@ void TasklistEditor::initFilters()
     ui->comboBox_op_session->addItem(tr("lt"), "lt");
     ui->comboBox_op_session->addItem(tr("ge"), "ge");
     ui->comboBox_op_session->addItem(tr("le"), "le");
-
-    ui->comboBox_op_sessionName->addItem(tr("eq"), "eq");
-    ui->comboBox_op_sessionName->addItem(tr("ne"), "ne");
 
     ui->comboBox_op_cpuTime->addItem(tr("eq"), "eq");
     ui->comboBox_op_cpuTime->addItem(tr("ne"), "ne");
@@ -282,26 +195,24 @@ void TasklistEditor::initFilters()
     ui->comboBox_op_module->addItem(tr("eq"), "eq");
     ui->comboBox_op_module->addItem(tr("ne"), "ne");
 
-    // ç›‘å¬ä¿®æ”¹æ“ä½œ
-    connect(ui->comboBox_op_status, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_imageName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_pid, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_session, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_sessionName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_cpuTime, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_memusage, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_userName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_service, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_windowTitle, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->comboBox_op_module, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
+    // ¼àÌýÐÞ¸Ä²Ù×÷
+    connect(ui->comboBox_op_status, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_imageName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_pid, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_session, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_cpuTime, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_memusage, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_userName, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_service, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_windowTitle, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->comboBox_op_module, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
 
-    // åŠ å…¥åˆ°å †æ ˆå¸ƒå±€
+    // ¼ÓÈëµ½¶ÑÕ»²¼¾Ö
     m_op_layout = new QStackedLayout;
     m_op_layout->addWidget(ui->comboBox_op_status);
     m_op_layout->addWidget(ui->comboBox_op_imageName);
     m_op_layout->addWidget(ui->comboBox_op_pid);
     m_op_layout->addWidget(ui->comboBox_op_session);
-    m_op_layout->addWidget(ui->comboBox_op_sessionName);
     m_op_layout->addWidget(ui->comboBox_op_cpuTime);
     m_op_layout->addWidget(ui->comboBox_op_memusage);
     m_op_layout->addWidget(ui->comboBox_op_userName);
@@ -311,26 +222,24 @@ void TasklistEditor::initFilters()
     delete ui->widget_operators->layout();
     ui->widget_operators->setLayout(m_op_layout);
 
-    /************* ç­›é€‰å€¼ç¼–è¾‘å™¨ ****************/
-    // ç›‘å¬ä¿®æ”¹æ“ä½œ
-    connect(ui->comboBox_fiValue_status, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_imageName, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_pid, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_session, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_sessionName, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->timeEdit_fiValue_cpuTime, &QTimeEdit::timeChanged, this, &TasklistEditor::sigModified);
-    connect(ui->spinBox_fiValue_memUsage, QOverload<int>::of(&QSpinBox::valueChanged), this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_userName, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_service, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_windowTitle, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
-    connect(ui->lineEdit_fiValue_module, &QLineEdit::textChanged, this, &TasklistEditor::sigModified);
+    /************* É¸Ñ¡Öµ±à¼­Æ÷ ****************/
+    // ¼àÌýÐÞ¸Ä²Ù×÷
+    connect(ui->comboBox_fiValue_status, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_imageName, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_pid, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_session, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->timeEdit_fiValue_cpuTime, &QTimeEdit::timeChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->spinBox_fiValue_memUsage, QOverload<int>::of(&QSpinBox::valueChanged), this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_userName, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_service, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_windowTitle, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
+    connect(ui->lineEdit_fiValue_module, &QLineEdit::textChanged, this, &TaskkillCmdEditor::sigModified);
 
     m_fiValue_layout = new QStackedLayout;
     m_fiValue_layout->addWidget(ui->comboBox_fiValue_status);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_imageName);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_pid);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_session);
-    m_fiValue_layout->addWidget(ui->lineEdit_fiValue_sessionName);
     m_fiValue_layout->addWidget(ui->timeEdit_fiValue_cpuTime);
     m_fiValue_layout->addWidget(ui->spinBox_fiValue_memUsage);
     m_fiValue_layout->addWidget(ui->lineEdit_fiValue_userName);
@@ -341,16 +250,14 @@ void TasklistEditor::initFilters()
     ui->widget_filterValues->setLayout(m_fiValue_layout);
 }
 
-void TasklistEditor::setupFilterTypes(bool remote_system)
+void TaskkillCmdEditor::setupFilterTypes(bool remote_system)
 {
-    ui->comboBox_filterType->clear();/*æ¸…ç©ºåˆ—è¡¨é‡æ–°åŠ è½½*/
-
-    if (remote_system)/*å¸®åŠ©ä¸­è¯´ï¼Œè¿œç¨‹ç³»ç»Ÿæ²¡æœ‰STATUSå’ŒWINDOWTITLEé€‰é¡¹*/
+    ui->comboBox_filterType->clear();
+    if (remote_system)/*°ïÖúÖÐËµ£¬Ô¶³ÌÏµÍ³Ã»ÓÐSTATUSºÍWINDOWTITLEÑ¡Ïî*/
     {
         ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
         ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
         ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
-        ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
         ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
         ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
         ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
@@ -363,7 +270,6 @@ void TasklistEditor::setupFilterTypes(bool remote_system)
         ui->comboBox_filterType->addItem(tr("IMAGENAME(Process Imagename)"), IMAGENAME);
         ui->comboBox_filterType->addItem(tr("PID(Process ID)"), PID);
         ui->comboBox_filterType->addItem(tr("SESSION(Process Session ID)"), SESSION);
-        ui->comboBox_filterType->addItem(tr("SESSIONNAME(Process Session Name)"), SESSIONNAME);
         ui->comboBox_filterType->addItem(tr("CPUTIME(Process CpuTime Usage)"), CPUTIME);
         ui->comboBox_filterType->addItem(tr("MEMUSAGE(Process Memory Usage)"), MEMUSAGE);
         ui->comboBox_filterType->addItem(tr("USERNAME(Process Username)"), USERNAME);
@@ -373,8 +279,7 @@ void TasklistEditor::setupFilterTypes(bool remote_system)
     }
 }
 
-// è¿‡æ»¤å™¨ç±»åž‹åˆ‡æ¢å“åº”
-void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
+void TaskkillCmdEditor::on_comboBox_filterType_currentIndexChanged(int index)
 {
     int filter_type = ui->comboBox_filterType->currentData().toInt();
     m_op_layout->setCurrentIndex(filter_type);
@@ -382,19 +287,28 @@ void TasklistEditor::on_comboBox_filterType_currentIndexChanged(int index)
     emit sigModified();
 }
 
-// è¿œç¨‹/æœ¬åœ°åˆ‡æ¢
-void TasklistEditor::on_groupBox_remote_system_toggled(bool checked)
+void TaskkillCmdEditor::on_groupBox_remote_system_toggled(bool checked)
 {
-    setupFilterTypes(checked);/*åŠ è½½è¿‡æ»¤å™¨ç±»åž‹åˆ—è¡¨*/
-    m_filter_list.clear();/*æ¸…ç©ºå½“å‰è¿‡æ»¤å™¨åˆ—è¡¨ç¼“å­˜*/
+    if (checked)
+    {
+        ui->checkBox_option_f->setChecked(true);/*ÖÕÖ¹Ô¶³ÌÊ¼ÖÕÐèÒªÇ¿ÖÆÖÕÖ¹/F*/
+        ui->checkBox_option_f->setEnabled(false);
+    }
+    else
+    {
+        ui->checkBox_option_f->setEnabled(true);
+    }
+
+    setupFilterTypes(checked);/*¼ÓÔØ¹ýÂËÆ÷ÀàÐÍ*/
+    m_filter_list.clear();/*Çå¿Õµ±Ç°¹ýÂËÆ÷ÁÐ±í»º´æ*/
     emit sigModified();
 }
 
-void TasklistEditor::on_pushButton_addFilter_clicked()
+void TaskkillCmdEditor::on_pushButton_addFilter_clicked()
 {
     QString filter_string = QString(" /FI ");
 
-    // è®¡ç®—è¿‡æ»¤æ¡ä»¶
+    // ¼ÆËã¹ýÂËÌõ¼þ
     QString fi_type;
     QString fi_op;
     QString fi_value;
@@ -427,13 +341,6 @@ void TasklistEditor::on_pushButton_addFilter_clicked()
         fi_type = "SESSION";
         fi_op = ui->comboBox_op_session->currentData().toString();
         fi_value = ui->lineEdit_fiValue_session->text();
-        break;
-    }
-    case SESSIONNAME:
-    {
-        fi_type = "SESSIONNAME";
-        fi_op = ui->comboBox_op_sessionName->currentData().toString();
-        fi_value = ui->lineEdit_fiValue_sessionName->text();
         break;
     }
     case CPUTIME:
@@ -490,8 +397,43 @@ void TasklistEditor::on_pushButton_addFilter_clicked()
     emit sigModified();
 }
 
-void TasklistEditor::on_pushButton_clearFilter_clicked()
+void TaskkillCmdEditor::on_pushButton_clearFilter_clicked()
 {
     m_filter_list.clear();
     emit sigModified();
 }
+
+void TaskkillCmdEditor::on_spinBox_option_value_pid_valueChanged(int  checked)
+{
+    emit sigModified();
+}
+
+void TaskkillCmdEditor::on_lineEdit_option_value_im_textChanged(const QString &arg1)
+{
+    emit sigModified();
+}
+
+void TaskkillCmdEditor::on_checkBox_option_t_toggled(bool checked)
+{
+    emit sigModified();
+}
+
+void TaskkillCmdEditor::on_checkBox_option_f_toggled(bool checked)
+{
+    emit sigModified();
+}
+
+void TaskkillCmdEditor::on_radioButton_option_pid_toggled(bool checked)
+{
+    // /PIDºÍ/IMÑ¡Ïî»¥³â
+    ui->lineEdit_option_value_pid->setEnabled(checked);
+    emit sigModified();
+}
+
+void TaskkillCmdEditor::on_radioButton_option_im_toggled(bool checked)
+{
+    // /PIDºÍ/IMÑ¡Ïî»¥³â
+    ui->lineEdit_option_value_im->setEnabled(checked);
+    emit sigModified();
+}
+
