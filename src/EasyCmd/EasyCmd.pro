@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = EasyCmd
 TEMPLATE = app
 
-include($$PWD/CmdEditors/CmdEditors.pri)
+include($$PWD/Commands/Commands.pri)
 include($$PWD/Ui/Ui.pri)
 include($$PWD/Utils/Utils.pri)
 include($$PWD/Global/Global.pri)

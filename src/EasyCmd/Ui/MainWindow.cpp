@@ -1,9 +1,8 @@
-﻿#include "MainWindow.h"
+#include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "CmdEditorHeader.h"
 #include "AboutDialog.h"
-#include "NetStatCmdEditor.h"
-#include "CmdEditorFactory.h"
+#include "CommandFactory.h"
 #include "CmdProxyModel.h"
 #include "MainWindowActionResponse.h"
 
@@ -101,7 +100,7 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     // 如果没填id，就用name
     if (cmd_id.isEmpty())
     {
-        cmd_id = m_cmd_model->data(first_col_index).toString();
+        return;
     }
 
     // 创建对应的编辑器

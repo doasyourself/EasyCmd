@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--name为显示名，id为编辑器id（英文），desc为描述信息-->
 <root>
     <node name="启动器" id="launcher"></node>
@@ -6,27 +6,27 @@
         <node name="系统工具" id="systemTools" desc="打开系统自带工具"></node>
     </node>
     <node name="进程管理">
-        <node name="tasklist" desc="查看进程列表"></node>
-        <node name="taskkill" desc="结束进程"></node>
+        <node name="tasklist" id="tasklist" desc="查看进程列表"></node>
+        <node name="taskkill" id="taskkill" desc="结束进程"></node>
     </node>
     <node name="文件管理">
-        <node name="cd"></node>
-        <node name="dir"></node>
-        <node name="mkdir"></node>
-        <node name="rmdir"></node>
-        <node name="copy"></node>
-        <node name="xcopy"></node>
-        <node name="move"></node>
-        <node name="del"></node>
-        <node name="type"></node>
-        <node name="attrib"></node>
+        <node name="cd" id="cd"></node>
+        <node name="dir" id="dir"></node>
+        <node name="mkdir" id="mkdir"></node>
+        <node name="rmdir" id="rmdir"></node>
+        <node name="copy" id="copy"></node>
+        <node name="xcopy" id="xcopy"></node>
+        <node name="move" id="move"></node>
+        <node name="del" id="del"></node>
+        <node name="type" id="type"></node>
+        <node name="attrib" id="attrib"></node>
     </node>
     <node name="网络">
-        <node name="ping" desc="测试网络连通状况"></node>
-        <node name="netstat" desc="显示网络连接、路由表和网络接口信息"></node>
-        <node name="ipconfig" desc="查询TCP/IP配置信息"></node>
-        <node name="net" desc="管理网络"></node>
-        <node name="tracert" desc="跟踪路由"></node>
+        <node name="ping" id="ping" desc="测试网络连通状况"></node>
+        <node name="netstat" id="netstat" desc="显示网络连接、路由表和网络接口信息"></node>
+        <node name="ipconfig" id="ipconfig" desc="查询TCP/IP配置信息"></node>
+        <node name="net" id="net" desc="管理网络"></node>
+        <node name="tracert" id="tracert" desc="跟踪路由"></node>
     </node>
     <node name="应用程序">
         <node name="Ftp"></node>
