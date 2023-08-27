@@ -1,4 +1,4 @@
-﻿#ifndef MAINWINDOW_H
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -7,6 +7,8 @@
 #include "ConsoleRwWorker.h"
 #include "CmdTreeModel.h"
 #include "AppTrayIcon.h"
+#include "ICommand.h"
+#include "ICmdEditor.h"
 
 namespace Ui {
 class MainWindow;
@@ -94,6 +96,18 @@ private:
 
     // 动作响应
     MainWindowActionResponse *m_action_response;
+
+    /**
+     * @brief m_command_cache
+     *  命令缓存
+     */
+    QHash<QString, ICommand *> m_command_cache;
+
+    /**
+     * @brief m_cmd_editor_cache
+     *  命令编辑器缓存
+     */
+    QHash<QString, ICmdEditor*> m_cmd_editor_cache;
 };
 
 #endif // MAINWINDOW_H

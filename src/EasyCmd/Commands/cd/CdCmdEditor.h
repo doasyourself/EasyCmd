@@ -25,15 +25,14 @@ private slots:
     // 选择路径按钮响应
     void on_pushButton_selectpath_clicked();
 
-    // 目录文件路径改变事件响应
-    void on_lineEdit_dirfilepath_textChanged(const QString &dirfilepath);
-
     // 选项-d切换响应
     void on_checkBox_option_d_toggled(bool checked);
 
     void on_rbtn_localDirpath_toggled(bool checked);
 
     void on_rbtn_relativePath_toggled(bool checked);
+
+    void on_lineEdit_localDirfilepath_textChanged(const QString &text);
 
 private:
     Ui::CdCmdEditor *ui;

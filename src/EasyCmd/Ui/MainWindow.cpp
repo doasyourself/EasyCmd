@@ -73,6 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    qDeleteAll(m_command_cache);
+    qDeleteAll(m_cmd_editor_cache);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -91,10 +94,26 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    QModelIndex src_current = m_proxy_model->mapToSource(current);
+    QModelIndex src_previous = m_proxy_model->mapToSource(previous);
+    if (src_previous.isValid())
+    {
+        QModelIndex first_col_index = m_cmd_model->index(src_previous.row(),
+            CmdTreeModel::COL_COMMAND, src_previous.parent());
+        QString previous_cmd_id = m_cmd_model->data(first_col_index, Qt::UserRole).toString();
+        ICmdEditor *previous_editor = m_cmd_editor_cache[previous_cmd_id];
+        if (previous_editor)
+        {
+            // 从scrollarea中取出
+            ui->scrollArea->takeWidget();
+            previous_editor->setParent(Q_NULLPTR);
+            previous_editor->hide();
+        }
+    }
 
-    // 获取编辑器id
-    QModelIndex first_col_index = m_cmd_model->index(src_current.row(), CmdTreeModel::COL_COMMAND, src_current.parent());
+    // 获取当前命令id
+    QModelIndex src_current = m_proxy_model->mapToSource(current);
+    QModelIndex first_col_index = m_cmd_model->index(src_current.row(),
+        CmdTreeModel::COL_COMMAND, src_current.parent());
     QString cmd_id = m_cmd_model->data(first_col_index, Qt::UserRole).toString();
 
     // 如果没填id，就用name
@@ -103,24 +122,47 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
         return;
     }
 
-    // 创建对应的编辑器
-    static CommandFactory command_factory;
-    ICommand *command = command_factory.createCommand(cmd_id);
+    // 获取对应的编辑器
+    ICmdEditor *editor = Q_NULLPTR;
+    QHash<QString, ICmdEditor*>::iterator find_cmd_editor_itor = m_cmd_editor_cache.find(cmd_id);
+    if (find_cmd_editor_itor == m_cmd_editor_cache.end())
+    {
+        static CommandFactory command_factory;
 
-    /*找不到编辑器则返回*/
-    if (!command) return;
+        ICommand *command = Q_NULLPTR;
+        QHash<QString, ICommand *>::iterator find_it = m_command_cache.find(cmd_id);
+        if (find_it == m_command_cache.end())
+        {
+            command = command_factory.createCommand(cmd_id);
+        }
+        else
+        {
+            command = *find_it;
+        }
 
-    ICmdEditor *editor = command->createCmdEditorWidget();
+        /*找不到编辑器则返回*/
+        if (!command) return;
 
-    /*监听编辑器命令改变信号*/
-    connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
+        // 缓存编辑器
+        editor = command->createCmdEditorWidget();
+        m_cmd_editor_cache[cmd_id] = editor;
 
-    /* 更新一次命令，保证当前显示的命令时刻为最新的 */
-    QString cmd_string = editor->getCmdString();
-    ui->textEdit_cmdPreview->setText(cmd_string);
+        /*监听编辑器命令改变信号*/
+        connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
+
+        /* 更新一次命令，保证当前显示的命令时刻为最新的 */
+        QString cmd_string = editor->getCmdString();
+        ui->textEdit_cmdPreview->setText(cmd_string);
+    }
+    else
+    {
+        // 直接取缓存
+        editor = m_cmd_editor_cache[cmd_id];
+    }
 
     // 设置到界面上
     ui->scrollArea->setWidget(editor);
+    editor->show();
 
     // 使能按钮
     ui->pushButton_execCmd->setEnabled(true);

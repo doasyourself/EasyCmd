@@ -17,7 +17,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>必填参数</string>
+      <string>参数</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -110,7 +110,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
-      <string>可选参数</string>
+      <string>选项</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
@@ -121,7 +121,7 @@
            <string>/d</string>
           </property>
           <property name="text">
-           <string>同时切换目录和驱动器</string>
+           <string>(/d)同时切换目录和驱动器。</string>
           </property>
          </widget>
         </item>

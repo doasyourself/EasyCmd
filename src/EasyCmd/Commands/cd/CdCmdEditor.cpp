@@ -38,7 +38,7 @@ QString CdCmdEditor::getCmdString()
     QString options;
     if (ui->checkBox_option_d->isChecked())
     {
-        options += " /D";
+        options += " /d";
     }
 
     QString cmd = m_command->getCmdName();
@@ -70,22 +70,6 @@ void CdCmdEditor::on_pushButton_selectpath_clicked()
     emit sigModified();
 }
 
-void CdCmdEditor::on_lineEdit_dirfilepath_textChanged(const QString &dirfilepath)
-{
-    // 获取本地分隔符样式的路径
-    QString native_path = QDir().toNativeSeparators(dirfilepath);
-
-    // 相等就不设置，防止陷入死循环
-    if (dirfilepath.compare(native_path) == 0)
-    {
-        return;
-    }
-
-    // 保证是本地
-    ui->lineEdit_localDirfilepath->setText(native_path);
-    emit sigModified();
-}
-
 void CdCmdEditor::on_checkBox_option_d_toggled(bool checked)
 {
     emit sigModified();
@@ -103,3 +87,7 @@ void CdCmdEditor::on_rbtn_relativePath_toggled(bool checked)
     emit sigModified();
 }
 
+void CdCmdEditor::on_lineEdit_localDirfilepath_textChanged(const QString &text)
+{
+    emit sigModified();
+}
