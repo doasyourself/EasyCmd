@@ -31,6 +31,10 @@ private slots:
     // 选项-d切换响应
     void on_checkBox_option_d_toggled(bool checked);
 
+    void on_rbtn_localDirpath_toggled(bool checked);
+
+    void on_rbtn_relativePath_toggled(bool checked);
+
 private:
     Ui::CdCmdEditor *ui;
     CdCommand *m_command;
