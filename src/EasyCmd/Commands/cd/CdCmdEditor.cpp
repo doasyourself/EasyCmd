@@ -8,6 +8,9 @@ CdCmdEditor::CdCmdEditor(CdCommand *command, QWidget *parent) :
     m_command(command)
 {
     ui->setupUi(this);
+
+    // 初始化禁用相对路径
+    ui->widget_relativePath->setEnabled(false);
 }
 
 CdCmdEditor::~CdCmdEditor()
@@ -22,6 +25,16 @@ bool CdCmdEditor::isModified() const
 
 QString CdCmdEditor::getCmdString()
 {
+    QString destPath; // 目标路径
+    if (ui->rbtn_localDirpath->isChecked())
+    {
+        destPath = ui->lineEdit_localDirfilepath->text();
+    }
+    else
+    {
+        destPath = "..";
+    }
+
     QString options;
     if (ui->checkBox_option_d->isChecked())
     {
@@ -29,7 +42,7 @@ QString CdCmdEditor::getCmdString()
     }
 
     QString cmd = m_command->getCmdName();
-    cmd += QString("%1 \"%2\"").arg(options).arg(ui->lineEdit_dirfilepath->text());
+    cmd += QString("%1 \"%2\"").arg(options, destPath);
     return cmd;
 }
 
@@ -39,32 +52,22 @@ void CdCmdEditor::on_pushButton_selectpath_clicked()
     QString selected_path;
 
     // 当前路径信息
-    QFileInfo fi(ui->lineEdit_dirfilepath->text());
+    QFileInfo fi(ui->lineEdit_localDirfilepath->text());
 
-    // 选择文件夹
-    if (ui->radioButton_selectDir->isChecked())
-    {
-        selected_path = QFileDialog::getExistingDirectory(
-            this, tr("Choose dest dir"), fi.path(),
-            QFileDialog::ShowDirsOnly);
-    }
-    // 选择文件
-    else if (ui->radioButton_selectFile->isChecked())
-    {
-        selected_path = QFileDialog::getOpenFileName(
-            this, tr("Choose dest dir"), fi.path());
-    }
-    else
-    {
-        Q_ASSERT_X(0, "CdCmdEditor", "Can't handle this situation.");
-    }
+    // 在当前路径下选择目录
+    selected_path = QFileDialog::getExistingDirectory(
+        this, tr("Choose dest dir"), fi.path(),
+        QFileDialog::ShowDirsOnly);
 
     // 更新路径显示
     if (!selected_path.isEmpty())
     {
         // 一定要转成本地分隔符，否则命令行不识别
-        ui->lineEdit_dirfilepath->setText(QDir().toNativeSeparators(selected_path));
+        ui->lineEdit_localDirfilepath->setText(QDir().toNativeSeparators(selected_path));
     }
+
+    // 通知命令改变
+    emit sigModified();
 }
 
 void CdCmdEditor::on_lineEdit_dirfilepath_textChanged(const QString &dirfilepath)
@@ -79,7 +82,7 @@ void CdCmdEditor::on_lineEdit_dirfilepath_textChanged(const QString &dirfilepath
     }
 
     // 保证是本地
-    ui->lineEdit_dirfilepath->setText(native_path);
+    ui->lineEdit_localDirfilepath->setText(native_path);
     emit sigModified();
 }
 
@@ -87,3 +90,16 @@ void CdCmdEditor::on_checkBox_option_d_toggled(bool checked)
 {
     emit sigModified();
 }
+
+void CdCmdEditor::on_rbtn_localDirpath_toggled(bool checked)
+{
+    ui->widget_localDirpath->setEnabled(checked);
+    emit sigModified();
+}
+
+void CdCmdEditor::on_rbtn_relativePath_toggled(bool checked)
+{
+    ui->widget_relativePath->setEnabled(checked);
+    emit sigModified();
+}
+

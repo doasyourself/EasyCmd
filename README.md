@@ -16,9 +16,9 @@
 
 #### 编译运行
 
-- 使用Qt 5.7.0编译
+- 使用Qt 5.9.9编译通过。
 
-- 在win10上运行通过。
+- 在win10，win11上运行通过。
 
 #### 软件界面
 ![主界面](doc/images/mainwindow_snapshoot.png)
