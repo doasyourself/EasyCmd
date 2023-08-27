@@ -21,10 +21,20 @@ public:
 
     virtual QString getCmdString();
 
+protected:
+    QString getOptions();
+
 private slots:
     void on_lineEdit_arg_dirpath_textChanged(const QString &dirpath);
 
     void on_checkBox_option_d_toggled(bool checked);
+
+    void on_btn_chooseDirpath_clicked();
+
+    void on_chbox_help_toggled(bool checked);
+
+private:
+    bool check();
 
 private:
     Ui::MkDirCmdEditor *ui;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>563</height>
+    <width>594</width>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,24 @@
           <item>
            <widget class="QLineEdit" name="lineEdit_arg_dirpath"/>
           </item>
+          <item>
+           <widget class="QPushButton" name="btn_chooseDirpath">
+            <property name="text">
+             <string>选择目录</string>
+            </property>
+           </widget>
+          </item>
          </layout>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_warning">
+          <property name="styleSheet">
+           <string notr="true">color:red;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -46,13 +63,78 @@
      <property name="title">
       <string>可选参数</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,1">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="chbox_option_s">
+          <property name="text">
+           <string>(/s)删除目录树（指定的目录及其所有子目录，包括所有文件）。</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="chbox_option_q">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_option_q">
+          <property name="text">
+           <string>(/q)指定安静模式。删除目录树时不提示确认。仅当还指定了 /s 时，/q 参数才有效。
+警告：在安静模式下运行时，将删除整个目录树而不进行确认。确保在使用 /q 命令行选项之前移动或备份重要文件。</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QLabel" name="label_2">
+         <widget class="QCheckBox" name="chBox_option_help">
           <property name="text">
-           <string>无</string>
+           <string>(/?)帮助</string>
           </property>
          </widget>
         </item>

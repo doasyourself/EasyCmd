@@ -35,6 +35,9 @@ private slots:
     void on_lineEdit_localDirfilepath_textChanged(const QString &text);
 
 private:
+    bool check();
+
+private:
     Ui::CdCmdEditor *ui;
     CdCommand *m_command;
 };

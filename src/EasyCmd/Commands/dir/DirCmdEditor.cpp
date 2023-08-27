@@ -63,6 +63,10 @@ bool DirCmdEditor::isModified() const
 
 QString DirCmdEditor::getCmdString()
 {
+    // 参数
+    QString destPath = ui->lineEdit_arg_dirOrFilepath->text();
+
+    // 选项
     QString options;
 
     // 生成options
@@ -251,8 +255,16 @@ QString DirCmdEditor::getCmdString()
     options = optionList.join(" ");
 
     // 生成命令
-    QString cmd = m_command->getCmdName();
-    cmd += QString(" %1 \"%2\"").arg(options).arg(ui->lineEdit_arg_dirOrFilepath->text());
+    QString cmd;
+    if (options.isEmpty())
+    {
+        cmd = QString("%1 \"%2\"").arg(m_command->getCmdName(), destPath);
+    }
+    else
+    {
+        cmd = QString("%1 %2 \"%3\"").arg(m_command->getCmdName(), options, destPath);
+    }
+
     return cmd;
 }
 

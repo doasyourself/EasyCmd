@@ -11,6 +11,7 @@ CdCmdEditor::CdCmdEditor(CdCommand *command, QWidget *parent) :
 
     // 初始化禁用相对路径
     ui->widget_relativePath->setEnabled(false);
+    ui->label_warning->hide();
 }
 
 CdCmdEditor::~CdCmdEditor()
@@ -25,6 +26,7 @@ bool CdCmdEditor::isModified() const
 
 QString CdCmdEditor::getCmdString()
 {
+    // 参数
     QString destPath; // 目标路径
     if (ui->rbtn_localDirpath->isChecked())
     {
@@ -35,14 +37,28 @@ QString CdCmdEditor::getCmdString()
         destPath = "..";
     }
 
+    // 选项
     QString options;
+    QStringList optionList;
+
     if (ui->checkBox_option_d->isChecked())
     {
-        options += " /d";
+        optionList << "/d";
     }
 
-    QString cmd = m_command->getCmdName();
-    cmd += QString("%1 \"%2\"").arg(options, destPath);
+    options = optionList.join(" ");
+
+    // 生成命令
+    QString cmd;
+    if (options.isEmpty())
+    {
+        cmd = QString("%1 \"%2\"").arg(m_command->getCmdName(), destPath);
+    }
+    else
+    {
+        cmd = QString("%1 %2 \"%3\"").arg(m_command->getCmdName(), options, destPath);
+    }
+
     return cmd;
 }
 
@@ -72,6 +88,7 @@ void CdCmdEditor::on_pushButton_selectpath_clicked()
 
 void CdCmdEditor::on_checkBox_option_d_toggled(bool checked)
 {
+    check();
     emit sigModified();
 }
 
@@ -90,4 +107,24 @@ void CdCmdEditor::on_rbtn_relativePath_toggled(bool checked)
 void CdCmdEditor::on_lineEdit_localDirfilepath_textChanged(const QString &text)
 {
     emit sigModified();
+}
+
+bool CdCmdEditor::check()
+{
+    bool ok = true;
+    if (ui->checkBox_option_d->isChecked())
+    {
+        if (ui->rbtn_localDirpath->isChecked())
+        {
+            if (ui->lineEdit_localDirfilepath->text().isEmpty())
+            {
+                ok = false;
+                ui->label_warning->setText("目录不能为空！");
+            }
+        }
+    }
+
+    // 显示提示
+    ui->label_warning->setVisible(!ok);
+    return ok;
 }

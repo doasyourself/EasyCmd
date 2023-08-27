@@ -22,24 +22,7 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="rbtn_localDirpath">
-          <property name="text">
-           <string>本地路径：</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QRadioButton" name="rbtn_relativePath">
-          <property name="text">
-           <string>相对路径：</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QWidget" name="widget_relativePath" native="true">
           <property name="enabled">
            <bool>true</bool>
@@ -70,6 +53,23 @@
           </layout>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="rbtn_relativePath">
+          <property name="text">
+           <string>相对路径：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="rbtn_localDirpath">
+          <property name="text">
+           <string>本地路径：</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="1">
          <widget class="QWidget" name="widget_localDirpath" native="true">
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -86,7 +86,10 @@
             <number>0</number>
            </property>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLineEdit" name="lineEdit_localDirfilepath"/>
              </item>
@@ -100,6 +103,16 @@
             </layout>
            </item>
           </layout>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_warning">
+          <property name="styleSheet">
+           <string notr="true">color:red;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
          </widget>
         </item>
        </layout>
