@@ -7,6 +7,8 @@ HEADERS += \
     $$PWD/ICommand.h \
     $$PWD/cd/CdCmdEditor.h \
     $$PWD/cd/CdCommand.h \
+    $$PWD/copy/CopyCmdEditor.h \
+    $$PWD/copy/CopyCommand.h \
     $$PWD/dir/DirCmdEditor.h \
     $$PWD/dir/DirCommand.h \
     $$PWD/ipconfig/IPConfigCommand.h \
@@ -36,6 +38,8 @@ SOURCES += \
     $$PWD/ICommand.cpp \
     $$PWD/cd/CdCmdEditor.cpp \
     $$PWD/cd/CdCommand.cpp \
+    $$PWD/copy/CopyCmdEditor.cpp \
+    $$PWD/copy/CopyCommand.cpp \
     $$PWD/dir/DirCmdEditor.cpp \
     $$PWD/dir/DirCommand.cpp \
     $$PWD/ipconfig/IPConfigCommand.cpp \
@@ -61,6 +65,7 @@ SOURCES += \
 
 FORMS += \
     $$PWD/cd/CdCmdEditor.ui \
+    $$PWD/copy/CopyCmdEditor.ui \
     $$PWD/dir/DirCmdEditor.ui \
     $$PWD/ipconfig/IPConfigCmdEditor.ui \
     $$PWD/launcher/LauncherCmdEditor.ui \

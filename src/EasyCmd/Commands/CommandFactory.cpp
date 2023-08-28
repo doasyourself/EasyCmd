@@ -7,6 +7,7 @@
 #include "tasklist/TasklistCommand.h"
 #include "taskkill/TaskkillCommand.h"
 #include "tracert/TracertCommand.h"
+#include "copy/CopyCommand.h"
 #include "cd/CdCommand.h"
 #include "mkdir/MkDirCommand.h"
 #include "rmdir/RmDirCommand.h"
@@ -24,6 +25,7 @@ ICommand *newCdCommand() { return new CdCommand; }
 ICommand *newDirCommand() { return new DirCommand; }
 ICommand *newMkDirCommand() { return new MkDirCommand; }
 ICommand *newRmDirCommand() { return new RmDirCommand; }
+ICommand *newCopyCommand() { return new CopyCommand; }
 
 CommandFactory::CommandFactory()
 {
@@ -43,6 +45,7 @@ CommandFactory::CommandFactory()
     m_editor_map.insert("dir", newDirCommand);
     m_editor_map.insert("mkdir", newMkDirCommand);
     m_editor_map.insert("rmdir", newRmDirCommand);
+    m_editor_map.insert("copy", newCopyCommand);
 }
 
 ICommand *CommandFactory::createCommand(const QString &command_id)
