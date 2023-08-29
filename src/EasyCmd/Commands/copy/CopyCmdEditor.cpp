@@ -6,9 +6,14 @@
 CopyCmdEditor::CopyCmdEditor(CopyCommand *command, QWidget *parent) :
     ICmdEditor(parent),
     ui(new Ui::CopyCmdEditor),
-    m_command(command)
+    m_command(command),
+    m_button_group(new QButtonGroup(this))
 {
     ui->setupUi(this);
+
+    m_button_group->addButton(ui->radioBtn_singleFile);
+    m_button_group->addButton(ui->radioBtn_singleDir);
+    m_button_group->addButton(ui->radioBtn_srcFiles);
 
     check();
 }
@@ -25,17 +30,37 @@ bool CopyCmdEditor::isModified() const
 
 QString CopyCmdEditor::getCmdString()
 {
-    // 源路径
-    QString srcFilepath;
+    QString cmd;
 
-    QStringList quoted_filelist;
-    foreach (const QString &selectFile, m_selectedSrcFiles)
+    // 源路径
+    QString srcFilepath = "\"\"";
+    if (ui->radioBtn_singleFile->isChecked())
     {
-        // 加引号
-        quoted_filelist.append(QString("\"%1\"").arg(selectFile));
+        srcFilepath = QString("\"%1\"").arg(ui->lineEdit_singleFilepath->text());
+    }
+    else if (ui->radioBtn_singleDir->isChecked())
+    {
+        srcFilepath = QString("\"%1\"").arg(ui->lineEdit_srcDirpath->text());
+    }
+    else if (ui->radioBtn_srcFiles->isChecked())
+    {
+        QStringList quoted_filelist;
+        foreach (const QString &selectFile, m_selectedSrcFiles)
+        {
+            // 加引号
+            quoted_filelist.append(QString("\"%1\"").arg(selectFile));
+        }
+
+        if (!quoted_filelist.isEmpty())
+        {
+            srcFilepath = quoted_filelist.join("+");
+        }
     }
 
-    srcFilepath = quoted_filelist.join("+");
+    if (srcFilepath.isEmpty())
+    {
+        ui->label_srcFilepath_warning->setText("源路径不能为空！");
+    }
 
     // 目标路径
     QString destFilepath = ui->lineEdit_destFilepath->text();
@@ -44,15 +69,14 @@ QString CopyCmdEditor::getCmdString()
     QString options = getOptions();
 
     // 生成命令
-    QString cmd;
     if (options.isEmpty())
     {
-        cmd = QString("%1 \"%2\" \"%3\"").arg(m_command->getCmdName(),
+        cmd = QString("%1 %2 \"%3\"").arg(m_command->getCmdName(),
             srcFilepath, destFilepath);
     }
     else
     {
-        cmd = QString("%1 %2 \"%3\" \"%4\"").arg(m_command->getCmdName(),
+        cmd = QString("%1 %2 %3 \"%4\"").arg(m_command->getCmdName(),
             options, srcFilepath, destFilepath);
     }
 
@@ -94,12 +118,14 @@ QString CopyCmdEditor::getOptions()
         optionList << "/z";
     }
 
-    if (ui->chbox_option_a->isChecked())
+    if (ui->chbox_option_a->isChecked() ||
+       (ui->radioBtn_srcFiles->isChecked() && ui->radioBtn_text_merge->isChecked()))
     {
         optionList << "/a";
     }
 
-    if (ui->chbox_option_b->isChecked())
+    if (ui->chbox_option_b->isChecked() ||
+       (ui->radioBtn_srcFiles->isChecked() && ui->radioBtn_bin_merge->isChecked()))
     {
         optionList << "/b";
     }
@@ -115,31 +141,59 @@ QString CopyCmdEditor::getOptions()
 
 bool CopyCmdEditor::check()
 {
-    bool ok = true;
+    bool ok1 = true;
 
-    if (ui->edit_srcFilepath->toPlainText().isEmpty())
+    // 源路径
+    if (ui->lineEdit_singleFilepath->text().isEmpty() &&
+        ui->lineEdit_srcDirpath->text().isEmpty() &&
+        ui->plainTextEdit_srcFilepathList->toPlainText().isEmpty())
     {
-        ok = false;
+        ok1 = false;
         ui->label_srcFilepath_warning->setText("源文件路径不能为空！");
-        ui->label_srcFilepath_warning->setVisible(true);
-    }
-    else
-    {
-        ui->label_srcFilepath_warning->setVisible(false);
     }
 
-    if (ui->label_destFilepath_warning->text().isEmpty())
-    {
-        ok = false;
-        ui->label_destFilepath_warning->setText("目标文件路径不能为空！");
-        ui->label_destFilepath_warning->setVisible(true);
-    }
-    else
-    {
-        ui->label_destFilepath_warning->setVisible(false);
-    }
+    ui->label_srcFilepath_warning->setVisible(!ok1);
 
-    return ok;
+    bool ok2 = true;
+    do
+    {
+        // 目标路径
+        if (ui->lineEdit_destFilepath->text().isEmpty())
+        {
+            ok2 = false;
+            ui->label_destFilepath_warning->setText("目标路径不能为空！");
+            break;
+        }
+
+        // 检查目标路径类型
+        if (ui->radioBtn_singleDir->isChecked())
+        {
+            // 源文件是文件夹，目的文件只能是文件夹
+            QFileInfo fi(ui->lineEdit_destFilepath->text());
+            if (!fi.isDir())
+            {
+                ok2 = false;
+                ui->label_destFilepath_warning->setText("源路径是文件夹，目的只能是文件夹");
+                break;
+            }
+        }
+        else if (ui->radioBtn_srcFiles->isChecked())
+        {
+            // 源文件是多个文件，目的文件只能是文件
+            QFileInfo fi(ui->lineEdit_destFilepath->text());
+            if (!fi.isFile())
+            {
+                ok2 = false;
+                ui->label_destFilepath_warning->setText("源路径是多个文件，目的路径只能是文件");
+                break;
+            }
+        }
+
+    } while (0);
+
+    ui->label_destFilepath_warning->setVisible(!ok2);
+
+    return ok1 && ok2;
 }
 
 void CopyCmdEditor::on_chBox_option_help_toggled(bool checked)
@@ -152,21 +206,15 @@ void CopyCmdEditor::on_chBox_option_help_toggled(bool checked)
 void CopyCmdEditor::on_btn_browserSourceFilepath_clicked()
 {
     // 当前路径信息
-    QFileInfo fi(ui->edit_srcFilepath->toPlainText());
+    QFileInfo fi(ui->lineEdit_singleFilepath->text());
 
-    // 在当前路径下选择目录
-    m_selectedSrcFiles = QFileDialog::getOpenFileNames(
-        this, tr("Choose src filepath"), fi.path());
+    QString selectedFile = QFileDialog::getOpenFileName(
+        this, tr("Choose src file"), fi.path());
 
     // 更新路径显示
-    if (!m_selectedSrcFiles.isEmpty())
+    if (!selectedFile.isEmpty())
     {
-        // 一定要转成本地分隔符，否则命令行不识别
-        foreach (const QString &selectFile, m_selectedSrcFiles)
-        {
-            ui->edit_srcFilepath->append(QDir().toNativeSeparators(selectFile));
-        }
-
+        ui->lineEdit_singleFilepath->setText(selectedFile);
         ui->label_srcFilepath_warning->hide();
     }
 
@@ -177,39 +225,59 @@ void CopyCmdEditor::on_btn_browserSourceFilepath_clicked()
 void CopyCmdEditor::on_btn_browserDestFilepath_clicked()
 {
     // 用户选择的目录路径
-    QString selected_path;
+    QString selectedPath;
     QFileInfo fi;
 
-    // 当前路径信息
-    int srcFileCount = m_selectedSrcFiles.size();
-    if (srcFileCount > 0)
+    if (ui->radioBtn_singleFile->isChecked())
     {
-        QString default_destFilepath = m_selectedSrcFiles.first();
-        if (!default_destFilepath.isEmpty())
+        fi.setFile(ui->lineEdit_singleFilepath->text());
+
+        if (ui->radio_destIsFile->isChecked())
         {
-            fi.setFile(default_destFilepath);
+            selectedPath = QFileDialog::getSaveFileName(
+                this, tr("Choose dest filepath"), fi.absoluteFilePath()
+            );
+        }
+        else if (ui->radio_destIsDir->isChecked())
+        {
+            selectedPath = QFileDialog::getExistingDirectory(
+                this, tr("Choose dest dir"), fi.absoluteFilePath()
+            );
         }
     }
-
-    // 在当前路径下选择目录
-    selected_path = QFileDialog::getSaveFileName(
-        this, tr("Choose dest filepath"),
-        srcFileCount == 1 ? fi.absoluteFilePath() : fi.absolutePath()
-    );
-
-    // 更新路径显示
-    if (!selected_path.isEmpty())
+    else if (ui->radioBtn_srcFiles->isChecked())
     {
-        QFileInfo fi2(selected_path);
-        if (fi2.isFile())
+        // 当前路径信息
+        int srcFileCount = m_selectedSrcFiles.size();
+        if (srcFileCount > 0)
         {
-            QMessageBox::information(this, "提示", "源参数为多个文件时，目标参数只能是路径");
+            QString default_destFilepath = m_selectedSrcFiles.first();
+            if (!default_destFilepath.isEmpty())
+            {
+                fi.setFile(default_destFilepath);
+            }
         }
 
-        selected_path = fi.absolutePath();
+        selectedPath = QFileDialog::getSaveFileName(
+            this, tr("Choose dest filepath"), fi.absoluteFilePath()
+        );
+    }
+    else if (ui->radioBtn_singleDir->isChecked())
+    {
+        selectedPath = QFileDialog::getExistingDirectory(
+            this, tr("Choose dest path"), fi.absolutePath()
+        );
+    }
+    else
+    {
+        Q_ASSERT(0);
+    }
 
+    // 更新路径显示
+    if (!selectedPath.isEmpty())
+    {
         // 一定要转成本地分隔符，否则命令行不识别
-        ui->lineEdit_destFilepath->setText(QDir().toNativeSeparators(selected_path));
+        ui->lineEdit_destFilepath->setText(QDir().toNativeSeparators(selectedPath));
         ui->label_destFilepath_warning->hide();
     }
 
@@ -217,13 +285,11 @@ void CopyCmdEditor::on_btn_browserDestFilepath_clicked()
     emit sigModified();
 }
 
-
 void CopyCmdEditor::on_chbox_option_d_toggled(bool checked)
 {
     check();
     emit sigModified();
 }
-
 
 void CopyCmdEditor::on_chbox_option_v_toggled(bool checked)
 {
@@ -277,24 +343,105 @@ void CopyCmdEditor::on_chbox_option_y_toggled(bool checked)
     }
 }
 
-void CopyCmdEditor::on_edit_srcFilepath_textChanged()
+void CopyCmdEditor::on_lineEdit_destFilepath_textChanged(const QString &arg1)
 {
     check();
     emit sigModified();
-
-    // 更新文件列表
-    m_selectedSrcFiles = ui->edit_srcFilepath->toPlainText().split("\n");
 }
 
-void CopyCmdEditor::on_btn_addSrcDirpath_clicked()
+void CopyCmdEditor::on_btn_browserSrcDir_clicked()
 {
-    // 在当前路径下选择目录
+    QString tmp = ui->lineEdit_srcDirpath->text();
     QString selectedDir = QFileDialog::getExistingDirectory(
-        this, tr("Choose src filepath"));
-    selectedDir = QDir::toNativeSeparators(selectedDir);
-    m_selectedSrcFiles.append(selectedDir);
+        this, tr("Choose dest filepath"), QFileInfo(tmp).absolutePath()
+    );
 
-    // 添加到列表
-    ui->edit_srcFilepath->append(QString("%1").arg(selectedDir));
+    ui->lineEdit_srcDirpath->setText(QDir::toNativeSeparators(selectedDir));
+}
+
+void CopyCmdEditor::on_plainTextEdit_srcFilepathList_textChanged()
+{
+    check();
+
+    // 更新文件列表
+    m_selectedSrcFiles = ui->plainTextEdit_srcFilepathList->toPlainText().split("\n");
+    emit sigModified();
+}
+
+
+void CopyCmdEditor::on_btn_addSrcFilepath_clicked()
+{
+    QString tmp = ui->plainTextEdit_srcFilepathList->toPlainText();
+    QStringList selectedFiles = QFileDialog::getOpenFileNames(
+        this, tr("Choose dest filepath"), QFileInfo(tmp).absolutePath()
+    );
+
+    foreach (QString file, selectedFiles)
+    {
+        if (!m_selectedSrcFiles.contains(file))
+        {
+            // 转为本地斜杠
+            file = QDir::toNativeSeparators(file);
+
+            m_selectedSrcFiles.append(file);
+            ui->plainTextEdit_srcFilepathList->appendPlainText(file);
+        }
+    }
+}
+
+void CopyCmdEditor::on_radioBtn_singleFile_toggled(bool checked)
+{
+    ui->widget_singleSrcFile->setEnabled(checked);
+
+    if (checked)
+    {
+        ui->widget_destType->setEnabled(true);
+    }
+
+    check();
+    emit sigModified();
+}
+
+void CopyCmdEditor::on_radioBtn_singleDir_toggled(bool checked)
+{
+    ui->widget_srcDir->setEnabled(checked);
+
+    if (checked)
+    {
+        // 目标只能是文件夹
+        ui->radio_destIsDir->setChecked(true);
+        ui->widget_destType->setEnabled(false);
+    }
+
+    check();
+    emit sigModified();
+}
+
+void CopyCmdEditor::on_radioBtn_srcFiles_toggled(bool checked)
+{
+    ui->widget_srcFiles->setEnabled(checked);
+
+    if (checked)
+    {
+        // 目标只能是文件
+        ui->radio_destIsFile->setChecked(true);
+        ui->widget_destType->setEnabled(false);
+    }
+
+    check();
+    emit sigModified();
+}
+
+void CopyCmdEditor::on_radioBtn_bin_merge_toggled(bool checked)
+{
+    check();
+    emit sigModified();
+}
+
+
+void CopyCmdEditor::on_radioBtn_text_merge_toggled(bool checked)
+{
+    check();
+    emit sigModified();
 }
 
