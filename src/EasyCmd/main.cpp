@@ -1,4 +1,4 @@
-﻿#include "MainWindow.h"
+#include "MainWindow.h"
 
 #include <QApplication>
 #include <QThread>
@@ -8,6 +8,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    qRegisterMetaType<QVariantHash>("QVariantHash");
 
     QString version = QLatin1Literal("V0.2");
     QString application_name = QStringLiteral("EasyCmd %1（Windows版）")

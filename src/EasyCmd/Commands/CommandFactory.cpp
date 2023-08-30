@@ -13,19 +13,19 @@
 #include "rmdir/RmDirCommand.h"
 #include "dir/DirCommand.h"
 
-ICommand *newPingCommand() { return new PingCommand; }
-ICommand *newNetStatCommand() { return new NetStatCommand; }
-ICommand *newWinSystemToolCommand() { return new WinSystemToolCommand; }
-ICommand *newLauncherCommand() { return new LauncherCommand; }
-ICommand *newIPConfigCommand() { return new IPConfigCommand; }
-ICommand *newTasklistCommand() { return new TasklistCommand; }
-ICommand *newTaskkillCommand() { return new TaskkillCommand; }
-ICommand *newTracertCommand() { return new TracertCommand; }
-ICommand *newCdCommand() { return new CdCommand; }
-ICommand *newDirCommand() { return new DirCommand; }
-ICommand *newMkDirCommand() { return new MkDirCommand; }
-ICommand *newRmDirCommand() { return new RmDirCommand; }
-ICommand *newCopyCommand() { return new CopyCommand; }
+IUnifiedBase *newPingCommand() { return new PingCommand; }
+IUnifiedBase *newNetStatCommand() { return new NetStatCommand; }
+IUnifiedBase *newWinSystemToolCommand() { return new WinSystemToolCommand; }
+IUnifiedBase *newLauncherCommand() { return new LauncherCommand; }
+IUnifiedBase *newIPConfigCommand() { return new IPConfigCommand; }
+IUnifiedBase *newTasklistCommand() { return new TasklistCommand; }
+IUnifiedBase *newTaskkillCommand() { return new TaskkillCommand; }
+IUnifiedBase *newTracertCommand() { return new TracertCommand; }
+IUnifiedBase *newCdCommand() { return new CdCommand; }
+IUnifiedBase *newDirCommand() { return new DirCommand; }
+IUnifiedBase *newMkDirCommand() { return new MkDirCommand; }
+IUnifiedBase *newRmDirCommand() { return new RmDirCommand; }
+IUnifiedBase *newCopyCommand() { return new CopyCommand; }
 
 CommandFactory::CommandFactory()
 {
@@ -48,9 +48,9 @@ CommandFactory::CommandFactory()
     m_editor_map.insert("copy", newCopyCommand);
 }
 
-ICommand *CommandFactory::createCommand(const QString &command_id)
+IUnifiedBase *CommandFactory::createCommand(const QString &command_id)
 {
-    ICommand *command = NULL;
+    IUnifiedBase *command = NULL;
     newEditorFunc func = m_editor_map.value(command_id);
     if (func) command = func();
     return command;

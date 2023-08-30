@@ -33,3 +33,6 @@
 
 # Build dir
 build-EasyCmd-*
+*.ilk
+*.pdb
+*.exp

@@ -1,10 +1,13 @@
 INCLUDEPATH += $$PWD
 
+DEFINES += DLL_MAKER
+
 HEADERS += \
     $$PWD/CmdEditorHeader.h \
     $$PWD/CommandFactory.h \
+    $$PWD/CommandGlobal.h \
     $$PWD/ICmdEditor.h \
-    $$PWD/ICommand.h \
+    $$PWD/IUnifiedBase.h \
     $$PWD/cd/CdCmdEditor.h \
     $$PWD/cd/CdCommand.h \
     $$PWD/copy/CopyCmdEditor.h \
@@ -12,7 +15,7 @@ HEADERS += \
     $$PWD/dir/DirCmdEditor.h \
     $$PWD/dir/DirCommand.h \
     $$PWD/ipconfig/IPConfigCommand.h \
-    $$PWD/ipconfig/IPconfigCmdEditor.h \
+    $$PWD/ipconfig/IPConfigCmdEditor.h \
     $$PWD/launcher/LauncherCommand.h \
     $$PWD/launcher/LauncherCmdEditor.h \
     $$PWD/mkdir/MkDirCmdEditor.h \
@@ -35,7 +38,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/CommandFactory.cpp \
     $$PWD/ICmdEditor.cpp \
-    $$PWD/ICommand.cpp \
+    $$PWD/IUnifiedBase.cpp \
     $$PWD/cd/CdCmdEditor.cpp \
     $$PWD/cd/CdCommand.cpp \
     $$PWD/copy/CopyCmdEditor.cpp \

@@ -7,7 +7,7 @@
 #include "ConsoleRwWorker.h"
 #include "CmdTreeModel.h"
 #include "AppTrayIcon.h"
-#include "ICommand.h"
+#include "IUnifiedBase.h"
 #include "ICmdEditor.h"
 
 namespace Ui {
@@ -65,7 +65,7 @@ private slots:
     void on_lineEdit_searchCmd_textEdited(const QString &arg1);
 
     // 响应编辑器修改信号
-    void slotEditorModified();
+    void slotEditorNotify(int type, QVariantHash val);
 
     // 响应命令行进程错误
     void slotCmdErrorOccurred(QProcess::ProcessError error);
@@ -101,7 +101,7 @@ private:
      * @brief m_command_cache
      *  命令缓存
      */
-    QHash<QString, ICommand *> m_command_cache;
+    QHash<QString, IUnifiedBase *> m_command_cache;
 
     /**
      * @brief m_cmd_editor_cache

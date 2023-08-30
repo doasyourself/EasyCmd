@@ -10,7 +10,7 @@
 #include <QWidget>
 #include <QMap>
 
-#include "ICommand.h"
+#include "IUnifiedBase.h"
 
 class CommandFactory
 {
@@ -18,10 +18,10 @@ public:
     CommandFactory();
 
     // 创建命令对象
-    ICommand *createCommand(const QString &command_id);
+    IUnifiedBase *createCommand(const QString &command_id);
 
 private:
-    typedef ICommand *(*newEditorFunc)();
+    typedef IUnifiedBase *(*newEditorFunc)();
 
     // 使用hash加速创建
     QHash<QString, newEditorFunc> m_editor_map;

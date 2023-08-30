@@ -5,6 +5,7 @@
 #include "CommandFactory.h"
 #include "CmdProxyModel.h"
 #include "MainWindowActionResponse.h"
+#include "CommandGlobal.h"
 
 #include <QDesktopWidget>
 #include <QKeyEvent>
@@ -129,8 +130,8 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
     {
         static CommandFactory command_factory;
 
-        ICommand *command = Q_NULLPTR;
-        QHash<QString, ICommand *>::iterator find_it = m_command_cache.find(cmd_id);
+        IUnifiedBase *command = Q_NULLPTR;
+        QHash<QString, IUnifiedBase *>::iterator find_it = m_command_cache.find(cmd_id);
         if (find_it == m_command_cache.end())
         {
             command = command_factory.createCommand(cmd_id);
@@ -144,14 +145,22 @@ void MainWindow::slotCurrentRowChanged(const QModelIndex &current, const QModelI
         if (!command) return;
 
         // 缓存编辑器
-        editor = command->createCmdEditorWidget();
+        QVariant val;
+        int code = command->getProperty(PID_CMDEDITOR, val);
+        Q_ASSERT(code == 0);
+
+        editor = static_cast<ICmdEditor *>(val.value<void *>());
         m_cmd_editor_cache[cmd_id] = editor;
 
         /*监听编辑器命令改变信号*/
-        connect(editor, &ICmdEditor::sigModified, this, &MainWindow::slotEditorModified);
+        connect(editor, &ICmdEditor::sigNotify, this, &MainWindow::slotEditorNotify);
 
         /* 更新一次命令，保证当前显示的命令时刻为最新的 */
-        QString cmd_string = editor->getCmdString();
+        QString cmd_string;
+        QVariant cmd_string_val;
+        editor->getProperty(PID_CMDSTRING, cmd_string_val);
+        cmd_string = cmd_string_val.toString();
+
         ui->textEdit_cmdPreview->setText(cmd_string);
     }
     else
@@ -217,11 +226,27 @@ void MainWindow::on_lineEdit_searchCmd_textEdited(const QString &arg1)
     m_proxy_model->setFilterFixedString(filter_string);
 }
 
-void MainWindow::slotEditorModified()
+void MainWindow::slotEditorNotify(int type, QVariantHash val)
 {
-    ICmdEditor *editor = qobject_cast<ICmdEditor *>(sender());
-    QString cmd_string = editor->getCmdString();
-    ui->textEdit_cmdPreview->setText(cmd_string);
+    switch (type)
+    {
+    case SID_MODIFIED:
+    {
+        ICmdEditor *editor = qobject_cast<ICmdEditor *>(sender());
+        QString cmd_string;
+
+        QVariant cmd_string_val;
+        editor->getProperty(PID_CMDSTRING, cmd_string_val);
+        cmd_string = cmd_string_val.toString();
+
+        ui->textEdit_cmdPreview->setText(cmd_string);
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
 }
 
 void MainWindow::slotCmdErrorOccurred(QProcess::ProcessError error)

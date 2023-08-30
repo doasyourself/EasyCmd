@@ -14,6 +14,7 @@
 
 #include <QString>
 #include <QWidget>
+#include <QVariantHash>
 #include "Global.h"
 
 class ICmdEditor : public QWidget
@@ -23,20 +24,34 @@ public:
     explicit ICmdEditor(QWidget *parent = NULL);
 
     /**
-     * @brief isModified
-     *  暂时不用
+     * @brief getProperty
+     * @param propertyId
+     * @param out
      * @return
      */
-    virtual bool isModified() const = 0;
+    virtual int getProperty(int propertyId, QVariant &out_property);
 
     /**
-     * @brief getCmdString
+     * @brief setProperty
+     * @param propertyId
+     * @param property
      * @return
      */
-    virtual QString getCmdString() = 0;
+    virtual int setProperty(int propertyId, const QVariant &property);
+
+public slots:
+    /**
+     * @brief slotOnNotify
+     *  响应通知
+     */
+    virtual void slotOnNotify(int type, const QVariantHash &val);
 
 signals:
-    void sigModified();/*更新命令*/
+    /**
+     * @brief sigNotify
+     *  发出通知
+     */
+    void sigNotify(int type, QVariantHash val);
 };
 
 #endif // ICMDEDITOR_H
