@@ -3,7 +3,7 @@ QT += widgets
 TEMPLATE = lib
 DEFINES += DLL_MAKER
 
-CONFIG += c++11
+CONFIG += c++11 plugin
 DESTDIR = $$PWD/dist
 
 # You can make your code fail to compile if it uses deprecated APIs.

@@ -9,6 +9,7 @@
 #include <QString>
 #include <QWidget>
 #include <QMap>
+#include <QPluginLoader>
 
 #include "IUnifiedBase.h"
 
@@ -16,15 +17,14 @@ class CommandFactory
 {
 public:
     CommandFactory();
+    ~CommandFactory();
 
     // 创建命令对象
     IUnifiedBase *createCommand(const QString &command_id);
 
 private:
-    typedef IUnifiedBase *(*newEditorFunc)();
-
     // 使用hash加速创建
-    QHash<QString, newEditorFunc> m_editor_map;
+    QHash<QString, QPluginLoader *> m_command_plugin_map;
 };
 
 #endif // CMDEDITORFACTORY_H

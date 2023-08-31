@@ -1,6 +1,5 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "CmdEditorHeader.h"
 #include "AboutDialog.h"
 #include "CommandFactory.h"
 #include "CmdProxyModel.h"
