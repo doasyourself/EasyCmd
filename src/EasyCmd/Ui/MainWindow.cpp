@@ -9,6 +9,7 @@
 #include <QDesktopWidget>
 #include <QKeyEvent>
 #include <QTranslator>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,11 +27,12 @@ MainWindow::MainWindow(QWidget *parent) :
     qApp->setQuitOnLastWindowClosed(false);
 
     ui->setupUi(this);
-    ui->splitter->setStretchFactor(0, 2);
-    ui->splitter->setStretchFactor(1, 5);
 
-    ui->splitter_2->setStretchFactor(0, 5);
-    ui->splitter_2->setStretchFactor(1, 3);
+    QList<int> sizes1{ 100000, 100000 };
+    ui->splitter_2->setSizes(sizes1);
+
+    QList<int> sizes2{ 100000, 200000 };
+    ui->splitter->setSizes(sizes2);
 
     // 加载命令列表
     m_cmd_model = CmdTreeModel::modelFromFile(":/CommandTree.xml");
@@ -231,7 +233,10 @@ void MainWindow::slotEditorNotify(int type, QVariantHash val)
     {
     case SID_MODIFIED:
     {
-        ICmdEditor *editor = qobject_cast<ICmdEditor *>(sender());
+        QObject *sender_ = sender();
+
+        // 这里用qobject_cast会报错
+        ICmdEditor *editor = dynamic_cast<ICmdEditor *>(sender_);
         QString cmd_string;
 
         QVariant cmd_string_val;

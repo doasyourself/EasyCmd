@@ -44,7 +44,6 @@ IUnifiedBase *CommandFactory::createCommand(const QString &command_id)
     if (loader)
     {
         command = qobject_cast<IUnifiedBase *>(loader->instance());
-        qDebug() << loader->errorString();
     }
 
     return command;

@@ -1,14 +1,11 @@
-INCLUDEPATH += $$PWD
-
-DEFINES += DLL_MAKER
+INCLUDEPATH += $$PWD $$PWD/../../WinCommands/common
 
 HEADERS += \
-    $$PWD/CommandFactory.h \
-    $$PWD/CommandGlobal.h \
-    $$PWD/ICmdEditor.h \
-    $$PWD/IUnifiedBase.h
+    $$PWD/../../WinCommands/common/CommandGlobal.h \
+    $$PWD/../../WinCommands/common/ICmdEditor.h \
+    $$PWD/../../WinCommands/common/IUnifiedBase.h \
+    $$PWD/CommandFactory.h
 
 SOURCES += \
-    $$PWD/CommandFactory.cpp \
-    $$PWD/ICmdEditor.cpp \
-    $$PWD/IUnifiedBase.cpp
+    $$PWD/../../WinCommands/common/IUnifiedBase.cpp \
+    $$PWD/CommandFactory.cpp

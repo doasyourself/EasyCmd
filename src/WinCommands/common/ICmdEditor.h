@@ -15,8 +15,9 @@
 #include <QString>
 #include <QWidget>
 #include <QVariantHash>
+#include "CommandGlobal.h"
 
-class ICmdEditor : public QWidget
+class COMMAND_API ICmdEditor : public QWidget
 {
     Q_OBJECT
 public:

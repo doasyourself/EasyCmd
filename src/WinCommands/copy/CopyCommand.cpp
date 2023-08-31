@@ -1,5 +1,6 @@
 #include "CopyCommand.h"
 #include "CopyCmdEditor.h"
+#include <QMessageBox>
 
 CopyCommand::CopyCommand(QObject *parent) : IUnifiedBase(parent)
 {
@@ -19,7 +20,8 @@ int CopyCommand::getProperty(int propertyId, QVariant &out_property)
     }
     case PID_CMDEDITOR:
     {
-        out_property.setValue<void *>(new CopyCmdEditor(this));
+        CopyCmdEditor *copy_editor = new CopyCmdEditor(this);
+        out_property.setValue<void *>((void *)copy_editor);
         break;
     }
     default:
@@ -36,4 +38,5 @@ int CopyCommand::setProperty(int propertyId, const QVariant &property)
     int code = 0;
     return code;
 }
+
 

@@ -31,9 +31,9 @@ win32: {
 }
 
 CONFIG(debug,debug|release) {
-    target.path = $$PWD/../../dist/debug/plugins/$$TARGET
+    target.path = $$PWD/../../dist/debug/commands/$$TARGET
 } else {
-    target.path = $$PWD/../../dist/release/plugins/$$TARGET
+    target.path = $$PWD/../../dist/release/commands/$$TARGET
 }
 INSTALLS += target
 

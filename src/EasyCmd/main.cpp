@@ -12,14 +12,14 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QVariantHash>("QVariantHash");
 
     QString version = QLatin1Literal("V0.2");
-    QString application_name = QStringLiteral("EasyCmd %1（Windows版）")
+    QString application_name = QString("EasyCmd %1（Windows版）")
             .arg(version);
     a.setApplicationName(application_name);
     a.setApplicationVersion(version);
 
     MainWindow w;
     w.setWindowTitle(application_name);
-    w.show();
+    w.showMaximized();
 
     return a.exec();
 }
