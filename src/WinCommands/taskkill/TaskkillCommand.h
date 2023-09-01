@@ -2,10 +2,11 @@
 #define TASKKILLCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "TaskkillCommandGlobal.h"
 
-class COMMAND_API TaskkillCommand : public IUnifiedBase
+class TASKKILLCOMMAND_API TaskkillCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

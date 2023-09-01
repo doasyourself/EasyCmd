@@ -2,10 +2,11 @@
 #define RMDIRCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "RmDirCommandGlobal.h"
 
-class COMMAND_API RmDirCommand : public IUnifiedBase
+class RMDIRCOMMAND_API RmDirCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

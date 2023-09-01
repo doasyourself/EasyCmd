@@ -9,8 +9,9 @@
 
 #include <QObject>
 #include <QVariantHash>
+#include "CommonGlobal.h"
 
-class IUnifiedBase : public QObject
+class COMMON_API IUnifiedBase : public QObject
 {
     Q_OBJECT
 

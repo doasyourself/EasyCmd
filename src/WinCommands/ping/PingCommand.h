@@ -2,10 +2,11 @@
 #define PINGCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "PingCommandGlobal.h"
 
-class COMMAND_API PingCommand : public IUnifiedBase
+class PINGCOMMAND_API PingCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

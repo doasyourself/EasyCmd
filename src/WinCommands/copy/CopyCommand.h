@@ -2,10 +2,11 @@
 #define COPYCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "CopyCommandGlobal.h"
 
-class COMMAND_API CopyCommand : public IUnifiedBase
+class COPYCOMMAND_API CopyCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

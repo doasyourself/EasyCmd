@@ -15,13 +15,16 @@
 #include <QString>
 #include <QWidget>
 #include <QVariantHash>
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 
-class COMMAND_API ICmdEditor : public QWidget
+class COMMON_API ICmdEditor : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ICmdEditor(QWidget *parent = NULL);
+    explicit ICmdEditor(QWidget *parent = NULL)
+    {}
+
+    ~ICmdEditor() {}
 
     /**
      * @brief getProperty
@@ -29,7 +32,10 @@ public:
      * @param out
      * @return
      */
-    virtual int getProperty(int propertyId, QVariant &out_property);
+    virtual int getProperty(int propertyId, QVariant &out_property)
+    {
+        return 0;
+    }
 
     /**
      * @brief setProperty
@@ -37,14 +43,19 @@ public:
      * @param property
      * @return
      */
-    virtual int setProperty(int propertyId, const QVariant &property);
+    virtual int setProperty(int propertyId, const QVariant &property)
+    {
+        return 0;
+    }
 
 public slots:
     /**
      * @brief slotOnNotify
      *  响应通知
      */
-    virtual void slotOnNotify(int type, const QVariantHash &val);
+    virtual void slotOnNotify(int type, const QVariantHash &val)
+    {
+    }
 
 signals:
     /**

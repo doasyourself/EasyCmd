@@ -2,10 +2,11 @@
 #define TRACERTCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "TracertCommandGlobal.h"
 
-class COMMAND_API TracertCommand : public IUnifiedBase
+class TRACERTCOMMAND_API TracertCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

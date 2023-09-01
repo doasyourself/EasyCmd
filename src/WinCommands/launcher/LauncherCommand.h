@@ -2,10 +2,11 @@
 #define LAUNCHERCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "LauncherCommandGlobal.h"
 
-class COMMAND_API LauncherCommand : public IUnifiedBase
+class LAUNCHERCOMMAND_API LauncherCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

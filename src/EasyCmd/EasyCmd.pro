@@ -11,15 +11,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = EasyCmd
 TEMPLATE = app
 
+DIST_DIR = $$PWD/../../dist
+LIBS_DIR = $$PWD/../libs
+
 include($$PWD/Commands/Commands.pri)
 include($$PWD/Ui/Ui.pri)
 include($$PWD/Utils/Utils.pri)
 include($$PWD/Global/Global.pri)
+include($$LIBS_DIR/common/common.pri)
 
 CONFIG(debug|release,debug) {
-    DESTDIR = $$PWD/../dist/debug
+    DESTDIR = $$DIST_DIR/debug
 } else {
-    DESTDIR = $$PWD/../dist/release
+    DESTDIR = $$DIST_DIR/release
 }
 
 win32 {

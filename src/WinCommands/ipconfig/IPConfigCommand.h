@@ -2,10 +2,11 @@
 #define IPCONFIGCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "IPConfigCommandGlobal.h"
 
-class COMMAND_API IPConfigCommand : public IUnifiedBase
+class IPCONFIGCOMMAND_API IPConfigCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

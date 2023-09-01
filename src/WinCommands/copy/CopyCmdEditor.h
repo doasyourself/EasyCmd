@@ -11,7 +11,7 @@ namespace Ui {
 class CopyCmdEditor;
 }
 
-class COMMAND_API CopyCmdEditor : public ICmdEditor
+class CopyCmdEditor : public ICmdEditor
 {
     Q_OBJECT
 

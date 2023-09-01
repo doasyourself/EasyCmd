@@ -4,7 +4,7 @@
 #include "CommandFactory.h"
 #include "CmdProxyModel.h"
 #include "MainWindowActionResponse.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 
 #include <QDesktopWidget>
 #include <QKeyEvent>
@@ -236,7 +236,7 @@ void MainWindow::slotEditorNotify(int type, QVariantHash val)
         QObject *sender_ = sender();
 
         // 这里用qobject_cast会报错
-        ICmdEditor *editor = dynamic_cast<ICmdEditor *>(sender_);
+        ICmdEditor *editor = qobject_cast<ICmdEditor *>(sender_);
         QString cmd_string;
 
         QVariant cmd_string_val;

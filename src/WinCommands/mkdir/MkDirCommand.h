@@ -2,10 +2,11 @@
 #define MKDIRCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "MkdirCommandGlobal.h"
 
-class COMMAND_API MkDirCommand : public IUnifiedBase
+class MKDIRCOMMAND_API MkDirCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

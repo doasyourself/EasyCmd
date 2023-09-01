@@ -2,10 +2,11 @@
 #define NETSTATCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "NetstatCommandGlobal.h"
 
-class COMMAND_API NetStatCommand : public IUnifiedBase
+class NETSTATCOMMAND_API NetStatCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

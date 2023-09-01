@@ -2,10 +2,11 @@
 #define TASKLISTCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "TasklistCommandGlobal.h"
 
-class COMMAND_API TasklistCommand : public IUnifiedBase
+class TASKLISTCOMMAND_API TasklistCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

@@ -2,10 +2,11 @@
 #define WINSYSTEMTOOLCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "WinSystemToolCommandGlobal.h"
 
-class COMMAND_API WinSystemToolCommand : public IUnifiedBase
+class WINSYSTEMTOOLCOMMAND_API WinSystemToolCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

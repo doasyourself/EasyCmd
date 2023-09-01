@@ -2,10 +2,11 @@
 #define DIRCOMMAND_H
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "DirCommandGlobal.h"
 
-class COMMAND_API DirCommand : public IUnifiedBase
+class DIRCOMMAND_API DirCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

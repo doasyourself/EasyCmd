@@ -4,10 +4,11 @@
 #include <QObject>
 
 #include "IUnifiedBase.h"
-#include "CommandGlobal.h"
+#include "CommonGlobal.h"
 #include "ICmdEditor.h"
+#include "CdCommandGlobal.h"
 
-class COMMAND_API CdCommand : public IUnifiedBase
+class CDCOMMAND_API CdCommand : public IUnifiedBase
 {
     Q_OBJECT
     Q_INTERFACES(IUnifiedBase)

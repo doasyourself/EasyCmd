@@ -1,13 +1,12 @@
-#ifndef COMMANDGLOBAL_H
-#define COMMANDGLOBAL_H
+#ifndef COMMONGLOBAL_H
+#define COMMONGLOBAL_H
 
 #include <QtGlobal>
 
-// 导出宏
-#ifdef DLL_MAKER
-    #define COMMAND_API Q_DECL_EXPORT
+#ifdef COMMONLIB_MAKER
+    #define COMMON_API Q_DECL_EXPORT
 #else
-    #define COMMAND_API
+    #define COMMON_API Q_DECL_IMPORT
 #endif
 
 // 属性id
@@ -24,4 +23,4 @@ enum SignalID
     SID_MODIFIED, // 改变消息
 };
 
-#endif // COMMANDGLOBAL_H
+#endif // COMMONGLOBAL_H
