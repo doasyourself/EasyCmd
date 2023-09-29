@@ -22,4 +22,3 @@
 
 #### 软件界面
 ![主界面](doc/images/mainwindow_snapshoot.png)
-![使用截图](doc/images/cmdtool_snapshoot.png)
