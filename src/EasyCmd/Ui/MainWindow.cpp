@@ -28,10 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    QList<int> sizes1{ 100000, 100000 };
+    QList<int> sizes1{ 100000, 150000 };
     ui->splitter_2->setSizes(sizes1);
 
-    QList<int> sizes2{ 100000, 200000 };
+    QList<int> sizes2{ 100000, 100000 };
     ui->splitter->setSizes(sizes2);
 
     // 加载命令列表

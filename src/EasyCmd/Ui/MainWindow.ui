@@ -37,7 +37,7 @@
         <item>
          <widget class="QSplitter" name="splitter">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Vertical</enum>
           </property>
           <widget class="QWidget" name="widget_cmdlist" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -96,7 +96,7 @@
            </layout>
           </widget>
           <widget class="QWidget" name="widget_cmdeditor" native="true">
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0">
             <property name="spacing">
              <number>5</number>
             </property>
@@ -113,28 +113,33 @@
              <number>0</number>
             </property>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_2">
-              <item>
-               <widget class="QScrollArea" name="scrollArea">
-                <property name="frameShape">
-                 <enum>QFrame::Box</enum>
-                </property>
-                <property name="widgetResizable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="scrollAreaWidgetContents">
-                 <property name="geometry">
-                  <rect>
-                   <x>0</x>
-                   <y>0</y>
-                   <width>266</width>
-                   <height>871</height>
-                  </rect>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="title">
+               <string>命令编辑器</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QScrollArea" name="scrollArea">
+                 <property name="frameShape">
+                  <enum>QFrame::Box</enum>
                  </property>
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>714</width>
+                    <height>171</height>
+                   </rect>
+                  </property>
+                 </widget>
                 </widget>
-               </widget>
-              </item>
-             </layout>
+               </item>
+              </layout>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -270,7 +275,7 @@
      <x>0</x>
      <y>0</y>
      <width>1687</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

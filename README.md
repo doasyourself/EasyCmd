@@ -1,4 +1,4 @@
-# EasyCmd
+# EasyCmd for Windows
 
 #### 介绍
 命令行图形化
